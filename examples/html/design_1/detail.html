@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vote | PicklePolls</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B1F33',
+                        teal: '#0F766E'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+
+    <!-- Navbar -->
+    <nav class="border-b border-slate-200 bg-white">
+        <div class="mx-auto max-w-6xl px-6 py-4">
+
+            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-navy">
+                ← Back to Polls
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main class="mx-auto max-w-3xl px-6 py-12">
+
+        <!-- Poll Header -->
+        <div class="mb-8">
+
+            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
+                🕒
+            </div>
+
+            <p class="mb-3 text-sm font-bold uppercase tracking-widest text-teal-600">
+                Schedule Poll
+            </p>
+
+            <h1 class="text-3xl font-bold leading-tight tracking-tight text-navy md:text-4xl">
+                What time should Sunday games start?
+            </h1>
+
+            <p class="mt-4 text-slate-500">
+                Choose the time that works best for you.
+            </p>
+
+        </div>
+
+
+        <!-- Voting Form -->
+        <form action="#" method="post">
+
+            <!-- Error Message -->
+            <!--
+            <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700">
+                Please select an option before voting.
+            </div>
+            -->
+
+
+            <fieldset>
+
+                <legend class="mb-4 text-sm font-semibold text-slate-700">
+                    Select one answer
+                </legend>
+
+
+                <div class="space-y-4">
+
+
+                    <!-- Choice -->
+                    <label class="group flex cursor-pointer items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white p-5 transition hover:border-teal-500 hover:bg-emerald-50">
+
+                        <input
+                            type="radio"
+                            name="choice"
+                            value="1"
+                            class="h-5 w-5 accent-teal-600"
+                        >
+
+                        <div class="flex-1">
+
+                            <p class="font-semibold text-navy">
+                                3:00 PM
+                            </p>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                Start earlier and finish earlier
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Choice -->
+                    <label class="group flex cursor-pointer items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white p-5 transition hover:border-teal-500 hover:bg-emerald-50">
+
+                        <input
+                            type="radio"
+                            name="choice"
+                            value="2"
+                            class="h-5 w-5 accent-teal-600"
+                        >
+
+                        <div class="flex-1">
+
+                            <p class="font-semibold text-navy">
+                                4:00 PM
+                            </p>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                The current preferred schedule
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Choice -->
+                    <label class="group flex cursor-pointer items-center gap-4 rounded-2xl border-2 border-slate-200 bg-white p-5 transition hover:border-teal-500 hover:bg-emerald-50">
+
+                        <input
+                            type="radio"
+                            name="choice"
+                            value="3"
+                            class="h-5 w-5 accent-teal-600"
+                        >
+
+                        <div class="flex-1">
+
+                            <p class="font-semibold text-navy">
+                                5:00 PM
+                            </p>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                A later start for players coming from work
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+            </fieldset>
+
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="mt-8 w-full rounded-2xl bg-navy px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-slate-800 hover:shadow-xl"
+            >
+
+                Submit My Vote →
+
+            </button>
+
+
+            <p class="mt-4 text-center text-sm text-slate-400">
+                Your vote helps shape the next community decision.
+            </p>
+
+        </form>
+
+    </main>
+
+</body>
+</html>

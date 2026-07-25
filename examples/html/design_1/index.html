@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PicklePolls</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B1F33',
+                        teal: '#0F766E',
+                        mint: '#ECFDF5'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+
+    <!-- Navbar -->
+    <nav class="border-b border-slate-200 bg-white">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+            <a href="#" class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600 text-xl">
+                    🎾
+                </div>
+
+                <div>
+                    <h1 class="text-lg font-bold text-navy">
+                        PicklePolls
+                    </h1>
+
+                    <p class="text-xs text-slate-500">
+                        Your community. Your voice.
+                    </p>
+                </div>
+            </a>
+
+            <button class="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">
+                My Profile
+            </button>
+
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-6xl px-6 py-12">
+
+        <!-- Header -->
+        <div class="mb-10">
+
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
+                🎾 Community Voting
+            </div>
+
+            <h2 class="text-4xl font-bold tracking-tight text-navy md:text-5xl">
+                Community Polls
+            </h2>
+
+            <p class="mt-3 max-w-2xl text-lg text-slate-500">
+                Help shape the future of your pickleball community.
+                Vote on upcoming events, schedules, tournaments, and more.
+            </p>
+
+        </div>
+
+
+        <!-- Poll Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            <!-- Poll Card 1 -->
+            <article class="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+
+                <div class="mb-6 flex items-start justify-between">
+
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-2xl">
+                        🕒
+                    </div>
+
+                    <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                        Active
+                    </span>
+
+                </div>
+
+                <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-teal-600">
+                    Schedule
+                </p>
+
+                <h3 class="text-xl font-bold leading-snug text-navy">
+                    What time should Sunday games start?
+                </h3>
+
+                <p class="mt-3 text-sm leading-relaxed text-slate-500">
+                    Help us choose the best starting time for our weekly Sunday pickleball session.
+                </p>
+
+                <div class="mt-6 flex items-center gap-4 border-t border-slate-100 pt-5 text-sm text-slate-500">
+                    <span>👥 42 votes</span>
+                    <span>•</span>
+                    <span>3 choices</span>
+                </div>
+
+                <a href="#"
+                   class="mt-6 flex items-center justify-center gap-2 rounded-xl bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800">
+
+                    Vote Now
+
+                    <span class="transition group-hover:translate-x-1">
+                        →
+                    </span>
+
+                </a>
+
+            </article>
+
+
+            <!-- Poll Card 2 -->
+            <article class="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+
+                <div class="mb-6 flex items-start justify-between">
+
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-2xl">
+                        🏆
+                    </div>
+
+                    <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                        Active
+                    </span>
+
+                </div>
+
+                <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-teal-600">
+                    Tournament
+                </p>
+
+                <h3 class="text-xl font-bold leading-snug text-navy">
+                    What tournament format do you prefer?
+                </h3>
+
+                <p class="mt-3 text-sm leading-relaxed text-slate-500">
+                    Tell us which format would make our next tournament more competitive and fun.
+                </p>
+
+                <div class="mt-6 flex items-center gap-4 border-t border-slate-100 pt-5 text-sm text-slate-500">
+                    <span>👥 28 votes</span>
+                    <span>•</span>
+                    <span>4 choices</span>
+                </div>
+
+                <a href="#"
+                   class="mt-6 flex items-center justify-center gap-2 rounded-xl bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800">
+
+                    Vote Now
+
+                    <span class="transition group-hover:translate-x-1">
+                        →
+                    </span>
+
+                </a>
+
+            </article>
+
+
+            <!-- Poll Card 3 -->
+            <article class="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+
+                <div class="mb-6 flex items-start justify-between">
+
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
+                        🎾
+                    </div>
+
+                    <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                        Active
+                    </span>
+
+                </div>
+
+                <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-teal-600">
+                    Equipment
+                </p>
+
+                <h3 class="text-xl font-bold leading-snug text-navy">
+                    Which ball should we use for our next session?
+                </h3>
+
+                <p class="mt-3 text-sm leading-relaxed text-slate-500">
+                    Help us decide which pickleball brand to use for our next community session.
+                </p>
+
+                <div class="mt-6 flex items-center gap-4 border-t border-slate-100 pt-5 text-sm text-slate-500">
+                    <span>👥 35 votes</span>
+                    <span>•</span>
+                    <span>3 choices</span>
+                </div>
+
+                <a href="#"
+                   class="mt-6 flex items-center justify-center gap-2 rounded-xl bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800">
+
+                    Vote Now
+
+                    <span class="transition group-hover:translate-x-1">
+                        →
+
+                    </span>
+
+                </a>
+
+            </article>
+
+        </div>
+
+
+        <!-- Empty State Example -->
+        <!--
+        <div class="py-24 text-center">
+
+            <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-100 text-4xl">
+                🎾
+            </div>
+
+            <h3 class="text-xl font-bold text-navy">
+                No polls available
+            </h3>
+
+            <p class="mt-2 text-slate-500">
+                Check back later for new community polls.
+            </p>
+
+        </div>
+        -->
+
+    </main>
+
+</body>
+</html>

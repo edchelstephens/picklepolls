@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PicklePolls</title>
+
+
+    <!-- Tailwind CSS -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- Tailwind Configuration -->
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        pickle: {
+
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+
+                        },
+
+                        lime: {
+
+                            400: '#A3E635',
+                            500: '#84CC16',
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</head>
+
+
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+
+    <!-- ================================= -->
+    <!-- NAVIGATION -->
+    <!-- ================================= -->
+
+    <nav class="border-b border-green-100 bg-white">
+
+        <div
+            class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6"
+        >
+
+
+            <!-- BRAND -->
+
+            <a
+                href="#"
+                class="flex items-center gap-3"
+            >
+
+                <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200"
+                >
+
+                    🎾
+
+                </div>
+
+
+                <div>
+
+                    <h1
+                        class="text-lg font-black tracking-tight text-green-900"
+                    >
+
+                        PicklePolls
+
+                    </h1>
+
+
+                    <p
+                        class="text-[11px] font-medium text-green-600"
+                    >
+
+                        Your community. Your voice.
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- PROFILE -->
+
+            <button
+                class="rounded-xl px-4 py-2 text-sm font-semibold text-green-800 transition hover:bg-green-50"
+            >
+
+                My Profile
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================================= -->
+    <!-- MAIN PAGE CONTAINER -->
+    <!-- ================================= -->
+
+    <main
+        class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8"
+    >
+
+
+        <!-- ================================= -->
+        <!-- CONTAINED HERO SECTION -->
+        <!-- ================================= -->
+
+        <section
+            class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60"
+        >
+
+
+            <!-- Decorative circles -->
+
+            <div
+                class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"
+            ></div>
+
+
+            <div
+                class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"
+            ></div>
+
+
+            <!-- Hero Content -->
+
+            <div
+                class="relative px-6 py-8 md:px-10 md:py-10"
+            >
+
+                <div
+                    class="flex flex-col justify-between gap-6 md:flex-row md:items-center"
+                >
+
+
+                    <!-- HERO TEXT -->
+
+                    <div
+                        class="max-w-2xl"
+                    >
+
+
+                        <!-- LABEL -->
+
+                        <div
+                            class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm"
+                        >
+
+                            🎾
+
+                            Community Voting
+
+                        </div>
+
+
+                        <!-- TITLE -->
+
+                        <h2
+                            class="text-3xl font-black leading-tight tracking-tight text-white md:text-5xl"
+                        >
+
+                            Your vote.
+
+                            <span
+                                class="text-lime-200"
+                            >
+
+                                Your community.
+
+                            </span>
+
+                        </h2>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <p
+                            class="mt-3 max-w-xl text-sm leading-relaxed text-green-50 md:text-base"
+                        >
+
+                            Help shape the future of our pickleball community by voting on schedules, tournaments, events, and more.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- STATS -->
+
+                    <div
+                        class="flex shrink-0 gap-3"
+                    >
+
+
+                        <!-- ACTIVE POLLS -->
+
+                        <div
+                            class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm"
+                        >
+
+                            <p
+                                class="text-xl font-black text-white"
+                            >
+
+                                3
+
+                            </p>
+
+
+                            <p
+                                class="text-xs text-green-100"
+                            >
+
+                                Active Polls
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- COMMUNITY VOTES -->
+
+                        <div
+                            class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm"
+                        >
+
+                            <p
+                                class="text-xl font-black text-white"
+                            >
+
+                                105
+
+                            </p>
+
+
+                            <p
+                                class="text-xs text-green-100"
+                            >
+
+                                Community Votes
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- POLL SECTION -->
+        <!-- ================================= -->
+
+        <section
+            class="mt-8"
+        >
+
+
+            <!-- SECTION HEADER -->
+
+            <div
+                class="mb-5 flex items-end justify-between"
+            >
+
+
+                <div>
+
+
+                    <p
+                        class="mb-1 text-xs font-black uppercase tracking-widest text-green-600"
+                    >
+
+                        Have your say
+
+                    </p>
+
+
+                    <h2
+                        class="text-2xl font-black text-green-950 md:text-3xl"
+                    >
+
+                        Active Polls
+
+                    </h2>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <span
+                    class="hidden rounded-full bg-green-100 px-4 py-2 text-sm font-bold text-green-700 sm:block"
+                >
+
+                    🟢 Voting is open
+
+                </span>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- POLL GRID -->
+            <!-- ================================= -->
+
+            <div
+                class="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+            >
+
+
+                <!-- ================================= -->
+                <!-- POLL CARD 1 -->
+                <!-- ================================= -->
+
+                <article
+                    class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                >
+
+
+                    <!-- TOP COLOR STRIP -->
+
+                    <div
+                        class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 to-lime-400"
+                    ></div>
+
+
+                    <!-- COMPANY HEADER -->
+
+                    <div
+                        class="mb-5 flex items-center justify-between pt-1"
+                    >
+
+
+                        <!-- COMPANY -->
+
+                        <div
+                            class="flex items-center gap-3"
+                        >
+
+                            <img
+                                src="https://assets.reclub.co/group-avatars/154681.webp?updatedAt=1784943122"
+                                alt="ACES Club logo"
+                                class="h-12 w-12 rounded-2xl object-cover shadow-sm"
+                            >
+
+
+                            <div>
+
+                                <p
+                                    class="font-black text-green-950"
+                                >
+
+                                    ACES Club
+
+                                </p>
+
+
+                                <p
+                                    class="text-xs font-medium text-green-600"
+                                >
+
+                                    Community Poll
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <span
+                            class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700"
+                        >
+
+                            ACTIVE
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUESTION TYPE -->
+
+                    <p
+                        class="mb-2 text-xs font-black uppercase tracking-widest text-green-600"
+                    >
+
+                        Schedule
+
+                    </p>
+
+
+                    <!-- QUESTION -->
+
+                    <h3
+                        class="text-xl font-black leading-snug text-green-950"
+                    >
+
+                        What time should Sunday games start?
+
+                    </h3>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <p
+                        class="mt-3 text-sm leading-relaxed text-slate-500"
+                    >
+
+                        Help us choose the best starting time for our weekly Sunday pickleball session.
+
+                    </p>
+
+
+                    <!-- META -->
+
+                    <div
+                        class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500"
+                    >
+
+                        <span>
+
+                            👥 42 votes
+
+                        </span>
+
+
+                        <span
+                            class="text-green-300"
+                        >
+
+                            •
+
+                        </span>
+
+
+                        <span>
+
+                            3 choices
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- VOTE BUTTON -->
+
+                    <a
+                        href="#"
+                        class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"
+                    >
+
+                        Vote Now
+
+
+                        <span
+                            class="transition group-hover:translate-x-1"
+                        >
+
+                            →
+
+                        </span>
+
+                    </a>
+
+                </article>
+
+
+                <!-- ================================= -->
+                <!-- POLL CARD 2 -->
+                <!-- ================================= -->
+
+                <article
+                    class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                >
+
+
+                    <!-- TOP COLOR STRIP -->
+
+                    <div
+                        class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-yellow-400 to-orange-400"
+                    ></div>
+
+
+                    <!-- COMPANY HEADER -->
+
+                    <div
+                        class="mb-5 flex items-center justify-between pt-1"
+                    >
+
+
+                        <div
+                            class="flex items-center gap-3"
+                        >
+
+                            <img
+                                src="https://assets.reclub.co/group-avatars/154681.webp?updatedAt=1784943122"
+                                alt="ACES Club logo"
+                                class="h-12 w-12 rounded-2xl object-cover shadow-sm"
+                            >
+
+
+                            <div>
+
+                                <p
+                                    class="font-black text-green-950"
+                                >
+
+                                    ACES Club
+
+                                </p>
+
+
+                                <p
+                                    class="text-xs font-medium text-green-600"
+                                >
+
+                                    Community Poll
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700"
+                        >
+
+                            ACTIVE
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUESTION TYPE -->
+
+                    <p
+                        class="mb-2 text-xs font-black uppercase tracking-widest text-green-600"
+                    >
+
+                        Tournament
+
+                    </p>
+
+
+                    <!-- QUESTION -->
+
+                    <h3
+                        class="text-xl font-black leading-snug text-green-950"
+                    >
+
+                        What tournament format do you prefer?
+
+                    </h3>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <p
+                        class="mt-3 text-sm leading-relaxed text-slate-500"
+                    >
+
+                        Tell us which format would make our next tournament more competitive and fun.
+
+                    </p>
+
+
+                    <!-- META -->
+
+                    <div
+                        class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500"
+                    >
+
+                        <span>
+
+                            👥 28 votes
+
+                        </span>
+
+
+                        <span
+                            class="text-green-300"
+                        >
+
+                            •
+
+                        </span>
+
+
+                        <span>
+
+                            4 choices
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- VOTE BUTTON -->
+
+                    <a
+                        href="#"
+                        class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"
+                    >
+
+                        Vote Now
+
+
+                        <span
+                            class="transition group-hover:translate-x-1"
+                        >
+
+                            →
+
+                        </span>
+
+                    </a>
+
+                </article>
+
+
+                <!-- ================================= -->
+                <!-- POLL CARD 3 -->
+                <!-- ================================= -->
+
+                <article
+                    class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                >
+
+
+                    <!-- TOP COLOR STRIP -->
+
+                    <div
+                        class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-blue-400 to-cyan-400"
+                    ></div>
+
+
+                    <!-- COMPANY HEADER -->
+
+                    <div
+                        class="mb-5 flex items-center justify-between pt-1"
+                    >
+
+
+                        <div
+                            class="flex items-center gap-3"
+                        >
+
+                            <img
+                                src="https://assets.reclub.co/group-avatars/154681.webp?updatedAt=1784943122"
+                                alt="ACES Club logo"
+                                class="h-12 w-12 rounded-2xl object-cover shadow-sm"
+                            >
+
+
+                            <div>
+
+                                <p
+                                    class="font-black text-green-950"
+                                >
+
+                                    ACES Club
+
+                                </p>
+
+
+                                <p
+                                    class="text-xs font-medium text-green-600"
+                                >
+
+                                    Community Poll
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700"
+                        >
+
+                            ACTIVE
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUESTION TYPE -->
+
+                    <p
+                        class="mb-2 text-xs font-black uppercase tracking-widest text-green-600"
+                    >
+
+                        Equipment
+
+                    </p>
+
+
+                    <!-- QUESTION -->
+
+                    <h3
+                        class="text-xl font-black leading-snug text-green-950"
+                    >
+
+                        Which ball should we use for our next session?
+
+                    </h3>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <p
+                        class="mt-3 text-sm leading-relaxed text-slate-500"
+                    >
+
+                        Help us decide which pickleball brand to use for our next community session.
+
+                    </p>
+
+
+                    <!-- META -->
+
+                    <div
+                        class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500"
+                    >
+
+                        <span>
+
+                            👥 35 votes
+
+                        </span>
+
+
+                        <span
+                            class="text-green-300"
+                        >
+
+                            •
+
+                        </span>
+
+
+                        <span>
+
+                            3 choices
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- VOTE BUTTON -->
+
+                    <a
+                        href="#"
+                        class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"
+                    >
+
+                        Vote Now
+
+
+                        <span
+                            class="transition group-hover:translate-x-1"
+                        >
+
+                            →
+
+                        </span>
+
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- FOOTER MESSAGE -->
+        <!-- ================================= -->
+
+        <footer
+            class="mt-10 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center"
+        >
+
+
+            <div
+                class="mb-2 text-3xl"
+            >
+
+                🎾
+
+            </div>
+
+
+            <h3
+                class="text-lg font-black text-green-900"
+            >
+
+                Every vote makes a difference.
+
+            </h3>
+
+
+            <p
+                class="mt-1 text-sm text-green-700"
+            >
+
+                Together, we make our pickleball community better.
+
+            </p>
+
+        </footer>
+
+    </main>
+
+
+</body>
+
+</html>

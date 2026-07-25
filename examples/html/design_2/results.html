@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Results | PicklePolls</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pickle: {
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+                        },
+
+                        lime: {
+                            400: '#A3E635',
+                            500: '#84CC16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+
+    <!-- NAVBAR -->
+
+    <nav class="border-b border-green-100 bg-white">
+
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+
+            <a href="#" class="flex items-center gap-3">
+
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-lime-400 text-2xl shadow-lg shadow-green-200">
+                    🎾
+                </div>
+
+                <div>
+
+                    <h1 class="text-xl font-black tracking-tight text-green-900">
+                        PicklePolls
+                    </h1>
+
+                    <p class="text-xs font-medium text-green-600">
+                        Your community. Your voice.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <button
+                class="rounded-xl px-4 py-2 text-sm font-semibold text-green-800 transition hover:bg-green-50"
+            >
+                My Profile
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="mx-auto max-w-4xl px-6 py-10 md:py-16">
+
+
+        <!-- BACK LINK -->
+
+        <a
+            href="#"
+            class="mb-8 inline-flex items-center gap-2 text-sm font-bold text-green-700 transition hover:text-green-900"
+        >
+
+            <span class="text-lg">
+                ←
+            </span>
+
+            Back to Polls
+
+        </a>
+
+
+        <!-- HEADER -->
+
+        <div class="mb-8">
+
+            <div class="mb-6 flex items-center justify-between">
+
+                <div class="flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-yellow-100 to-lime-100 text-4xl shadow-sm">
+
+                    🏆
+
+                </div>
+
+
+                <span class="rounded-full bg-green-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-green-700">
+
+                    Poll Results
+
+                </span>
+
+            </div>
+
+
+            <p class="mb-3 text-sm font-black uppercase tracking-widest text-green-600">
+
+                Schedule
+
+            </p>
+
+
+            <h2 class="max-w-3xl text-4xl font-black leading-tight tracking-tight text-green-950 md:text-5xl">
+
+                What time should Sunday games start?
+
+            </h2>
+
+
+            <p class="mt-5 text-lg leading-relaxed text-slate-500">
+
+                Here's what the community decided.
+
+            </p>
+
+        </div>
+
+
+        <!-- WINNER HERO -->
+
+        <div class="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-green-600 via-green-500 to-lime-500 p-8 text-white shadow-xl shadow-green-200">
+
+
+            <!-- Decorative Circle -->
+
+            <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10"></div>
+
+
+            <div class="relative">
+
+
+                <div class="mb-6 flex items-center justify-between">
+
+                    <div>
+
+                        <p class="text-sm font-bold uppercase tracking-widest text-green-100">
+
+                            Community Choice
+
+                        </p>
+
+                        <p class="mt-2 text-3xl font-black">
+
+                            4:00 PM 🎉
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="text-right">
+
+                        <p class="text-5xl font-black">
+                            52%
+                        </p>
+
+                        <p class="text-sm font-medium text-green-100">
+                            of all votes
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="h-4 overflow-hidden rounded-full bg-white/20">
+
+                    <div
+                        class="h-full rounded-full bg-white"
+                        style="width: 52%;"
+                    ></div>
+
+                </div>
+
+
+                <p class="mt-4 text-sm text-green-100">
+
+                    🏆 Winning choice with 22 votes
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY STATS -->
+
+        <div class="mb-8 grid gap-4 sm:grid-cols-3">
+
+
+            <div class="rounded-3xl border border-green-100 bg-white p-5 shadow-sm">
+
+                <p class="text-sm font-medium text-slate-500">
+                    Total Votes
+                </p>
+
+                <p class="mt-2 text-3xl font-black text-green-900">
+                    42
+                </p>
+
+            </div>
+
+
+            <div class="rounded-3xl border border-green-100 bg-white p-5 shadow-sm">
+
+                <p class="text-sm font-medium text-slate-500">
+                    Choices
+                </p>
+
+                <p class="mt-2 text-3xl font-black text-green-900">
+                    3
+                </p>
+
+            </div>
+
+
+            <div class="rounded-3xl border border-green-100 bg-white p-5 shadow-sm">
+
+                <p class="text-sm font-medium text-slate-500">
+                    Leader
+                </p>
+
+                <p class="mt-2 text-xl font-black text-green-600">
+                    4:00 PM
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RESULTS CARD -->
+
+        <div class="relative overflow-hidden rounded-3xl border border-green-100 bg-white p-6 shadow-xl shadow-green-100/60 md:p-8">
+
+
+            <!-- Accent -->
+
+            <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 via-lime-400 to-yellow-300"></div>
+
+
+            <div class="mb-8 flex items-center justify-between pt-2">
+
+                <div>
+
+                    <h3 class="text-2xl font-black text-green-950">
+
+                        Vote Breakdown
+
+                    </h3>
+
+                    <p class="mt-1 text-sm text-slate-500">
+
+                        See how the community voted.
+
+                    </p>
+
+                </div>
+
+
+                <span class="text-3xl">
+                    📊
+                </span>
+
+            </div>
+
+
+            <div class="space-y-6">
+
+
+                <!-- WINNING RESULT -->
+
+                <div>
+
+                    <div class="mb-3 flex items-center justify-between">
+
+                        <div class="flex items-center gap-3">
+
+                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-yellow-100 text-lg">
+
+                                🏆
+
+                            </span>
+
+
+                            <span class="font-black text-green-950">
+
+                                4:00 PM
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="font-black text-green-600">
+
+                            52%
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="h-4 overflow-hidden rounded-full bg-green-100">
+
+                        <div
+                            class="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-400"
+                            style="width: 52%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p class="mt-2 text-sm text-slate-500">
+
+                        22 votes
+
+                    </p>
+
+                </div>
+
+
+                <!-- SECOND RESULT -->
+
+                <div>
+
+                    <div class="mb-3 flex items-center justify-between">
+
+                        <span class="font-bold text-green-950">
+
+                            3:00 PM
+
+                        </span>
+
+
+                        <span class="font-bold text-slate-500">
+
+                            31%
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="h-4 overflow-hidden rounded-full bg-slate-100">
+
+                        <div
+                            class="h-full rounded-full bg-green-300"
+                            style="width: 31%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p class="mt-2 text-sm text-slate-500">
+
+                        13 votes
+
+                    </p>
+
+                </div>
+
+
+                <!-- THIRD RESULT -->
+
+                <div>
+
+                    <div class="mb-3 flex items-center justify-between">
+
+                        <span class="font-bold text-green-950">
+
+                            5:00 PM
+
+                        </span>
+
+
+                        <span class="font-bold text-slate-500">
+
+                            17%
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="h-4 overflow-hidden rounded-full bg-slate-100">
+
+                        <div
+                            class="h-full rounded-full bg-green-200"
+                            style="width: 17%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p class="mt-2 text-sm text-slate-500">
+
+                        7 votes
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+
+
+            <a
+                href="#"
+                class="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"
+            >
+
+                Vote Again
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-green-200 bg-white px-6 py-4 font-black text-green-700 transition hover:bg-green-50"
+            >
+
+                Back to Polls
+
+                <span>
+                    🏠
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- FOOTER MESSAGE -->
+
+        <div class="mt-10 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-8 text-center">
+
+            <div class="mb-3 text-4xl">
+                🎾
+            </div>
+
+            <h3 class="text-xl font-black text-green-900">
+
+                Thanks for participating!
+
+            </h3>
+
+            <p class="mt-2 text-green-700">
+
+                Together, we make our pickleball community better.
+
+            </p>
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>
