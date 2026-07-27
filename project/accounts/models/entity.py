@@ -21,3 +21,8 @@ class Entity(models.Model):
     def __str__(self) -> str:
         """Human readable string representation of the instance."""
         return self.name
+
+    @property
+    def has_image(self) -> bool:
+        """Check if logo url is filled."""
+        return len(self.logo_url) > 4
