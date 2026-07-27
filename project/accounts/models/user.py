@@ -18,3 +18,8 @@ class User(AbstractUser):
     def __str__(self) -> str:
         """Human readable string representation of the instance."""
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def has_image(self) -> bool:
+        """Check if has profile pic url."""
+        return len(self.profile_pic_url) > 4
