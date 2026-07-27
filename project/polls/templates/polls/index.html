@@ -1,25 +1,126 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Polls</title>
-    </head>
-    <body>
-    {% if latest_question_list %}
-        <div>
-            <h1>Polls Page</h1>
-            <ul>
-                {% for question in latest_question_list %}
-                    <li>
-                        <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
-                        <p>Choices:{{question.total_choices}}</p>
-                        <p>Votes:{{question.total_votes}}</p></p>
-                    </li>
-                {% endfor %}
-            </ul>
+<html lang="en">
+<meta>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Pickle Polls</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                   pickle: {
+
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+
+                        },
+                    
+                    lime: {
+                            400: '#A3E635',
+                            500: '#84CC16',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="border-b border-green-100 bg-white">
+        <div class="mx-auto flex max-w7x1 items-center justify-between px-5 py-3 md:px-6">
+            <!-- Brand -->
+             <a 
+                href="#"
+                class="flex items-center gap-3"
+            >
+                <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200"
+                >
+                    🎾
+                </div>
+                <div>
+                    <h1 class="text-lg font-black tracking-tight text-green-900">
+                        PicklePolls
+                    </h1>
+                    <p class="text-[11px] font-medium text-green-600">
+                        Your community. Your voice.
+                    </p>
+                </div>
+
+             </a>
 
         </div>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
-    </body>
+    </nav>
+
+    <!-- Main -->
+     <main 
+        class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8"
+     >
+
+     <!-- Contained Hero Section -->
+      <section
+        class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60"
+      >
+
+        <!-- Decorative Circles -->
+         <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
+         <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/200"></div>
+
+         <!-- Hero Section -->
+          <div class="relative px-6 py-8 md:px-10 md:py-10">
+            <div
+                class="flex flex-col justify-between gap-6 md:flex-row md:items-center"
+            >
+            <!-- Hero Text -->
+             <div class="max-w-2xl">
+                <!-- Label -->
+                 <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
+                    🎾 Community Voting
+                 </div>
+                 <!-- Title -->
+                  <h2 class="text=3xl font-black leading-tight tracking-tight text-white md:text-5xl">
+                    Your vote. <span class="text-lime-200">Your community</span>
+                  </h2>
+                  <!-- Description -->
+                   <p class="mt-3 max-w-xl text-sm leading-relaxed text-green-50 md:text-base">
+                    Help shape the future of pickleball community by voting on venues, schedules, tournaments, events and more.
+                   </p>
+                </div>
+
+                <!-- Stats -->
+                 <div class="flex shrink-0 gap-3">
+                    <!-- Total Polls -->
+                    <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                        <p class="text-xl font-black text-white">{{ total_polls }}</p>
+                        <p class="text-xs text-green-100">Total Polls</p>
+                    </div>
+                    <!-- Community Votes -->
+                    <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                        <p class="text-xl font-black text-white">{{total_votes}}</p>
+                        <p class="text-xs text-green-100">Community Votes</p>
+                    </div>
+
+                 </div>
+
+            </div>
+
+          </div>
+      </section>
+
+     </main>
+</body>
 </html>

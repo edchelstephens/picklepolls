@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.db.models import F
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
@@ -11,7 +13,17 @@ def index(request: HttpRequest) -> HttpResponse:
     """Index page."""
 
     latest_question_list = Question.objects.order_by("-publication_datetime")[:5]
-    context = {"latest_question_list": latest_question_list}
+    total_polls = Question.objects.count()
+    total_votes = sum(Choice.objects.values_list("votes", flat=True))
+
+    context = {
+        "latest_question_list": latest_question_list,
+        "total_polls": total_polls,
+        "total_votes": total_votes,
+    }
+
+    print(" ======== context ========")
+    pprint(context)
 
     return render(request, "polls/index.html", context)
 
