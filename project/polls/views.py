@@ -12,18 +12,16 @@ from polls.models import Question, Choice
 def index(request: HttpRequest) -> HttpResponse:
     """Index page."""
 
-    latest_question_list = Question.objects.order_by("-publication_datetime")[:5]
+    question_list = Question.objects.order_by("-publication_datetime")[:3]
     total_polls = Question.objects.count()
     total_votes = sum(Choice.objects.values_list("votes", flat=True))
 
     context = {
-        "latest_question_list": latest_question_list,
+        "question_list": question_list,
+        "has_polls": total_polls > 0,
         "total_polls": total_polls,
         "total_votes": total_votes,
     }
-
-    print(" ======== context ========")
-    pprint(context)
 
     return render(request, "polls/index.html", context)
 
