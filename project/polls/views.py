@@ -12,7 +12,7 @@ from polls.models import Question, Choice
 def index(request: HttpRequest) -> HttpResponse:
     """Index page."""
 
-    question_list = Question.objects.order_by("-publication_datetime")[:3]
+    question_list = Question.objects.order_by("-publication_datetime")
     total_polls = Question.objects.count()
     total_votes = sum(Choice.objects.values_list("votes", flat=True))
 
