@@ -35,7 +35,7 @@ def vote(request: HttpRequest, question_id: int) -> HttpResponse:
     question = get_object_or_404(Question, pk=question_id)
     try:
         choice_id = request.POST["choice"]
-        selected_choice = question.choice_set.get(pk=choice_id)
+        selected_choice = question.choices.get(pk=choice_id)
     except (KeyError, Choice.DoesNotExist):
         return render(
             request,

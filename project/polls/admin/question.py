@@ -25,13 +25,13 @@ class QuestionAdmin(admin.ModelAdmin):
     @admin.display(description="Total Choices")
     def total_choices(self, obj):
         """Return the total choices count of the question."""
-        return obj.choice_set.count()
+        return obj.choices.count()
 
     @admin.display(description="Total Votes")
     def total_votes(self, obj):
         """Return the total votes count of all the choices for the question."""
 
-        choices_votes = obj.choice_set.values_list("votes", flat=True)
+        choices_votes = obj.choices.values_list("votes", flat=True)
         return sum(choices_votes)
 
 
