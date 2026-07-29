@@ -58,6 +58,12 @@
             <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900">
                 <span class="text-sm">←</span> Back to Polls
             </a>
+            
+            {% if question.is_active %}
+                <span class="rounded-full bg-green-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-green-700">
+                🟢 Active Poll
+                </span>
+            {% endif %}
         </div>
 
         <!-- Main Voting Card -->
@@ -85,7 +91,7 @@
              </div>
 
         <!-- Form and Vertical Choices -->
-         <form action="#" method="post">
+         <form action="{% url 'polls:vote' question.id %}" method="post">
             <fieldset>
                 <legend class="sr-only">Poll Choices</legend>
                 <div class="flex flex-col gap-3">
@@ -106,13 +112,19 @@
             <!-- Submit button -->
              <button
                 type="submit"
-                class="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 text-sm font-black text-white shadow-green-200 transition hover:from-green-700 hover:to-green-600"   
+                class="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"   
              >
                 Submit My Vote
                 <span class="text-base">→</span>
-
              </button>
          </form>
+        </div>
+
+        <!-- Footer Message -->
+        <div class="mt-8 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
+            <div class="mb-2 text-3xl">🤝</div>
+            <h3 class="text-lg font-black text-green-900">Every vote counts.</h3>
+            <p class="mt-1 text-sm text-green-700">Your vote helps shape the next community decision.</p>
         </div>
 
         
