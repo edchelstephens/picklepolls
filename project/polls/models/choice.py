@@ -24,6 +24,6 @@ class Choice(models.Model):
     def vote_percentage(self) -> float:
         """Get the percentage of this choice from the total casted votes across all choices under question."""
         total_votes = self.question.total_votes
-        percentage = (self.votes / total_votes) * 100
+        percentage = round((self.votes / total_votes) * 100)
 
         return percentage
