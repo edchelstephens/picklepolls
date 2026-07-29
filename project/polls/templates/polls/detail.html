@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Polls</title>
-    </head>
-    <body>
-
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-        {% csrf_token %}
-        <fieldset>
-            <legend><h1>{{ question.question_text }}</h1></legend>
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p> {% endif %}
-            {% for choice in question.choices.all %}
-                <input type="radio" name="choice" id="{{choice.id }}" value="{{ choice.id }}">
-                    <label for="{{choice.id }}">{{ choice.choice_text  }}</label><br/>
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Vote">
-
-    </form>
-    
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote on Poll {{question.id}} | PicklePolls</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pickle: {
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+                        },
+                        lime: {
+                            400: '#A3E635',
+                            500: '#84CC16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
 </html>
