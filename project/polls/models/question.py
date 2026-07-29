@@ -81,3 +81,7 @@ class Question(models.Model):
             raise ValueError("The poll does not have multiple choices voted yet.")
 
         return self.choices.order_by("votes").first()
+
+    def get_choices_ordered_by_winning_votes(self) -> models.QuerySet:
+        """Get choices ordered by winning votes."""
+        return self.choices.order_by("-votes")

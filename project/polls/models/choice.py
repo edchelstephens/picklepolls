@@ -19,3 +19,11 @@ class Choice(models.Model):
         return (
             f"{self.question.question_text} - {self.choice_text} - {self.votes} votes"
         )
+
+    @property
+    def vote_percentage(self) -> float:
+        """Get the percentage of this choice from the total casted votes across all choices under question."""
+        total_votes = self.question.total_votes
+        percentage = (self.votes / total_votes) * 100
+
+        return percentage
