@@ -38,7 +38,7 @@
     <nav class="border-b border-green-100 bg-white">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
         <!-- Brand -->
-         <a href="#" class="flex items-center gap-3">
+         <a href="{% url 'polls:index' %}" class="flex items-center gap-3">
             <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200">
                 🎾
             </div>
@@ -55,7 +55,7 @@
 
         <!-- Top nav link and Badge -->
         <div class="mb-4 flex items-center justify-between">
-            <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900">
+            <a href="{% url 'polls:index' %}" class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900">
                 <span class="text-sm">←</span> Back to Polls
             </a>
             
@@ -92,6 +92,7 @@
 
         <!-- Form and Vertical Choices -->
          <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
             <fieldset>
                 <legend class="sr-only">Poll Choices</legend>
                 <div class="flex flex-col gap-3">
