@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll {{question.id}} | Results </title>
-    <script src="https://'cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -33,5 +33,54 @@
     </script>
     
 </head>
-<body></body>
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+    <!-- Nav -->
+     <nav class="border-b border-green-100 bg-white">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
+            <!-- Brand -->
+            <a href="{% url 'polls:index' %}" class="flex items-center gap-3">
+                <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200"
+                >
+                    🎾
+                </div>
+                <div>
+                    <h1 class="text-lg font-black tracking-tight text-green-900">PicklePolls</h1>
+                    <p class="text-[11px] font-medium text-green-600">Your community. Your voice.</p>
+                </div>
+            </a>
+        </div>
+     </nav>
+
+    <!-- Main Container -->
+    <main class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8">
+        <!-- Links and Header Nav -->
+        <div class="mb-4 flex items-center justify-between">
+            <a
+                href="{% url 'polls:index' %}"    
+                class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900"
+            >
+                <span class="text-sm">←</span> Back to Polls
+            </a>
+            <span class="rounded-full bg-yellow-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-yellow-800">🏆 Poll Results</span>
+        </div>
+        
+        <!-- Main Grid Layout -->
+        <div class="grid gap-6 md:grid-cols-12">
+
+            <!-- Left column: Poll Info & Winnign Choice -->
+             <div
+                class="flex flex-col justify-between md:col-span-5"
+             >
+
+
+
+             </div>
+             
+            <!-- Right column: Breakdown List -->
+             <div></div>
+        </div>
+    </main>
+</body>
 </html>
