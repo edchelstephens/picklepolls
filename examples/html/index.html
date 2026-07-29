@@ -1,0 +1,316 @@
+<html lang="en"><head><meta>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickle Polls</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                   pickle: {
+
+                            50: '#F0FDF4',
+                            100: '#DCFCE7',
+                            200: '#BBF7D0',
+                            300: '#86EFAC',
+                            400: '#4ADE80',
+                            500: '#22C55E',
+                            600: '#16A34A',
+                            700: '#15803D',
+                            800: '#166534',
+                            900: '#14532D',
+
+                        },
+                    
+                    lime: {
+                            400: '#A3E635',
+                            500: '#84CC16',
+                    }
+                }
+            }
+        }
+    </script>
+
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="border-b border-green-100 bg-white">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
+            <!-- Brand -->
+             <a href="#" class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200">
+                    🎾
+                </div>
+                <div>
+                    <h1 class="text-lg font-black tracking-tight text-green-900">
+                        PicklePolls
+                    </h1>
+                    <p class="text-[11px] font-medium text-green-600">
+                        Your community. Your voice.
+                    </p>
+                </div>
+
+             </a>
+
+        </div>
+    </nav>
+
+    <!-- Main -->
+     <main class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8">
+
+     <!-- Contained Hero Section -->
+      <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60">
+
+        <!-- Decorative Circles -->
+         <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
+         <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"></div>
+
+         <!-- Hero Section -->
+          <div class="relative px-6 py-8 md:px-10 md:py-10">
+            <div class="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+            <!-- Hero Text -->
+             <div class="max-w-2xl">
+                <!-- Label -->
+                 <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
+                    🎾 Community Voting
+                 </div>
+                 <!-- Title -->
+                  <h2 class="text=3xl font-black leading-tight tracking-tight text-white md:text-5xl">
+                    Your vote. <span class="text-lime-200">Your community</span>
+                  </h2>
+                  <!-- Description -->
+                   <p class="mt-3 max-w-xl text-sm leading-relaxed text-green-50 md:text-base">
+                    Help shape the future of pickleball community by voting on venues, schedules, formats, events and more.
+                   </p>
+                </div>
+
+                <!-- Stats -->
+                 <div class="flex shrink-0 gap-3">
+                    <!-- Total Polls -->
+                    <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                        <p class="text-xl font-black text-white">3</p>
+                        <p class="text-xs text-green-100">Total Polls</p>
+                    </div>
+                    <!-- Community Votes -->
+                    <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                        <p class="text-xl font-black text-white">8</p>
+                        <p class="text-xs text-green-100">Community Votes</p>
+                    </div>
+
+                 </div>
+
+            </div>
+
+          </div>
+      </section>
+
+      <!-- Polls Section -->
+      <section class="mt-8">
+        <!-- Section Header -->
+         <div class="mb-5 flex items-end justify-between">
+            <div>
+                <p class="mb-1 text-xs font-black uppercase tracking-widest text-green-600">Have your say</p>
+                <h2 class="text-2xl font-black text-green-950 md:text-3xl">Polls</h2>
+            </div>
+            <!-- Status -->
+             
+             <span class="hidden rounded-full bg-green-100 px-4 py-2 text-sm font-bold text-green-700 sm:block">
+                🟢 Voting is open
+             </span>
+             
+            </div>
+
+            <!-- Poll Grid -->
+            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                
+                    <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <!-- Top Color Strip -->
+                         <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 to-lime-400"></div>
+                         <!-- Header for Entity who asked the Poll  -->
+                          <div class="mb-5 flex items-center justify-between pt-1">
+                            <!-- Entity -->
+                             <div class="flex items-center gap-3">
+                                <img src="https://assets.reclub.co/group-avatars/154681.webp" alt="ACES" class="h-12 w-12 rounded-2xl object-cover shadow-sm">
+                                <div>
+                                    <p class="font-black text-green-950">ACES</p>
+                                    <p class="text-xs font-medium text-green-600">Community Poll</p>
+                                </div>
+                             </div>
+                             <!-- Status -->
+                              
+                              <span class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700">ACTIVE</span>
+                              
+                            </div>
+
+                             <!-- Question Type -->
+                              <p class="mb-2 text-xs font-black uppercase tracking-widest text-green-600">Format</p>
+
+                              <!-- Question -->
+                               <h3 class="text-xl font-black leading-snug text-green-950">What is your preferred DUPR Format?</h3>
+
+                               <!-- Metrics -->
+                                <div class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500">
+                                    <span>👥 4 votes</span>
+                                    <span class="text-green-300">•</span>
+                                    <span>4 choices</span>
+                                </div>
+
+                                <!-- Vote Button -->
+                                 <a href="/1/" class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600">
+                                    Vote Now
+                                    <span class="transition group-hover:translate-x-1"> → </span>
+                                 </a>
+
+                        
+                    </article>
+                
+                    <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <!-- Top Color Strip -->
+                         <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 to-lime-400"></div>
+                         <!-- Header for Entity who asked the Poll  -->
+                          <div class="mb-5 flex items-center justify-between pt-1">
+                            <!-- Entity -->
+                             <div class="flex items-center gap-3">
+                                <img src="https://assets.reclub.co/group-avatars/154681.webp" alt="ACES" class="h-12 w-12 rounded-2xl object-cover shadow-sm">
+                                <div>
+                                    <p class="font-black text-green-950">ACES</p>
+                                    <p class="text-xs font-medium text-green-600">Community Poll</p>
+                                </div>
+                             </div>
+                             <!-- Status -->
+                              
+                              <span class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700">ACTIVE</span>
+                              
+                            </div>
+
+                             <!-- Question Type -->
+                              <p class="mb-2 text-xs font-black uppercase tracking-widest text-green-600">Frequency</p>
+
+                              <!-- Question -->
+                               <h3 class="text-xl font-black leading-snug text-green-950">How frequent should we do DUPR sessions?</h3>
+
+                               <!-- Metrics -->
+                                <div class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500">
+                                    <span>👥 1 votes</span>
+                                    <span class="text-green-300">•</span>
+                                    <span>3 choices</span>
+                                </div>
+
+                                <!-- Vote Button -->
+                                 <a href="/4/" class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600">
+                                    Vote Now
+                                    <span class="transition group-hover:translate-x-1"> → </span>
+                                 </a>
+
+                        
+                    </article>
+                
+                    <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <!-- Top Color Strip -->
+                         <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 to-lime-400"></div>
+                         <!-- Header for Entity who asked the Poll  -->
+                          <div class="mb-5 flex items-center justify-between pt-1">
+                            <!-- Entity -->
+                             <div class="flex items-center gap-3">
+                                <img src="https://assets.reclub.co/group-avatars/154681.webp" alt="ACES" class="h-12 w-12 rounded-2xl object-cover shadow-sm">
+                                <div>
+                                    <p class="font-black text-green-950">ACES</p>
+                                    <p class="text-xs font-medium text-green-600">Community Poll</p>
+                                </div>
+                             </div>
+                             <!-- Status -->
+                              
+                              <span class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700">ACTIVE</span>
+                              
+                            </div>
+
+                             <!-- Question Type -->
+                              <p class="mb-2 text-xs font-black uppercase tracking-widest text-green-600">Venue</p>
+
+                              <!-- Question -->
+                               <h3 class="text-xl font-black leading-snug text-green-950">Which is your preferred Court Venue for ACES?</h3>
+
+                               <!-- Metrics -->
+                                <div class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500">
+                                    <span>👥 3 votes</span>
+                                    <span class="text-green-300">•</span>
+                                    <span>4 choices</span>
+                                </div>
+
+                                <!-- Vote Button -->
+                                 <a href="/3/" class="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600">
+                                    Vote Now
+                                    <span class="transition group-hover:translate-x-1"> → </span>
+                                 </a>
+
+                        
+                    </article>
+                
+            </div>
+         
+      </section>
+
+      <!-- Footer Area -->
+      <footer>
+        <div class="mt-10 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
+            <div class="mb-2 text-3xl">🎾</div>
+            <h3 class="text-lg font-black text-green-900">Every vote makes a difference.</h3>
+            <p class="mt-1 text-sm text-green-700">Together, we make our pickleball community better.</p>
+        </div>
+      
+        
+
+        
+        <!-- Developer Credit -->
+        <div class="mt-8 flex justify-center pb-4">
+            <div class="inline-flex items-center gap-4 rounded-2xl px-5 py-4 transition hover:bg-white hover:shadow-sm">
+                <!-- Picture -->
+                 <a href="https://www.linkedin.com/in/edchelstephens/" target="_blank" rel="noopener noreferrer" class="block text-sm font-bold text-green-700 transition hover:text-green-900">
+                    <img src="https://avatars.githubusercontent.com/u/49672830?v=4" alt="Edchel Stephen Nini" class="h-11 w-11 rounded-full border-2 border-green-200 object-cover shadow-sm">
+                 </a>
+
+                <!-- Text -->
+                 <div class="text-left">
+                    <p class="text-xs text-slate-400">Made with 💚 by</p>
+                    <a href="https://www.linkedin.com/in/edchelstephens/" target="_blank" rel="noopener noreferrer" class="block text-sm font-bold text-green-700 transition hover:text-green-900">
+                        edchelstephens
+                    </a>
+
+                    <!-- Social Icons -->
+                     <div class="mt-2 flex items-center gap-3">
+                        <!-- GitHub -->
+                        <a href="https://github.com/edchelstephens" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-400 transition hover:text-slate-900">
+                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.58 9.58 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.001 10.001 0 0 0 22 12C22 6.477 17.523 2 12 2Z"></path>
+                            </svg>
+                        </a>
+
+
+                        <!-- LinkedIn -->
+                         <a href="https://www.linkedin.com/in/edchelstephens/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-400 transition hover:text-[#0A66C2]">
+                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.119 20.452H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0Z"></path>
+                            </svg>
+                         </a>
+
+
+        
+                        <!-- Facebook -->
+                         <a href="https://www.facebook.com/edchelstephens" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-slate-400 transition hover:text-[#1877F2]">
+                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.019 4.388 11.009 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.007 1.792-4.669 4.533-4.669 1.313 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.926-1.956 1.875v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.082 24 18.092 24 12.073z"></path>
+                            </svg>
+                         </a>
+                     </div>
+                 </div>
+            </div>
+        </div>
+
+     
+      </footer>
+      
+     </main>
+
+
+</body></html>
