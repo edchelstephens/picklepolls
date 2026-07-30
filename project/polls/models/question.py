@@ -72,7 +72,7 @@ class Question(models.Model):
         if not self.has_votes:
             raise ValueError("The poll question has not been voted yet.")
 
-        return self.choices.order_by("votes").last()
+        return self.choices.order_by("-votes").first()
 
     @property
     def losing_choice(self) -> models.Model:
@@ -80,7 +80,7 @@ class Question(models.Model):
         if not self.has_multiple_votes:
             raise ValueError("The poll does not have multiple choices voted yet.")
 
-        return self.choices.order_by("votes").first()
+        return self.choices.order_by("-votes").last()
 
     def get_choices_ordered_by_winning_votes(self) -> models.QuerySet:
         """Get choices ordered by winning votes."""

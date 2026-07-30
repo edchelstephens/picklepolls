@@ -73,7 +73,47 @@
              <div
                 class="flex flex-col justify-between md:col-span-5"
              >
+                <div class="rounded-3xl border border-green-100 bg-white p-6 shadow-lg shadow-green-100/60">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                        <img src="{{ question.entity.logo_url }}" alt="{{ question.entity.name }}" class="h-10 w-10 rounded-xl object-cover shadow-sm"/>
+                        <div>
+                            <p class="text-xs font-black text-green-950">{{ question.entity.name }}</p>
+                            <p class="text-[11px] font-medium text-green-600">{{ question.question_type.name }}</p>
+                        </div>
+                    </div>
+                    <h2 class="mt-4 text-xl font-black leading-tight text-green-950">
+                        {{ question.question_text }}
+                    </h2>
+                    
+                    <!-- Winner banner-->
+                    {% if question.has_votes %}
+                    <div class="relative mt-4 overflow-hidden rounded-2xl bg-gradient-to-br from-green-600 via-green-500 to-lime-500 p-5 text-white shadow-md">
+                        <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10"></div>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-green-100">Winning Choice</p>
+                        <div class="mt-1 flex items-baseline justify-between">
+                            <p class="text-2xl font-black">{{ question.winning_choice.choice_text }} 🎉</p>
+                          
+                        </div>
+                        <p class="text-xl font-black">🗳️ {{ question.winning_choice.vote_percentage}} %</p>
+                        <p class="mt-2 text-l text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total votes</p>
+                    </div>
+                    {% endif %}
 
+                    <!-- Navigation actions -->
+                     <div class="mt-4 grid grid-cols-2 gap-2">
+                        <a 
+                            href="{% url 'polls:detail' question.pk %}"
+                            class="flex items-center justify-center rounded-xl bg-green-600 py-3 text-xs font-black text-white transition hover:bg-green-70"
+                        >
+                            Vote Again →
+                        </a>
+                        <a 
+                            href="{% url 'polls:index' %}"
+                            class="flex items-center justify-center rounded-xl border border-green-200 bg-white py-3 text-xs font-black text-green-700 transition hover:bg-green-50"
+                        >Back Home 🏠</a>
+
+                     </div>
+                </div>
 
 
              </div>
