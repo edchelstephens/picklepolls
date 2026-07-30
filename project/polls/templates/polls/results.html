@@ -95,7 +95,7 @@
                           
                         </div>
                         <p class="text-xl font-black">🗳️ {{ question.winning_choice.vote_percentage}} %</p>
-                        <p class="mt-2 text-l text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total votes</p>
+                        <p class="mt-2 text-m text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total votes</p>
                     </div>
                     {% endif %}
 
@@ -119,8 +119,54 @@
              </div>
              
             <!-- Right column: Breakdown List -->
-             <div></div>
+             <div class="relative overflow-hidden rounded-3xl border border-green-100 bg-white p-6 shadow-xl shadow-green-100/60 md:col-span-7">
+                <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 via-lime-400 to-yellow-300"></div>
+                <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 pt-1">
+                    <div>
+                        <h3 class="text-base font-black text-green-950">Vote Breakdown</h3>
+                        <p class="text-xs text-slate-500">{{ question.total_votes}} total responses logged</p>
+                    </div>
+                    <span class="text-xl">📊</span>
+                </div>
+                <div class="space-y-4">
+                    {% for choice in question.get_choices_ordered_by_winning_votes %}
+                       {%  if forloop.counter == 1 %}
+                            <!-- Winning Choice -->
+                             <div class="rounded-2xl border border-green-200 bg-green-50/40 p-4">
+                                <div class="mb-2 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-yellow-100 text-xs">🏆</span>
+                                        <span class="text-sm font-black text-green-950">{{ choice.choice_text}}</span>
+                                    </div>
+                                    <span class="text-xs font-black text-green-700">{{ choice.votes}} votes</span>
+                                </div>
+                                <div class="h-2.5 overflow-hidden rounded-full bg-green-100">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-400" style="width: {{choice.vote_percentage}}%;"></div>
+                                </div>
+                             </div>
+                       {% else %}
+                            <div class="p-1">
+                                <div class="mb-2 flex items-center justify-between">
+                                    <span class="text-sm font-bold text-slate-800">{{choice.choice_text}}</span>
+                                    <span class="text-xs font-bold text-slate-500">{{ choice.votes}} votes</span>
+                                </div>
+                                <div class="h-2.5 overflow-hidden rounded-full bg-slate-100">
+                                    <div class="h-full rounded-full bg-green-400" style="width: {{choice.vote_percentage}}%;"></div>
+                                </div>
+                            </div>
+                       {% endif %}
+                    {% endfor %}
+
+                </div>
+             </div>
         </div>
+
+        <!-- Footer Message -->
+         <div class="mt-8 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
+            <div class="mb-2 text-3xl">🎾</div>
+            <h3 class="text-lg font-black text-green-900">Thanks for participating!</h3>
+            <p class="mt-1 text-sm text-green-700">Together, we make our pickleball community better.</p>
+         </div>
     </main>
 </body>
 </html>
