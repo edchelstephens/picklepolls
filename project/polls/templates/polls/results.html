@@ -95,7 +95,7 @@
                           
                         </div>
                         <p class="text-xl font-black">🗳️ {{ question.winning_choice.vote_percentage}} %</p>
-                        <p class="mt-2 text-m text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total votes</p>
+                        <p class="mt-2 text-m text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total vote{{ question.total_votes | pluralize }}</p>
                     </div>
                     {% endif %}
 
@@ -124,7 +124,7 @@
                 <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 pt-1">
                     <div>
                         <h3 class="text-base font-black text-green-950">Vote Breakdown</h3>
-                        <p class="text-xs text-slate-500">{{ question.total_votes}} total responses logged</p>
+                        <p class="text-xs text-slate-500">{{ question.total_votes}} total response{{ question.total_votes | pluralize }} logged</p>
                     </div>
                     <span class="text-xl">📊</span>
                 </div>
@@ -138,7 +138,7 @@
                                         <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-yellow-100 text-xs">🏆</span>
                                         <span class="text-sm font-black text-green-950">{{ choice.choice_text}}</span>
                                     </div>
-                                    <span class="text-xs font-black text-green-700">{{ choice.votes}} votes</span>
+                                    <span class="text-xs font-black text-green-700">{{ choice.votes}} vote{{ choice.votes | pluralize }}</span>
                                 </div>
                                 <div class="h-2.5 overflow-hidden rounded-full bg-green-100">
                                     <div class="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-400" style="width: {{choice.vote_percentage}}%;"></div>

@@ -106,12 +106,12 @@
                     <!-- Total Polls -->
                     <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
                         <p class="text-xl font-black text-white">{{ total_polls }}</p>
-                        <p class="text-xs text-green-100">Total Polls</p>
+                        <p class="text-xs text-green-100">Total Poll{{ total_polls |pluralize}}</p>
                     </div>
                     <!-- Community Votes -->
                     <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
                         <p class="text-xl font-black text-white">{{total_votes}}</p>
-                        <p class="text-xs text-green-100">Community Votes</p>
+                        <p class="text-xs text-green-100">Community Vote{{total_votes | pluralize}}</p>
                     </div>
 
                  </div>
@@ -175,9 +175,9 @@
 
                                <!-- Metrics -->
                                 <div class="mt-5 flex items-center gap-3 border-t border-green-50 pt-4 text-xs font-medium text-slate-500">
-                                    <span>👥 {{question.total_votes}} votes</span>
+                                    <span>👥 {{question.total_votes}} vote{{ question.total_votes |pluralize}}</span>
                                     <span class="text-green-300">•</span>
-                                    <span>{{question.total_choices}} choices</span>
+                                    <span>{{question.total_choices}} choice{{ question.total_choices |pluralize}}</span>
                                 </div>
 
                                 <!-- Vote Button -->
