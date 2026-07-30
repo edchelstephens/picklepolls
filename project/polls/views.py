@@ -1,12 +1,96 @@
-from pprint import pprint
-
 from django.db.models import F
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.views.generic import TemplateView, DetailView
+from django.views import View
 
 
 from polls.models import Question, Choice
+
+
+class PollsIndexView(TemplateView):
+    """Index view."""
+
+    template_name = "polls/index.html"
+
+    def get_context_data(self, **kwargs) -> dict:
+        """Get context data."""
+
+        question_list = Question.objects.order_by("-publication_datetime")
+        total_polls = Question.objects.count()
+        total_votes = sum(Choice.objects.values_list("votes", flat=True))
+
+        context = {
+            "question_list": question_list,
+            "has_polls": total_polls > 0,
+            "total_polls": total_polls,
+            "total_votes": total_votes,
+        }
+
+        return context
+
+
+class PollDetailView(DetailView):
+    """Poll Detail view."""
+
+    model = Question
+    template_name = "polls/detail.html"
+
+
+class PollResultsView(DetailView):
+    """Poll results view."""
+
+    model = Question
+    template_name = "polls/results.html"
+
+
+class PollVoteView(View):
+    """Poll vote view."""
+
+    def post(self, request, pk: int, *args, **kwargs):
+        """Poll vote view."""
+
+        question = get_object_or_404(Question, pk=pk)
+        try:
+            choice_id = request.POST["choice"]
+            selected_choice = question.choices.get(pk=choice_id)
+        except (KeyError, Choice.DoesNotExist):
+            return render(
+                request,
+                "polls/detail.html",
+                context={
+                    "question": "question",
+                    "error_message": "You did not select a choice.",
+                },
+            )
+        else:
+            selected_choice.votes = F("votes") + 1
+            selected_choice.save()
+
+            return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+def vote(request: HttpRequest, pk: int) -> HttpResponse:
+    """Vote view."""
+    question = get_object_or_404(Question, pk=pk)
+    try:
+        choice_id = request.POST["choice"]
+        selected_choice = question.choices.get(pk=choice_id)
+    except (KeyError, Choice.DoesNotExist):
+        return render(
+            request,
+            "polls/detail.html",
+            context={
+                "question": "question",
+                "error_message": "You did not select a choice.",
+            },
+        )
+    else:
+        selected_choice.votes = F("votes") + 1
+        selected_choice.save()
+
+        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -26,23 +110,23 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "polls/index.html", context)
 
 
-def detail(request: HttpRequest, question_id: int) -> HttpResponse:
+def detail(request: HttpRequest, pk: int) -> HttpResponse:
     """Question detail page."""
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=pk)
     context = {"question": question}
     return render(request, "polls/detail.html", context)
 
 
-def results(request: HttpRequest, question_id: int) -> HttpResponse:
+def results(request: HttpRequest, pk: int) -> HttpResponse:
     """Question results page."""
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=pk)
     context = {"question": question}
     return render(request, "polls/results.html", context)
 
 
-def vote(request: HttpRequest, question_id: int) -> HttpResponse:
+def vote(request: HttpRequest, pk: int) -> HttpResponse:
     """Vote view."""
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=pk)
     try:
         choice_id = request.POST["choice"]
         selected_choice = question.choices.get(pk=choice_id)
