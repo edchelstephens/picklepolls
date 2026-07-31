@@ -42,7 +42,13 @@ class Question(models.Model):
 
     def was_published_recently(self) -> bool:
         """Check if question was published recently."""
-        return self.publication_datetime >= timezone.now() - datetime.timedelta(days=1)
+        current_datetime = timezone.now()
+
+        return (
+            current_datetime - datetime.timedelta(days=1)
+            <= self.publication_datetime
+            <= current_datetime
+        )
 
     @property
     def total_choices(self) -> int:
