@@ -67,6 +67,11 @@ class Question(models.Model):
         return choices_with_votes_count > 1
 
     @property
+    def has_choices(self) -> bool:
+        """Check if question has choices."""
+        return self.choices.exists()
+
+    @property
     def winning_choice(self) -> models.Model:
         """Get the winning choice based on vote count."""
         if not self.has_votes:

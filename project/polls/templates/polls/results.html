@@ -105,7 +105,7 @@
                             href="{% url 'polls:detail' question.pk %}"
                             class="flex items-center justify-center rounded-xl bg-green-600 py-3 text-xs font-black text-white transition hover:bg-green-700"
                         >
-                            Vote Again →
+                            {% if question.has_choices %}Vote Again →{% else %}View Poll→{% endif %}
                         </a>
                         <a 
                             href="{% url 'polls:index' %}"
