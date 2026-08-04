@@ -7,5 +7,5 @@ pytest==9.1.1 # https://pypi.org/project/pytest/
 pytest-django==4.12.0 # https://pypi.org/project/pytest-django/
 pytest-sugar==1.1.1 # https://pypi.org/project/pytest-sugar/
 
-
+factory-boy==3.3.3  # https://pypi.org/project/factory-boy/
 
