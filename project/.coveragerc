@@ -10,20 +10,20 @@
 # https://coverage.readthedocs.io/en/stable/branch.html#how-to-measure-branch-coverage
 branch = True
 
-include =
-    polls/models/question.py
+
 
 omit =
+    */admin/*
     */migrations/*
     *tests*
-    *__init__.py
+    *__init__*
     *manage*
+    *settings.py
     *urls.py
+    *apps.py
 
 
 
 [report]
 exclude_lines =
     pragma no cover
-
-show_missing = True
