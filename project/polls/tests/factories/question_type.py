@@ -1,6 +1,7 @@
 from factory import Faker
-
+from factory.fuzzy import FuzzyChoice
 from factory.django import DjangoModelFactory
+
 
 from polls.models import QuestionType
 
@@ -11,4 +12,4 @@ class QuestionTypeFactory(DjangoModelFactory):
     class Meta:
         model = QuestionType
 
-    name = Faker("name")
+    name = FuzzyChoice(choices=["Format", "Venue", "Schedule"])
