@@ -93,6 +93,17 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertGreater(self.choice_2.votes, 0)
         self.assertTrue(self.question.has_multiple_votes)
 
+    def test_has_multiple_votes_returns_False_on_question_only_has_1_choice_that_has_votes(
+        self,
+    ) -> None:
+        """has_votes returns False on given question only has 1 choice with votes."""
+
+        self.assertGreater(self.choice_1.votes, 0)
+        self.choice_2.votes = 0
+        self.choice_2.save()
+        self.choice.refresh_from_db()
+        self.assertFalse(self.question.has_multiple_votes)
+
     def test_has_choices_returns_True_on_choices_existed_on_question(self) -> None:
         """has_votes returns True on choices existed for question."""
 
