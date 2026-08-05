@@ -28,10 +28,16 @@ jobs:
 
         python -m pip install --upgrade pip
         pip install -r _requirements/test.txt
+
+    - name: Print working directory
+      run: |
+
+        pwd
+
     - name: Go to project directory, Run Pytest tests and Get Coverage Report
       run: |
 
-        cd project
+    
         coverage run -m pytest -sv -m "not skip_on_ci"
         coverage report
 
