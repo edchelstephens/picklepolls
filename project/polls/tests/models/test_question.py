@@ -72,6 +72,12 @@ class QuestionModelTestCase(ModelTestCase):
 
         self.assertEqual(actual, expected)
 
+    def test_has_votes_returns_False_on_choices_has_no_votes(self) -> None:
+        """has_votes returns False on choices with 0 votes."""
+
+        Choice.objects.filter(question=self.question).update(votes=0)
+        self.assertFalse(self.question.has_votes)
+
     def test_has_votes_returns_True_on_choices_has_votes(self) -> None:
         """has_votes returns True on given choices with votes."""
 
