@@ -59,8 +59,15 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertFalse(self.question.was_published_recently())
 
     def test_total_choices_returns_total_count_of_choices(self) -> None:
-        """Total chioces returns total amount of related Choice records."""
+        """Total total_choices returns total amount of related Choice records."""
         expected = Choice.objects.filter(question=self.question).count()
         actual = self.question.total_choices
+
+        self.assertEqual(actual, expected)
+
+    def test_total_votes_returns_total_count_of_votes(self) -> None:
+        """Total votes returns total amount of related Choice record votes."""
+        expected = self.choice_1_votes + self.choice_2_votes
+        actual = self.question.total_votes
 
         self.assertEqual(actual, expected)
