@@ -15,7 +15,7 @@ jobs:
         python-version: [3.13.5]
 
     env:
-        DJANGO_SETTINGS_MODULE: picklepoll.settings
+        DJANGO_SETTINGS_MODULE: project.picklepoll.settings
 
     steps:
     - uses: actions/checkout@v3
