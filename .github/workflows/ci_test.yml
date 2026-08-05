@@ -33,6 +33,7 @@ jobs:
       run: |
 
         pwd
+        tree -L 1
 
     - name: Go to project directory, Run Pytest tests and Get Coverage Report
       run: |
