@@ -38,3 +38,14 @@ class UserModelTestCase(ModelTestCase):
         expected = f"User(pk={self.user.pk}, email={self.email})"
 
         self.assertEqual(actual, expected)
+
+    def test_has_image_returns_True_with_User_having_profile_pic_url(self) -> None:
+        """Test has_image() property returns True with User having profile pic url filled."""
+        self.assertTrue(self.user.has_image)
+
+    def test_has_image_returns_False_on_no_profile_pic_url(self) -> None:
+        """Test has_image() property returns False on User not having profile pic url filled."""
+        self.user.profile_pic_url = ""
+        self.user.save()
+        self.user.refresh_from_db()
+        self.assertFalse(self.user.has_image)

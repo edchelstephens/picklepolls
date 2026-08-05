@@ -27,5 +27,12 @@ class EntityModelTest(ModelTestCase):
         self.assertEqual(actual, expected)
 
     def test_has_image_returns_True_with_entity_having_logo_url(self) -> None:
-        """Test has_image() property returns True wih entity haveing logo url filled."""
+        """Test has_image() property returns True wih entity having logo url filled."""
         self.assertTrue(self.entity.has_image)
+
+    def test_has_image_returns_False_on_no_logo_url(self) -> None:
+        """Test has_image() property returns False on entity not having logo url filled."""
+        self.entity.logo_url = ""
+        self.entity.save()
+        self.entity.refresh_from_db()
+        self.assertFalse(self.entity.has_image)
