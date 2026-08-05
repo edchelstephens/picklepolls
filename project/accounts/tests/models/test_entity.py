@@ -1,4 +1,4 @@
-from accounts.tests.factories import EntityFactory
+from accounts.tests.factories.entity import EntityFactory
 
 from utils.tests.testcases import ModelTestCase
 
@@ -13,14 +13,14 @@ class EntityModelTest(ModelTestCase):
         self.entity = EntityFactory(name=self.name, logo_url=self.logo_url)
 
     def test_str_method(self):
-        """Test string method of Question Type model."""
+        """Test string method of model."""
         actual = self.entity.__str__()
         expected = self.name
 
         self.assertEqual(actual, expected)
 
     def test_repr_method(self):
-        """Test repr method of Question Type model."""
+        """Test repr method of model."""
         actual = self.entity.__repr__()
         expected = f"Entity(pk={self.entity.pk}, name={self.name})"
 

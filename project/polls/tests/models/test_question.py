@@ -15,7 +15,22 @@ class QuestionModelTestCase(ModelTestCase):
         """Run this setUp before each test."""
         super().setUp()
 
-        self.question = QuestionFactory()
+        self.question_text = "3rd Short Drive or 3rd Shot Drop?"
+        self.question = QuestionFactory(question_text=self.question_text)
+
+    def test_str_method(self):
+        """Test string method of Question model."""
+        actual = self.question.__str__()
+        expected = self.question_text
+
+        self.assertEqual(actual, expected)
+
+    def test_repr_method(self):
+        """Test repr method of Question model."""
+        actual = self.question.__repr__()
+        expected = f"Question(pk={self.question.pk}, question_text={self.question_text}, publication_datetime={self.question.publication_datetime})"
+
+        self.assertEqual(actual, expected)
 
     def test_was_published_recently_with_future_question(self) -> None:
         """Test was_published_recently() with future question should return False."""
