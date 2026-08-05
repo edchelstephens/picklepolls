@@ -87,4 +87,10 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertGreater(self.choice_2.votes, 0)
         self.assertTrue(self.question.has_multiple_votes)
 
-    
+    def test_has_choices_returns_True_on_choices_existed_on_question(self) -> None:
+        """has_votes returns True on given choices existed for question."""
+
+        expected = Choice.objects.filter(question=self.question).exists()
+        actual = self.question.has_choices
+
+        self.assertEqual(actual, expected)
