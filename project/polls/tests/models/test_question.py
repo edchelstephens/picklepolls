@@ -1,3 +1,5 @@
+import pytest
+
 import datetime
 
 
@@ -148,15 +150,18 @@ class QuestionModelTestCase(ModelTestCase):
         with self.assertRaises(ValueError):
             self.question.losing_choice
 
+    @pytest.mark.solo
     def test_get_choices_ordered_by_winning_votes(self) -> None:
         """get_choices_ordered_by_winning_votes returns corrected ordered queryset."""
 
         expected = Choice.objects.filter(question=self.question).order_by("-votes")
+        expected_ids = [choice.pk for choice in expected]
         actual = self.question.get_choices_ordered_by_winning_votes()
+        actual_ids = [choice.pk for choice in actual]
 
         first = Choice.objects.filter(question=self.question).order_by("-votes").first()
         last = Choice.objects.filter(question=self.question).order_by("-votes").last()
 
-        self.assertEqual(actual, expected)
+        self.assertEqual(expected_ids, actual_ids)
         self.assertEqual(first, self.choice_1)
         self.assertEqual(last, self.choice_2)
