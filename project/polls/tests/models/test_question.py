@@ -71,3 +71,20 @@ class QuestionModelTestCase(ModelTestCase):
         actual = self.question.total_votes
 
         self.assertEqual(actual, expected)
+
+    def test_has_votes_returns_True_on_choices_has_votes(self) -> None:
+        """has_votes returns True on given choices with votes."""
+
+        self.assertGreater(self.choice_1.votes, 0)
+        self.assertTrue(self.question.has_votes)
+
+    def test_has_multiple_votes_returns_True_on_question_has_multiple_choices_has_votes(
+        self,
+    ) -> None:
+        """has_votes returns True on given question has multiple choices with votes."""
+
+        self.assertGreater(self.choice_1.votes, 0)
+        self.assertGreater(self.choice_2.votes, 0)
+        self.assertTrue(self.question.has_multiple_votes)
+
+    
