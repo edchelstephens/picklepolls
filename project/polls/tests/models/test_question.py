@@ -123,3 +123,10 @@ class QuestionModelTestCase(ModelTestCase):
 
         self.assertEqual(self.choice_1, self.question.winning_choice)
         self.assertGreater(self.choice_1.votes, self.choice_2.votes)
+
+    def test_winning_choice_raises_ValueError_on_no_votes_choices(self) -> None:
+        """winning_choice raises Value error on no votes choices."""
+
+        Choice.objects.filter(question=self.question).delete()
+        with self.assertRaises(ValueError):
+            self.question.winning_choice
