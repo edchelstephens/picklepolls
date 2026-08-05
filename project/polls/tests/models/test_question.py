@@ -130,3 +130,20 @@ class QuestionModelTestCase(ModelTestCase):
         Choice.objects.filter(question=self.question).delete()
         with self.assertRaises(ValueError):
             self.question.winning_choice
+
+    def test_losing_choice_returns_correct_choice(self) -> None:
+        """losing_choice returns choice with highest votes."""
+
+        self.assertEqual(self.choice_2, self.question.losing_choice)
+        self.assertGreater(self.choice_1.votes, self.choice_2.votes)
+
+    def test_losing_choice_raises_ValueError_on_non_multiple_votes(self) -> None:
+        """losing_choice raises Value error on no votes choices."""
+
+        self.choice_2.votes = 0
+        self.choice_2.save()
+        self.choice_2.refresh_from_db()
+
+        self.assertFalse(self.question.has_multiple_votes)
+        with self.assertRaises(ValueError):
+            self.question.losing_choice
