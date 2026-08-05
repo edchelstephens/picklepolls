@@ -26,11 +26,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r _requirements/test.txt
 
-    - name: Print working directory
+    - name: Print working directory and Tree
       run: |
 
+        echo "Working Directory:"
         pwd
+        echo "tree -L 1"
         tree -L 1
+        echo "tree -L 2"
+        tree -L 2
 
     - name: Run Pytest tests and Get Coverage Report
       working-directory: project
