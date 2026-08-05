@@ -14,9 +14,6 @@ jobs:
       matrix:
         python-version: [3.13.5]
 
-    env:
-        DJANGO_SETTINGS_MODULE: project.picklepoll.settings
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -35,10 +32,9 @@ jobs:
         pwd
         tree -L 1
 
-    - name: Go to project directory, Run Pytest tests and Get Coverage Report
+    - name: Run Pytest tests and Get Coverage Report
+      working-directory: project
       run: |
-
-    
         coverage run -m pytest -sv -m "not skip_on_ci"
         coverage report
 
