@@ -147,3 +147,16 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertFalse(self.question.has_multiple_votes)
         with self.assertRaises(ValueError):
             self.question.losing_choice
+
+    def test_get_choices_ordered_by_winning_votes(self) -> None:
+        """get_choices_ordered_by_winning_votes returns corrected ordered queryset."""
+
+        expected = Choice.objects.filter(question=self.question).order_by("-votes")
+        actual = self.question.get_choices_ordered_by_winning_votes()
+
+        first = Choice.objects.filter(question=self.question).order_by("-votes").first()
+        last = Choice.objects.filter(question=self.question).order_by("-votes").last()
+
+        self.assertEqual(actual, expected)
+        self.assertEqual(first, self.choice_1)
+        self.assertEqual(last, self.choice_2)
