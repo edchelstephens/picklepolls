@@ -3,11 +3,12 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 
-from polls.models import Question
+
 from polls.tests.factories import QuestionFactory
+from utils.tests.testcases import ModelTestCase
 
 
-class QuestionModelTestCase(TestCase):
+class QuestionModelTestCase(ModelTestCase):
     """Question model test case."""
 
     def setUp(self) -> None:

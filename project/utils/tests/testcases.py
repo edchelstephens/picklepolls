@@ -1,0 +1,116 @@
+import datetime
+import json
+from typing import Any, List, Optional
+from urllib.parse import urlencode
+
+import pytest
+from django.db.models import Model, QuerySet
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.test.testcases import SimpleTestCase, TestCase
+
+
+@pytest.mark.django_db
+@pytest.mark.models
+class QuerySetTestMixin:
+    """Mixin for query set tests."""
+
+    def assertQuerySetEqualByIds(
+        self, first: QuerySet, second: QuerySet, msg: Optional[str] = None
+    ) -> None:
+        """Assert query sets are equal by using id checks."""
+        first_queryset_ids = list(first.order_by("id").values_list("id", flat=True))
+        second_queryset_ids = list(second.order_by("id").values_list("id", flat=True))
+
+        if msg is None:
+            msg = "Queryset ids not equal! {} != {}".format(
+                repr(first_queryset_ids), repr(second_queryset_ids)
+            )
+        assert first_queryset_ids == second_queryset_ids, msg
+
+    def assertQuerySetIsIn(
+        self, first: QuerySet, second: QuerySet, msg: Optional[str] = None
+    ) -> None:
+        """Assert first query sets is a subset of second queryset."""
+        first_queryset_ids = list(first.values_list("id", flat=True))
+        second_queryset_ids = list(second.values_list("id", flat=True))
+
+        if msg is None:
+            msg = "Queryset {} not in {}!".format(
+                repr(first_queryset_ids), repr(second_queryset_ids)
+            )
+        for model_id in first_queryset_ids:
+            assert model_id in second_queryset_ids, msg
+
+
+@pytest.mark.non_db
+class NonDBTestCase(SimpleTestCase):
+    """Our custom test case wrapper for tests not involving database access."""
+
+    maxDiff = None
+
+
+@pytest.mark.django_db
+class WithDBTestCase(QuerySetTestMixin, TestCase):
+    """Our custom test case wrapper for tests including database access."""
+
+    maxDiff = None
+
+
+@pytest.mark.django_db
+@pytest.mark.models
+class ModelTestCase(TestCase):
+    """Our custom test case wrapper for testing django models."""
+
+    maxDiff = None
+
+
+@pytest.mark.django_db
+@pytest.mark.django_views
+class DjangoViewTestCase(TestCase):
+    """Our test case wrapper for testing django views."""
+
+    maxDiff = None
+
+    def set_user(self, request, user) -> None:
+        """Manually set request.user to user.
+
+        To simulate a user logged-in trying to access an endpoint.
+        """
+        request.user = user
+
+    def get_json_response_data(self, response) -> Any:
+        """Get json response data from JSONResponse object content."""
+        try:
+            return json.loads(response.content)
+        except TypeError as exc:  # noqa
+            return json.loads(self.get_string_response(response))
+        except Exception as exc:
+            raise exc
+
+    def get_dict_response_data(self, response) -> dict:
+        """Get expected dictionary response data from deserialized JSONResponse response.content."""
+        data = self.get_json_response_data(response)
+        if not isinstance(data, dict):
+            raise TypeError(
+                "deserialized response.content is not a python dict but a {}".format(
+                    type(data)
+                )
+            )
+        return data
+
+    def get_list_response_data(self, response) -> list:
+        """Get expected list response data from deserialized JSONResponse response.content."""
+        data = self.get_json_response_data(response)
+        if not isinstance(data, list):
+            raise TypeError(
+                "deserialized response.content is not a python list but a {}".format(
+                    type(data)
+                )
+            )
+        return data
+
+    def get_string_response(self, response) -> str:
+        """Get the decoded response string from bytestring response.content."""
+        return response.content.decode()
+
+

@@ -2,8 +2,10 @@ from django.test import TestCase
 
 from polls.tests.factories import QuestionTypeFactory
 
+from utils.tests.testcases import ModelTestCase
 
-class QuestionTypeModelTest(TestCase):
+
+class QuestionTypeModelTest(ModelTestCase):
     """Test Question Type model."""
 
     def setUp(self):
