@@ -31,6 +31,7 @@ jobs:
     - name: Run Pytest tests and Get Coverage Report
       run: |
 
+        cd project
         coverage run -m pytest -sv -m "not skip_on_ci"
         coverage report
 
