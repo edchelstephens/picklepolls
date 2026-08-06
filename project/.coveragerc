@@ -21,6 +21,7 @@ omit =
     *settings.py
     *urls.py
     *apps.py
+    *debug.py
 
 
 
