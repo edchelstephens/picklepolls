@@ -8,7 +8,7 @@ from django.db.models import Model, QuerySet
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.test.testcases import SimpleTestCase, TestCase
 
-from utils.logging import DebuggerMixin
+from utils.debug import DebuggerMixin
 
 
 class TextMixin(DebuggerMixin):
