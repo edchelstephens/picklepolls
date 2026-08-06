@@ -89,3 +89,27 @@ class PollsIndexViewTestCase(DjangoViewTestCase):
             past_question.pk,
             response.context["question_list"].values_list("pk", flat=True),
         )
+
+    def test_index_page_with_polls_multiple_past_questions(self) -> None:
+        """Test index page with multiple past questions."""
+
+        past_question_1 = QuestionFactory(
+            publication_datetime=timezone.now() - timedelta(hours=1)
+        )
+        past_question_2 = QuestionFactory(
+            publication_datetime=timezone.now() - timedelta(days=1)
+        )
+        response = self.client.get(reverse("polls:index"))
+        question_list = response.context["question_list"]
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(question_list), 2)
+        self.assertContains(response, "Vote Now")
+        self.assertIn(
+            past_question_1.pk,
+            response.context["question_list"].values_list("pk", flat=True),
+        )
+        self.assertIn(
+            past_question_2.pk,
+            response.context["question_list"].values_list("pk", flat=True),
+        )
