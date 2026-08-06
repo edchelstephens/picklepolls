@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db.models import F
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
@@ -17,7 +18,9 @@ class PollsIndexView(TemplateView):
     def get_context_data(self, **kwargs) -> dict:
         """Get context data."""
 
-        question_list = Question.objects.order_by("-publication_datetime")
+        question_list = Question.objects.filter(
+            publication_datetime__lte=timezone.now()
+        ).order_by("-publication_datetime")
         total_polls = Question.objects.count()
         total_votes = sum(Choice.objects.values_list("votes", flat=True))
 
