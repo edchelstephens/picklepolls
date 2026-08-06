@@ -1,1 +1,4 @@
 Django==6.0 # https://pypi.org/project/Django/
+
+
+pytz==2026.3.post1 # https://pypi.org/project/pytz/2026.3.post1/

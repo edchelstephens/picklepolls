@@ -8,10 +8,22 @@ from django.db.models import Model, QuerySet
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.test.testcases import SimpleTestCase, TestCase
 
+from utils.logging import DebuggerMixin
+
+
+class TextMixin(DebuggerMixin):
+    """Mixin class for tests."""
+
+    def save_and_refresh(self, model: Model) -> Model:
+        """Save and refresh from db the model instance and return it."""
+        model.save()
+        model.refresh_from_db()
+        return model
+
 
 @pytest.mark.django_db
 @pytest.mark.models
-class QuerySetTestMixin:
+class QuerySetTestMixin(TextMixin):
     """Mixin for query set tests."""
 
     def assertQuerySetEqualByIds(
@@ -58,7 +70,7 @@ class WithDBTestCase(QuerySetTestMixin, TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.models
-class ModelTestCase(TestCase):
+class ModelTestCase(TextMixin, TestCase):
     """Our custom test case wrapper for testing django models."""
 
     maxDiff = None
@@ -66,7 +78,7 @@ class ModelTestCase(TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.django_views
-class DjangoViewTestCase(TestCase):
+class DjangoViewTestCase(TextMixin, TestCase):
     """Our test case wrapper for testing django views."""
 
     maxDiff = None
@@ -112,5 +124,3 @@ class DjangoViewTestCase(TestCase):
     def get_string_response(self, response) -> str:
         """Get the decoded response string from bytestring response.content."""
         return response.content.decode()
-
-
