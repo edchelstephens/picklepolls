@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.chrome.options import Options
 
 from polls.tests.factories import QuestionFactory, ChoiceFactory
+from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
 
 
 @pytest.mark.liveserver
@@ -22,7 +23,8 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         cls.selenium = WebDriver(options=options)
         cls.selenium.implicitly_wait(time_to_wait=10)
 
-        cls.question_1 = QuestionFactory()
+        cls.entity = SaturdayLateNightPickleballEntityFactory()
+        cls.question_1 = QuestionFactory(entity=cls.entity)
         cls.choice_1 = ChoiceFactory(question=cls.question_1)
         cls.choice_2 = ChoiceFactory(question=cls.question_1)
 

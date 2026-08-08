@@ -13,4 +13,10 @@ class EntityFactory(DjangoModelFactory):
         model = Entity
 
     name = Faker("company")
+
+
+class SaturdayLateNightPickleballEntityFactory(EntityFactory):
+    """SLNP entity factory."""
+
+    name = "SLNP"
     logo_url = "https://assets.reclub.co/group-avatars/249506.webp"
