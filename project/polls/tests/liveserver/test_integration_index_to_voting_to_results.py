@@ -48,7 +48,7 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
             question=self.question_1, votes=self.choice_1_initial_votes
         )
 
-        self.choice_2_initial_votes = 0
+        self.choice_2_initial_votes = 1
         self.choice_2 = ChoiceFactory(
             question=self.question_1, votes=self.choice_2_initial_votes
         )
@@ -62,25 +62,25 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
 
         self.selenium.get(f"{self.live_server_url}/")
 
-        self.pause(seconds=3)
+        self.pause(seconds=1)
 
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)
         vote_link.click()
 
-        self.pause(seconds=3)
+        self.pause(seconds=1)
 
         choice_radio_button_id = f"choice-{self.choice_1.pk}"
         choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
         choice_button.click()
 
-        self.pause(seconds=3)
+        self.pause(seconds=1)
 
         submit_button = self.selenium.find_element(
             By.CSS_SELECTOR, 'button[type="submit"]'
         )
         submit_button.click()
-        self.pause(seconds=3)
+        self.pause(seconds=1)
 
         votes_after = sum(Choice.objects.values_list("votes", flat=True))
 
@@ -89,3 +89,9 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
 
         self.assertGreater(choice_1_votes_after, self.choice_1_initial_votes)
         self.assertEqual(self.choice_1_initial_votes + 1, choice_1_votes_after)
+
+        expected_votes = self.choice_1_initial_votes + self.choice_2_initial_votes + 1
+        expected_text = f"{expected_votes} total responses logged"
+
+        self.assertIn(expected_text, self.selenium.page_source)
+        self.assertEqual(expected_votes, votes_after)
