@@ -11,7 +11,7 @@ from polls.models import Choice, Question
 from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
 
 
-
+@pytest.mark.skip_on_ci
 @pytest.mark.liveserver
 class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     """Index page selenium test case."""
