@@ -42,20 +42,50 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
         super().setUp()
         self.entity = SaturdayLateNightPickleballEntityFactory()
         self.question_1 = QuestionFactory(entity=self.entity)
-        self.choice_1 = ChoiceFactory(question=self.question_1)
-        self.choice_2 = ChoiceFactory(question=self.question_1)
 
+        self.choice_1_initial_votes = 1
+        self.choice_1 = ChoiceFactory(
+            question=self.question_1, votes=self.choice_1_initial_votes
+        )
+
+        self.choice_2_initial_votes = 0
+        self.choice_2 = ChoiceFactory(
+            question=self.question_1, votes=self.choice_2_initial_votes
+        )
+        self.votes_before = sum(Choice.objects.values_list("votes", flat=True))
+
+    @pytest.mark.solo
     def test_voting_on_an_choice_updates_the_poll_results(
         self,
     ) -> None:
         """Voting on a choice updates poll results."""
+
         self.selenium.get(f"{self.live_server_url}/")
+
+        self.pause(seconds=3)
 
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)
-
-        self.pause(seconds=3)
-
         vote_link.click()
 
         self.pause(seconds=3)
+
+        choice_radio_button_id = f"choice-{self.choice_1.pk}"
+        choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
+        choice_button.click()
+
+        self.pause(seconds=3)
+
+        submit_button = self.selenium.find_element(
+            By.CSS_SELECTOR, 'button[type="submit"]'
+        )
+        submit_button.click()
+        self.pause(seconds=3)
+
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_1.refresh_from_db()
+        choice_1_votes_after = int(self.choice_1.votes)
+
+        self.assertGreater(choice_1_votes_after, self.choice_1_initial_votes)
+        self.assertEqual(self.choice_1_initial_votes + 1, choice_1_votes_after)

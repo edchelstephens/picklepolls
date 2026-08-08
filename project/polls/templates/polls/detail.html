@@ -100,7 +100,7 @@
                 {% for choice in question.choices.all %}
                     <label class="group relative flex cursor-pointer items-center justify-between rounded-2xl border-2 border-slate-150 bg-slate-50/50 px-5 py-3.5 transition duration-200 hover:border-green-500 hover:bg-green-50/50">
                         <div class="flex items-center gap-3">
-                            <input type="radio" name="choice" value="{{choice.pk}}" class="h-4 w-4 accent-green-600">
+                            <input type="radio" name="choice" value="{{choice.pk}}" id="choice-{{choice.pk}}" class="h-4 w-4 accent-green-600">
                             <div class="flex items-center gap-3">
                                 <p class="text-base font-black text-green-950">{{choice.choice_text}}</p>
                             </div>

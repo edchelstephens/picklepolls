@@ -40,8 +40,8 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         super().setUp()
         self.entity = SaturdayLateNightPickleballEntityFactory()
         self.question_1 = QuestionFactory(entity=self.entity)
-        self.choice_1 = ChoiceFactory(question=self.question_1)
-        self.choice_2 = ChoiceFactory(question=self.question_1)
+        self.choice_1 = ChoiceFactory(question=self.question_1, votes=1)
+        self.choice_2 = ChoiceFactory(question=self.question_1, votes=1)
 
     def test_index_page_has_expected_header(self) -> None:
         """Test index page displays header text."""
