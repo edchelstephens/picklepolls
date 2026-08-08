@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.chrome.options import Options
 
 from polls.tests.factories import QuestionFactory, ChoiceFactory
+from polls.models import Choice, Question
 from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
 
 
@@ -34,11 +35,26 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_index_page(self) -> None:
-        """Test index page."""
+    def test_index_page_has_expected_header(self) -> None:
+        """Test index page displays header text."""
         self.selenium.get(f"{self.live_server_url}/")
 
         header = self.selenium.find_element(By.ID, "header-app-name")
         expected_header_title = "PicklePolls"
 
         self.assertEqual(header.text, expected_header_title)
+
+    def test_index_page_has_vote_now_button_given_that_there_is_a_published_question(
+        self,
+    ) -> None:
+        """Test index page has vote now button given taht there is a published question."""
+        self.selenium.get(f"{self.live_server_url}/")
+
+        vote_link_id = f"vote-on-poll-{self.question_1.pk}"
+        vote_link = self.selenium.find_element(By.ID, vote_link_id)
+
+        self.pprint_data(vote_link.text)
+        self.assertTrue(Question.objects.exists())
+        self.assertTrue(Choice.objects.exists())
+
+        vote_link.click()
