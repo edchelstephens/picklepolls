@@ -1,4 +1,5 @@
 import datetime
+import time
 import json
 from typing import Any, List, Optional
 from urllib.parse import urlencode
@@ -133,3 +134,7 @@ class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase
     """Our custom test case wrapper for tests including  StaticLiveServerTestCase."""
 
     maxDiff = None
+
+    def pause(self, seconds: int) -> None:
+        """Pause runtime execution by given seconds amount."""
+        time.sleep(seconds)
