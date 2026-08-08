@@ -15,9 +15,9 @@ jobs:
         python-version: [3.13.5]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
@@ -25,9 +25,23 @@ jobs:
 
         python -m pip install --upgrade pip
         pip install -r _requirements/test.txt
-    - name: Run Pytest tests and Get Coverage Report
+ 
+
+  
+        
+    - name: Print working directory and Tree
       run: |
 
+        echo "Working Directory:"
+        pwd
+        echo "tree -L 1"
+        tree -L 1
+        echo "tree -L 2"
+        tree -L 2
+
+    - name: Run Pytest tests and Get Coverage Report
+      working-directory: project
+      run: |
         coverage run -m pytest -sv -m "not skip_on_ci"
         coverage report
 

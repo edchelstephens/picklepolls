@@ -1,17 +1,32 @@
 import datetime
+import time
 import json
 from typing import Any, List, Optional
 from urllib.parse import urlencode
 
 import pytest
+
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.db.models import Model, QuerySet
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.test.testcases import SimpleTestCase, TestCase
 
+from utils.debug import DebuggerMixin
+
+
+class TextMixin(DebuggerMixin):
+    """Mixin class for tests."""
+
+    def save_and_refresh(self, model: Model) -> Model:
+        """Save and refresh from db the model instance and return it."""
+        model.save()
+        model.refresh_from_db()
+        return model
+
 
 @pytest.mark.django_db
 @pytest.mark.models
-class QuerySetTestMixin:
+class QuerySetTestMixin(TextMixin):
     """Mixin for query set tests."""
 
     def assertQuerySetEqualByIds(
@@ -58,7 +73,7 @@ class WithDBTestCase(QuerySetTestMixin, TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.models
-class ModelTestCase(TestCase):
+class ModelTestCase(TextMixin, TestCase):
     """Our custom test case wrapper for testing django models."""
 
     maxDiff = None
@@ -66,7 +81,7 @@ class ModelTestCase(TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.django_views
-class DjangoViewTestCase(TestCase):
+class DjangoViewTestCase(TextMixin, TestCase):
     """Our test case wrapper for testing django views."""
 
     maxDiff = None
@@ -114,3 +129,12 @@ class DjangoViewTestCase(TestCase):
         return response.content.decode()
 
 
+@pytest.mark.django_db
+class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase):
+    """Our custom test case wrapper for tests including  StaticLiveServerTestCase."""
+
+    maxDiff = None
+
+    def pause(self, seconds: int) -> None:
+        """Pause runtime execution by given seconds amount."""
+        time.sleep(seconds)

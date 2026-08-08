@@ -1,0 +1,98 @@
+from utils.tests.testcases import DjangoStaticLiveServerTestCase
+
+import pytest
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.firefox.options import Options
+
+from polls.tests.factories import QuestionFactory, ChoiceFactory
+from polls.models import Choice, Question
+from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
+
+
+@pytest.mark.skip_on_ci
+@pytest.mark.liveserver
+class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
+    DjangoStaticLiveServerTestCase
+):
+    """Integration test from index to voting to results page selenium test case."""
+
+    def get_chrome_options(self) -> Options:
+        """Get chrome driver options."""
+        options = Options()
+        options.add_argument("--start-maximized")
+
+    @classmethod
+    def setUpClass(cls):
+        """setUpClass."""
+        super().setUpClass()
+
+        cls.selenium = WebDriver()
+        cls.selenium.maximize_window()
+        cls.selenium.implicitly_wait(time_to_wait=10)
+
+    @classmethod
+    def tearDownClass(cls):
+        """tearDownClass."""
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.entity = SaturdayLateNightPickleballEntityFactory()
+        self.question_1 = QuestionFactory(entity=self.entity)
+
+        self.choice_1_initial_votes = 1
+        self.choice_1 = ChoiceFactory(
+            question=self.question_1, votes=self.choice_1_initial_votes
+        )
+
+        self.choice_2_initial_votes = 1
+        self.choice_2 = ChoiceFactory(
+            question=self.question_1, votes=self.choice_2_initial_votes
+        )
+        self.votes_before = sum(Choice.objects.values_list("votes", flat=True))
+
+    @pytest.mark.solo
+    def test_voting_on_an_choice_updates_the_poll_results(
+        self,
+    ) -> None:
+        """Voting on a choice updates poll results."""
+
+        self.selenium.get(f"{self.live_server_url}/")
+
+        self.pause(seconds=1)
+
+        vote_link_id = f"vote-on-poll-{self.question_1.pk}"
+        vote_link = self.selenium.find_element(By.ID, vote_link_id)
+        vote_link.click()
+
+        self.pause(seconds=1)
+
+        choice_radio_button_id = f"choice-{self.choice_1.pk}"
+        choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
+        choice_button.click()
+
+        self.pause(seconds=1)
+
+        submit_button = self.selenium.find_element(
+            By.CSS_SELECTOR, 'button[type="submit"]'
+        )
+        submit_button.click()
+        self.pause(seconds=1)
+
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_1.refresh_from_db()
+        choice_1_votes_after = int(self.choice_1.votes)
+
+        self.assertGreater(choice_1_votes_after, self.choice_1_initial_votes)
+        self.assertEqual(self.choice_1_initial_votes + 1, choice_1_votes_after)
+
+        expected_votes = self.choice_1_initial_votes + self.choice_2_initial_votes + 1
+        expected_text = f"{expected_votes} total responses logged"
+
+        self.assertIn(expected_text, self.selenium.page_source)
+        self.assertEqual(expected_votes, votes_after)

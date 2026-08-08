@@ -56,9 +56,18 @@ class QuestionModelTestCase(ModelTestCase):
 
         old_datetime = timezone.now() - datetime.timedelta(days=30)
         self.question.publication_datetime = old_datetime
-        self.question.save()
-        self.question.refresh_from_db()
+        self.question = self.save_and_refresh(self.question)
+
         self.assertFalse(self.question.was_published_recently())
+
+    def test_was_published_recently_with_recent_question(self) -> None:
+        """Test was_published_recently() with recent question should return True."""
+
+        recent_datetime = timezone.now()
+        self.question.publication_datetime = recent_datetime
+        self.question = self.save_and_refresh(self.question)
+
+        self.assertTrue(self.question.was_published_recently())
 
     def test_total_choices_returns_total_count_of_choices(self) -> None:
         """Total total_choices returns total amount of related Choice records."""
@@ -102,8 +111,7 @@ class QuestionModelTestCase(ModelTestCase):
 
         self.assertGreater(self.choice_1.votes, 0)
         self.choice_2.votes = 0
-        self.choice_2.save()
-        self.choice_2.refresh_from_db()
+        self.choice_2 = self.save_and_refresh(self.choice_2)
         self.assertFalse(self.question.has_multiple_votes)
 
     def test_has_choices_returns_True_on_choices_existed_on_question(self) -> None:
@@ -143,14 +151,13 @@ class QuestionModelTestCase(ModelTestCase):
         """losing_choice raises Value error on no votes choices."""
 
         self.choice_2.votes = 0
-        self.choice_2.save()
-        self.choice_2.refresh_from_db()
+
+        self.choice_2 = self.save_and_refresh(self.choice_2)
 
         self.assertFalse(self.question.has_multiple_votes)
         with self.assertRaises(ValueError):
             self.question.losing_choice
 
-    @pytest.mark.solo
     def test_get_choices_ordered_by_winning_votes(self) -> None:
         """get_choices_ordered_by_winning_votes returns corrected ordered queryset."""
 
