@@ -13,3 +13,4 @@ class EntityFactory(DjangoModelFactory):
         model = Entity
 
     name = Faker("company")
+    logo_url = "https://assets.reclub.co/group-avatars/249506.webp"

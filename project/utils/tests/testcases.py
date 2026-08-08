@@ -4,6 +4,8 @@ from typing import Any, List, Optional
 from urllib.parse import urlencode
 
 import pytest
+
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.db.models import Model, QuerySet
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.test.testcases import SimpleTestCase, TestCase
@@ -124,3 +126,10 @@ class DjangoViewTestCase(TextMixin, TestCase):
     def get_string_response(self, response) -> str:
         """Get the decoded response string from bytestring response.content."""
         return response.content.decode()
+
+
+@pytest.mark.django_db
+class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase):
+    """Our custom test case wrapper for tests including  StaticLiveServerTestCase."""
+
+    maxDiff = None
