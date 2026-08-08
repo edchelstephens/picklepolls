@@ -3,8 +3,8 @@ from utils.tests.testcases import DjangoStaticLiveServerTestCase
 import pytest
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.firefox.options import Options
 
 from polls.tests.factories import QuestionFactory, ChoiceFactory
 from polls.models import Choice, Question
@@ -15,13 +15,18 @@ from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFac
 class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     """Index page selenium test case."""
 
+    def get_chrome_options(self) -> Options:
+        """Get chrome driver options."""
+        options = Options()
+        options.add_argument("--start-maximized")
+
     @classmethod
     def setUpClass(cls):
         """setUpClass."""
         super().setUpClass()
-        options = Options()
-        options.add_argument("--start-maximized")
-        cls.selenium = WebDriver(options=options)
+
+        cls.selenium = WebDriver()
+        cls.selenium.maximize_window()
         cls.selenium.implicitly_wait(time_to_wait=10)
 
     @classmethod
