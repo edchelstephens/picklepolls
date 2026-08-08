@@ -24,16 +24,19 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         cls.selenium = WebDriver(options=options)
         cls.selenium.implicitly_wait(time_to_wait=10)
 
-        cls.entity = SaturdayLateNightPickleballEntityFactory()
-        cls.question_1 = QuestionFactory(entity=cls.entity)
-        cls.choice_1 = ChoiceFactory(question=cls.question_1)
-        cls.choice_2 = ChoiceFactory(question=cls.question_1)
-
     @classmethod
     def tearDownClass(cls):
         """tearDownClass."""
         cls.selenium.quit()
         super().tearDownClass()
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.entity = SaturdayLateNightPickleballEntityFactory()
+        self.question_1 = QuestionFactory(entity=self.entity)
+        self.choice_1 = ChoiceFactory(question=self.question_1)
+        self.choice_2 = ChoiceFactory(question=self.question_1)
 
     def test_index_page_has_expected_header(self) -> None:
         """Test index page displays header text."""
@@ -53,8 +56,6 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)
 
-        self.pprint_data(vote_link.text)
         self.assertTrue(Question.objects.exists())
         self.assertTrue(Choice.objects.exists())
-
-        vote_link.click()
+        self.assertIn("Vote Now", vote_link.text)
