@@ -1,13 +1,15 @@
-from utils.tests.testcases import DjangoStaticLiveServerTestCase
-
 import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.options import Options
 
-from polls.tests.factories import QuestionFactory, ChoiceFactory
+
+from utils.testing_utils.testcases import DjangoStaticLiveServerTestCase
+
 from polls.models import Choice, Question
+from polls.tests.factories import QuestionFactory, ChoiceFactory
+
 from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
 
 
@@ -48,6 +50,7 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         """Test index page displays header text."""
         self.selenium.get(f"{self.live_server_url}/")
 
+        self.pause(seconds=2)
         header = self.selenium.find_element(By.ID, "header-app-name")
         expected_header_title = "PicklePolls"
 
@@ -58,6 +61,8 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     ) -> None:
         """Test index page has vote now button given taht there is a published question."""
         self.selenium.get(f"{self.live_server_url}/")
+
+        self.pause(seconds=2)
 
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)

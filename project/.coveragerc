@@ -22,9 +22,19 @@ omit =
     *urls.py
     *apps.py
     *debug.py
+    utils/*
+    
+
+
 
 
 
 [report]
 exclude_lines =
     pragma no cover
+
+
+
+
+
+    

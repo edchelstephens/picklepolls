@@ -5,7 +5,7 @@ import datetime
 
 from django.utils import timezone
 
-from utils.tests.testcases import ModelTestCase
+from utils.testing_utils.testcases import ModelTestCase
 
 from polls.tests.factories import QuestionFactory
 from polls.tests.factories import ChoiceFactory

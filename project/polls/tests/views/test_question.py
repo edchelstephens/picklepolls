@@ -2,9 +2,15 @@ from datetime import timedelta
 from django.urls import reverse
 from django.utils import timezone
 
-from polls.models.question import Question
-from utils.tests.testcases import DjangoViewTestCase
-from polls.tests.factories import QuestionFactory
+import pytest
+
+
+from utils.testing_utils.testcases import DjangoViewTestCase
+
+
+from polls.models import Question, Choice
+from polls.views import PollVoteView
+from polls.tests.factories import QuestionFactory, ChoiceFactory
 
 
 class PollsIndexViewTestCase(DjangoViewTestCase):
@@ -112,4 +118,88 @@ class PollsIndexViewTestCase(DjangoViewTestCase):
         self.assertIn(
             past_question_2.pk,
             response.context["question_list"].values_list("pk", flat=True),
+        )
+
+
+class PollVoteViewTestCase(DjangoViewTestCase):
+    """PollVoteView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+
+        self.question = QuestionFactory()
+        self.choice_1_initial_votes = 0
+        self.choice_1 = ChoiceFactory(
+            question=self.question, votes=self.choice_1_initial_votes
+        )
+        self.choice_2_initial_votes = 0
+        self.choice_2 = ChoiceFactory(
+            question=self.question, votes=self.choice_2_initial_votes
+        )
+        self.choice_on_another_question_initial_votes = 0
+        self.choice_on_another_question = ChoiceFactory(
+            votes=self.choice_on_another_question_initial_votes
+        )
+
+    def get_url(self, question: Question) -> str:
+        """Get url."""
+        return "/{}/vote/".format(question.pk)
+
+
+class PollVoteViewWithClientTestCase(PollVoteViewTestCase):
+    """PollVoteView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+
+    def test_view_adds_vote_count_on_voted_choice(self) -> None:
+        """View adds given vote count on voted choice."""
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
+
+        data = {"choice": self.choice_1.pk}
+        url = self.get_url(question=self.question)
+
+        response = self.client.post(path=url, data=data, follow=True)
+
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_1.refresh_from_db()
+
+        self.assertTrue(response.status_code, 200)
+        self.assertGreater(votes_after, votes_before)
+        self.assertEqual(votes_before + 1, votes_after)
+        self.assertGreater(self.choice_1.votes, self.choice_1_initial_votes)
+
+
+class PollVoteViewAsViewTestCase(PollVoteViewTestCase):
+    """PollVoteView.as_view() test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = PollVoteView.as_view()
+
+    def test_view_adds_no_vote_count_on_non_voted_choice(self) -> None:
+        """View adds given vote count on non voted choice."""
+
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
+        data = {"choice": self.choice_on_another_question.pk}
+
+        url = self.get_url(question=self.question)
+
+        request = self.request_factory.post(path=url, data=data)
+        response = self.view(request, pk=self.question.pk)
+
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_on_another_question.refresh_from_db()
+
+        self.assertTrue(response.status_code, 200)
+        self.assertEqual(votes_after, votes_before)
+        self.assertEqual(
+            self.choice_on_another_question.votes,
+            self.choice_on_another_question_initial_votes,
         )

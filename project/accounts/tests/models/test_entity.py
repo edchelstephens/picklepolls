@@ -1,6 +1,6 @@
 from accounts.tests.factories.entity import EntityFactory
 
-from utils.tests.testcases import ModelTestCase
+from utils.testing_utils.testcases import ModelTestCase
 
 
 class EntityModelTest(ModelTestCase):

@@ -11,22 +11,31 @@ from django.db.models import Model, QuerySet
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.test.testcases import SimpleTestCase, TestCase
 
+from rest_framework.test import APITestCase, force_authenticate
+
+from accounts.models import User
+
 from utils.debug import DebuggerMixin
+from utils.testing_utils.request import (
+    DjangoRequestFactoryMixin,
+    RestRequestFactoryMixin,
+)
 
 
-class TextMixin(DebuggerMixin):
+class TestMixin(DebuggerMixin):
     """Mixin class for tests."""
 
     def save_and_refresh(self, model: Model) -> Model:
         """Save and refresh from db the model instance and return it."""
         model.save()
         model.refresh_from_db()
+
         return model
 
 
 @pytest.mark.django_db
 @pytest.mark.models
-class QuerySetTestMixin(TextMixin):
+class QuerySetTestMixin(TestMixin):
     """Mixin for query set tests."""
 
     def assertQuerySetEqualByIds(
@@ -73,7 +82,7 @@ class WithDBTestCase(QuerySetTestMixin, TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.models
-class ModelTestCase(TextMixin, TestCase):
+class ModelTestCase(TestMixin, TestCase):
     """Our custom test case wrapper for testing django models."""
 
     maxDiff = None
@@ -81,7 +90,7 @@ class ModelTestCase(TextMixin, TestCase):
 
 @pytest.mark.django_db
 @pytest.mark.django_views
-class DjangoViewTestCase(TextMixin, TestCase):
+class DjangoViewTestCase(TestMixin, DjangoRequestFactoryMixin, TestCase):
     """Our test case wrapper for testing django views."""
 
     maxDiff = None
@@ -138,3 +147,20 @@ class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase
     def pause(self, seconds: int) -> None:
         """Pause runtime execution by given seconds amount."""
         time.sleep(seconds)
+
+
+@pytest.mark.django_db
+@pytest.mark.api_views
+class RestAPITestCase(TestMixin, RestRequestFactoryMixin, APITestCase):
+    """Our test case wrapper for rest_framework api views."""
+
+    maxDiff = None
+
+    def set_user(self, request, user: User) -> None:
+        """Forcibly set request.user to user.
+
+        This is used on views which requires authenticated requests.
+        https://www.django-rest-framework.org/api-guide/testing/#forcing-authentication
+        """
+        force_authenticate(request, user=user)
+        request.user = user

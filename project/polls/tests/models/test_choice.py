@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 from polls.tests.factories import ChoiceFactory
-from utils.tests.testcases import ModelTestCase
+from utils.testing_utils.testcases import ModelTestCase
 
 
 class ChoiceModelTestCase(ModelTestCase):
