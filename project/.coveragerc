@@ -22,7 +22,12 @@ omit =
     *urls.py
     *apps.py
     *debug.py
-    *testcases.py
+    utils/exceptions.py
+    utils/request.py  
+    utils/testing_utils/testcases.py 
+    utils/view.py
+
+
 
 
 
