@@ -1,4 +1,4 @@
-from utils.tests.testcases import DjangoStaticLiveServerTestCase
+from utils.testing_utils.testcases import DjangoStaticLiveServerTestCase
 
 import pytest
 

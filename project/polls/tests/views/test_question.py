@@ -5,7 +5,7 @@ from django.utils import timezone
 import pytest
 
 
-from utils.tests.testcases import DjangoViewTestCase
+from utils.testing_utils.testcases import DjangoViewTestCase
 
 
 from polls.models import Question, Choice

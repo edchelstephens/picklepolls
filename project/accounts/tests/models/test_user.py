@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 from accounts.tests.factories import UserFactory
-from utils.tests.testcases import ModelTestCase
+from utils.testing_utils.testcases import ModelTestCase
 
 
 class UserModelTestCase(ModelTestCase):

@@ -1,6 +1,6 @@
 from polls.tests.factories import QuestionTypeFactory
 
-from utils.tests.testcases import ModelTestCase
+from utils.testing_utils.testcases import ModelTestCase
 
 
 class QuestionTypeModelTest(ModelTestCase):

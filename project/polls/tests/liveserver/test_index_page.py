@@ -1,13 +1,15 @@
-from utils.tests.testcases import DjangoStaticLiveServerTestCase
-
 import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.options import Options
 
-from polls.tests.factories import QuestionFactory, ChoiceFactory
+
+from utils.testing_utils.testcases import DjangoStaticLiveServerTestCase
+
 from polls.models import Choice, Question
+from polls.tests.factories import QuestionFactory, ChoiceFactory
+
 from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
 
 

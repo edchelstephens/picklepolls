@@ -2,7 +2,7 @@ from django.test import RequestFactory
 
 from rest_framework.test import APIRequestFactory
 
-from utils.tests.session import SessionRequiredTestMixin
+from utils.testing_utils.session import SessionRequiredTestMixin
 
 
 class RequestFactoryMixin:

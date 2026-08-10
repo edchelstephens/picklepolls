@@ -79,7 +79,7 @@ class DjangoViewAPIMixin(DebuggerMixin):
             return self.RESPONSE(
                 data=data, status=status, content_type=content_type, **kwargs
             )
-        except Exception as exc:
+        except Exception as exc:  # pargma no cover
             if "set the safe parameter to False" in str(exc):
                 return self.RESPONSE(
                     data=data,
@@ -124,7 +124,7 @@ class DjangoViewAPIMixin(DebuggerMixin):
                 - this is a mapping object with the same format as error_dict above.
         """
 
-        if settings.DEBUG:
+        if settings.DEBUG:  # pragma no cover
             self.debug_exception(exception)
 
         if error_data is None:
@@ -202,7 +202,7 @@ class DjangoViewAPIMixin(DebuggerMixin):
                 exception_message = str(exception)
                 error_data["message"] = exception_message
 
-        except Exception:
+        except Exception:  # pragma no cover
             error_data = self.get_default_error_dict()
 
         finally:
