@@ -22,7 +22,6 @@ omit =
     *urls.py
     *apps.py
     *debug.py
-
     utils/*
     
 
