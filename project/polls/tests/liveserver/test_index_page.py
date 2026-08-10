@@ -50,6 +50,7 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         """Test index page displays header text."""
         self.selenium.get(f"{self.live_server_url}/")
 
+        self.pause(seconds=2)
         header = self.selenium.find_element(By.ID, "header-app-name")
         expected_header_title = "PicklePolls"
 
@@ -60,6 +61,8 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     ) -> None:
         """Test index page has vote now button given taht there is a published question."""
         self.selenium.get(f"{self.live_server_url}/")
+
+        self.pause(seconds=2)
 
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)
