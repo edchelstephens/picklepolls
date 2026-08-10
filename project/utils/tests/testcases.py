@@ -21,6 +21,7 @@ class TextMixin(DebuggerMixin):
         """Save and refresh from db the model instance and return it."""
         model.save()
         model.refresh_from_db()
+
         return model
 
 

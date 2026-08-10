@@ -4,10 +4,10 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, DetailView
-from django.views import View
-
 
 from polls.models import Question, Choice
+
+from utils.view import DjangoView
 
 
 class PollsIndexView(TemplateView):
@@ -48,7 +48,7 @@ class PollResultsView(DetailView):
     template_name = "polls/results.html"
 
 
-class PollVoteView(View):
+class PollVoteView(DjangoView):
     """Poll vote view."""
 
     def post(self, request, pk: int, *args, **kwargs):

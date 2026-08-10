@@ -8,7 +8,7 @@ import pytest
 from utils.tests.testcases import DjangoViewTestCase
 
 
-from polls.models.question import Question
+from polls.models import Question, Choice
 from polls.tests.factories import QuestionFactory, ChoiceFactory
 
 
@@ -133,7 +133,7 @@ class PollVoteViewTestCase(DjangoViewTestCase):
         self.choice_1 = ChoiceFactory(
             question=self.question, votes=self.choice_1_initial_votes
         )
-        self.choice_2_initial_votes = 2
+        self.choice_2_initial_votes = 0
         self.choice_2 = ChoiceFactory(
             question=self.question, votes=self.choice_2_initial_votes
         )
@@ -147,10 +147,17 @@ class PollVoteViewTestCase(DjangoViewTestCase):
 
         data = {"choice": self.choice_1.pk}
 
-        self.url = self.get_url(question=self.question)
+        url = self.get_url(question=self.question)
 
-        response = self.client.post(path=self.url, data=data, follow=True)
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
 
-        self.pprint_data(response)
+        response = self.client.post(path=url, data=data, follow=True)
 
-        self.pprint_data(self.choice_1, "self.choice_1")
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_1.refresh_from_db()
+
+        self.assertTrue(response.status_code, 200)
+        self.assertGreater(votes_after, votes_before)
+        self.assertEqual(votes_before + 1, votes_after)
+        self.assertGreater(self.choice_1.votes, self.choice_1_initial_votes)
