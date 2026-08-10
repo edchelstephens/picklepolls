@@ -17,10 +17,7 @@ from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFac
 class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     """Index page selenium test case."""
 
-    def get_chrome_options(self) -> Options:
-        """Get chrome driver options."""
-        options = Options()
-        options.add_argument("--start-maximized")
+    
 
     @classmethod
     def setUpClass(cls):
