@@ -1,3 +1,5 @@
+from optparse import Option
+import os
 import pytest
 
 from selenium.webdriver.common.by import By
@@ -17,16 +19,25 @@ from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFac
 class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
     """Index page selenium test case."""
 
-    
+    @classmethod
+    def get_options(cls) -> Options:
+        """Get options instance."""
+        options = Options()
+        if os.getenv("CICD"):
+            options.add_argument("--headless")
+        return options
 
     @classmethod
     def setUpClass(cls):
         """setUpClass."""
         super().setUpClass()
 
-        cls.selenium = WebDriver()
-        cls.selenium.maximize_window()
+        options = cls.get_options()
+        cls.selenium = WebDriver(options=options)
         cls.selenium.implicitly_wait(time_to_wait=10)
+
+        if not os.getenv("CICD"):
+            cls.selenium.maximize_window()
 
     @classmethod
     def tearDownClass(cls):
