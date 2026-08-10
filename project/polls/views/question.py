@@ -54,6 +54,7 @@ class PollVoteView(DjangoView):
     def post(self, request, pk: int, *args, **kwargs):
         """Poll vote view."""
 
+        self.pprint_data(request.POST, "request.POST")
         question = get_object_or_404(Question, pk=pk)
         try:
             choice_id = request.POST["choice"]

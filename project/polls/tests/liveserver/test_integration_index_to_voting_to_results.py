@@ -62,25 +62,25 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
 
         self.selenium.get(f"{self.live_server_url}/")
 
-        self.pause(seconds=1)
+        self.pause(seconds=2)
 
         vote_link_id = f"vote-on-poll-{self.question_1.pk}"
         vote_link = self.selenium.find_element(By.ID, vote_link_id)
         vote_link.click()
 
-        self.pause(seconds=1)
+        self.pause(seconds=2)
 
         choice_radio_button_id = f"choice-{self.choice_1.pk}"
         choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
         choice_button.click()
 
-        self.pause(seconds=1)
+        self.pause(seconds=2)
 
         submit_button = self.selenium.find_element(
             By.CSS_SELECTOR, 'button[type="submit"]'
         )
         submit_button.click()
-        self.pause(seconds=1)
+        self.pause(seconds=2)
 
         votes_after = sum(Choice.objects.values_list("votes", flat=True))
 

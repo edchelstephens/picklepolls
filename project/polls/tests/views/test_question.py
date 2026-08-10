@@ -9,6 +9,7 @@ from utils.testing_utils.testcases import DjangoViewTestCase
 
 
 from polls.models import Question, Choice
+from polls.views import PollVoteView
 from polls.tests.factories import QuestionFactory, ChoiceFactory
 
 
@@ -120,7 +121,6 @@ class PollsIndexViewTestCase(DjangoViewTestCase):
         )
 
 
-@pytest.mark.solo
 class PollVoteViewTestCase(DjangoViewTestCase):
     """PollVoteView test case."""
 
@@ -146,14 +146,20 @@ class PollVoteViewTestCase(DjangoViewTestCase):
         """Get url."""
         return "/{}/vote/".format(question.pk)
 
+
+class PollVoteViewWithClientTestCase(PollVoteViewTestCase):
+    """PollVoteView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+
     def test_view_adds_vote_count_on_voted_choice(self) -> None:
         """View adds given vote count on voted choice."""
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
 
         data = {"choice": self.choice_1.pk}
-
         url = self.get_url(question=self.question)
-
-        votes_before = sum(Choice.objects.values_list("votes", flat=True))
 
         response = self.client.post(path=url, data=data, follow=True)
 
@@ -166,16 +172,26 @@ class PollVoteViewTestCase(DjangoViewTestCase):
         self.assertEqual(votes_before + 1, votes_after)
         self.assertGreater(self.choice_1.votes, self.choice_1_initial_votes)
 
+
+class PollVoteViewAsViewTestCase(PollVoteViewTestCase):
+    """PollVoteView.as_view() test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = PollVoteView.as_view()
+
     def test_view_adds_no_vote_count_on_non_voted_choice(self) -> None:
         """View adds given vote count on non voted choice."""
 
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
         data = {"choice": self.choice_on_another_question.pk}
 
         url = self.get_url(question=self.question)
 
-        votes_before = sum(Choice.objects.values_list("votes", flat=True))
-
-        response = self.client.post(path=url, data=data, follow=True)
+        request = self.request_factory.post(path=url, data=data)
+        response = self.view(request, pk=self.question.pk)
 
         votes_after = sum(Choice.objects.values_list("votes", flat=True))
 
