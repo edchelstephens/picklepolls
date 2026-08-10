@@ -137,6 +137,10 @@ class PollVoteViewTestCase(DjangoViewTestCase):
         self.choice_2 = ChoiceFactory(
             question=self.question, votes=self.choice_2_initial_votes
         )
+        self.choice_on_another_question_initial_votes = 0
+        self.choice_on_another_question = ChoiceFactory(
+            votes=self.choice_on_another_question_initial_votes
+        )
 
     def get_url(self, question: Question) -> str:
         """Get url."""
@@ -161,3 +165,25 @@ class PollVoteViewTestCase(DjangoViewTestCase):
         self.assertGreater(votes_after, votes_before)
         self.assertEqual(votes_before + 1, votes_after)
         self.assertGreater(self.choice_1.votes, self.choice_1_initial_votes)
+
+    def test_view_adds_no_vote_count_on_non_voted_choice(self) -> None:
+        """View adds given vote count on non voted choice."""
+
+        data = {"choice": self.choice_on_another_question.pk}
+
+        url = self.get_url(question=self.question)
+
+        votes_before = sum(Choice.objects.values_list("votes", flat=True))
+
+        response = self.client.post(path=url, data=data, follow=True)
+
+        votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_on_another_question.refresh_from_db()
+
+        self.assertTrue(response.status_code, 200)
+        self.assertEqual(votes_after, votes_before)
+        self.assertEqual(
+            self.choice_on_another_question.votes,
+            self.choice_on_another_question_initial_votes,
+        )
