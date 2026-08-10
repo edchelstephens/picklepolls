@@ -2,9 +2,14 @@ from datetime import timedelta
 from django.urls import reverse
 from django.utils import timezone
 
-from polls.models.question import Question
+import pytest
+
+
 from utils.tests.testcases import DjangoViewTestCase
-from polls.tests.factories import QuestionFactory
+
+
+from polls.models.question import Question
+from polls.tests.factories import QuestionFactory, ChoiceFactory
 
 
 class PollsIndexViewTestCase(DjangoViewTestCase):
@@ -113,3 +118,39 @@ class PollsIndexViewTestCase(DjangoViewTestCase):
             past_question_2.pk,
             response.context["question_list"].values_list("pk", flat=True),
         )
+
+
+@pytest.mark.solo
+class PollVoteViewTestCase(DjangoViewTestCase):
+    """PollVoteView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp() before each test."""
+        super().setUp()
+
+        self.question = QuestionFactory()
+        self.choice_1_initial_votes = 0
+        self.choice_1 = ChoiceFactory(
+            question=self.question, votes=self.choice_1_initial_votes
+        )
+        self.choice_2_initial_votes = 2
+        self.choice_2 = ChoiceFactory(
+            question=self.question, votes=self.choice_2_initial_votes
+        )
+
+    def get_url(self, question: Question) -> str:
+        """Get url."""
+        return "/{}/vote/".format(question.pk)
+
+    def test_view_adds_vote_count_on_voted_choice(self) -> None:
+        """View adds given vote count on voted choice."""
+
+        data = {"choice": self.choice_1.pk}
+
+        self.url = self.get_url(question=self.question)
+
+        response = self.client.post(path=self.url, data=data, follow=True)
+
+        self.pprint_data(response)
+
+        self.pprint_data(self.choice_1, "self.choice_1")

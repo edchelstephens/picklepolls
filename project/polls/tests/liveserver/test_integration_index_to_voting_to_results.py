@@ -55,7 +55,6 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
         )
         self.votes_before = sum(Choice.objects.values_list("votes", flat=True))
 
-    @pytest.mark.solo
     def test_voting_on_an_choice_updates_the_poll_results(
         self,
     ) -> None:
