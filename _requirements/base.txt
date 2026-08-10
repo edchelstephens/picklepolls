@@ -1,4 +1,6 @@
 Django==6.0 # https://pypi.org/project/Django/
 
 
+djangorestframework==3.18.0 # https://pypi.org/project/djangorestframework/
+
 pytz==2026.3.post1 # https://pypi.org/project/pytz/2026.3.post1/
