@@ -4,14 +4,14 @@ import os
 import pytest
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
+
 
 from polls.tests.factories import QuestionFactory, ChoiceFactory
 from polls.models import Choice, Question
 from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFactory
-from utils.testing_utils.testcases import DjangoStaticLiveServerTestCase
+
+
+from utils.testing_utils.liveserver_testcases import DjangoStaticLiveServerTestCase
 
 
 @pytest.mark.liveserver
@@ -19,32 +19,6 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
     DjangoStaticLiveServerTestCase
 ):
     """Integration test from index to voting to results page selenium test case."""
-
-    @classmethod
-    def get_options(cls) -> Options:
-        """Get options instance."""
-        options = Options()
-        if os.getenv("CICD"):
-            options.add_argument("--headless")
-        return options
-
-    @classmethod
-    def get_webdriver(cls, options: Options) -> WebDriver:
-        """Get webdriver."""
-
-        if os.getenv("CICD"):
-            service = Service(
-                executable_path=os.path.join(
-                    os.environ["GECKOWEBDRIVER"],
-                    "geckodriver",
-                )
-            )
-            webdriver = WebDriver(service=service, options=options)
-
-        else:
-            webdriver = WebDriver(options=options)
-
-        return webdriver
 
     @classmethod
     def setUpClass(cls):
