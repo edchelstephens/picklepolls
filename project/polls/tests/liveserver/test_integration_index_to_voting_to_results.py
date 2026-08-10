@@ -6,6 +6,7 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 
 from polls.tests.factories import QuestionFactory, ChoiceFactory
 from polls.models import Choice, Question
@@ -28,12 +29,30 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
         return options
 
     @classmethod
+    def get_webdriver(cls, options: Options) -> WebDriver:
+        """Get webdriver."""
+
+        if os.getenv("CICD"):
+            service = Service(
+                executable_path=os.path.join(
+                    os.environ["GECKOWEBDRIVER"],
+                    "geckodriver",
+                )
+            )
+            webdriver = WebDriver(service=service, options=options)
+
+        else:
+            webdriver = WebDriver(options=options)
+
+        return webdriver
+
+    @classmethod
     def setUpClass(cls):
         """setUpClass."""
         super().setUpClass()
 
         options = cls.get_options()
-        cls.selenium = WebDriver(options=options)
+        cls.selenium = cls.get_webdriver(options=options)
         cls.selenium.implicitly_wait(time_to_wait=10)
 
         if not os.getenv("CICD"):
