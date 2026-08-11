@@ -139,17 +139,6 @@ class DjangoViewTestCase(TestMixin, DjangoRequestFactoryMixin, TestCase):
 
 
 @pytest.mark.django_db
-class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase):
-    """Our custom test case wrapper for tests including  StaticLiveServerTestCase."""
-
-    maxDiff = None
-
-    def pause(self, seconds: int) -> None:
-        """Pause runtime execution by given seconds amount."""
-        time.sleep(seconds)
-
-
-@pytest.mark.django_db
 @pytest.mark.api_views
 class RestAPITestCase(TestMixin, RestRequestFactoryMixin, APITestCase):
     """Our test case wrapper for rest_framework api views."""
