@@ -102,12 +102,14 @@
                     <!-- Navigation actions -->
                      <div class="mt-4 grid grid-cols-2 gap-2">
                         <a 
+                            id="poll-detail-page-link"
                             href="{% url 'polls:detail' question.pk %}"
                             class="flex items-center justify-center rounded-xl bg-green-600 py-3 text-xs font-black text-white transition hover:bg-green-700"
                         >
                             {% if question.has_choices %}Vote Again →{% else %}View Poll→{% endif %}
                         </a>
                         <a 
+                            id="back-to-home-link"
                             href="{% url 'polls:index' %}"
                             class="flex items-center justify-center rounded-xl border border-green-200 bg-white py-3 text-xs font-black text-green-700 transition hover:bg-green-50"
                         >Back Home 🏠</a>

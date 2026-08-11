@@ -14,7 +14,6 @@ from accounts.tests.factories.entity import SaturdayLateNightPickleballEntityFac
 from utils.testing_utils.liveserver_testcases import DjangoStaticLiveServerTestCase
 
 
-@pytest.mark.solo
 @pytest.mark.liveserver
 class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
     DjangoStaticLiveServerTestCase
@@ -129,44 +128,147 @@ class IntegrationTestIndexToVotingToResultsSeleniumTestCase(
             expected_winning_votes_text,
         )
 
-    # @pytest.mark.skip
-    # def test_all_links_are_working(
-    #     self,
-    # ) -> None:
-    #     """Test that all links are working."""
+    def test_all_main_voting_and_navigation_links_are_working(
+        self,
+    ) -> None:
+        """Test all main voting and navigation links are working"""
 
-    #     self.selenium.get(f"{self.live_server_url}/")
+        self.selenium.get(f"{self.live_server_url}/")
 
-    #     self.pause(seconds=2)
+        self.pause(seconds=2)
 
-    #     vote_link_id = f"vote-on-poll-{self.question_1.pk}"
-    #     vote_link = self.selenium.find_element(By.ID, vote_link_id)
-    #     vote_link.click()
+        # First Voting
+        vote_link_id = f"vote-on-poll-{self.question_1.pk}"
+        vote_link = self.selenium.find_element(By.ID, vote_link_id)
+        vote_link.click()
 
-    #     self.pause(seconds=2)
+        self.pause(seconds=2)
 
-    #     choice_radio_button_id = f"choice-{self.choice_1.pk}"
-    #     choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
-    #     choice_button.click()
+        choice_radio_button_id = f"choice-{self.choice_2.pk}"
+        choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
+        choice_button.click()
 
-    #     self.pause(seconds=2)
+        self.pause(seconds=2)
 
-    #     submit_button = self.selenium.find_element(
-    #         By.CSS_SELECTOR, 'button[type="submit"]'
-    #     )
-    #     submit_button.click()
-    #     self.pause(seconds=2)
+        submit_button = self.selenium.find_element(
+            By.CSS_SELECTOR, 'button[type="submit"]'
+        )
+        submit_button.click()
+        self.pause(seconds=2)
 
-    #     votes_after = sum(Choice.objects.values_list("votes", flat=True))
+        first_update_votes_after = sum(Choice.objects.values_list("votes", flat=True))
 
-    #     self.choice_1.refresh_from_db()
-    #     choice_1_votes_after = int(self.choice_1.votes)
+        self.choice_2.refresh_from_db()
+        choice_2_votes_after = int(self.choice_2.votes)
 
-    #     self.assertGreater(choice_1_votes_after, self.choice_1_initial_votes)
-    #     self.assertEqual(self.choice_1_initial_votes + 1, choice_1_votes_after)
+        self.assertGreater(choice_2_votes_after, self.choice_2_initial_votes)
+        self.assertEqual(self.choice_2_initial_votes + 1, choice_2_votes_after)
 
-    #     expected_votes = self.choice_1_initial_votes + self.choice_2_initial_votes + 1
-    #     expected_text = f"{expected_votes} total responses logged"
+        expected_votes = self.choice_2_initial_votes + self.choice_2_initial_votes + 1
+        expected_text = f"{expected_votes} total responses logged"
 
-    #     self.assertIn(expected_text, self.selenium.page_source)
-    #     self.assertEqual(expected_votes, votes_after)
+        self.assertIn(expected_text, self.selenium.page_source)
+        self.assertEqual(expected_votes, first_update_votes_after)
+
+        winning_choice_p_element = self.selenium.find_element(
+            By.ID, "winning-choice-text"
+        )
+
+        expected_winning_choice_p_element_text = self.choice_2.choice_text + " 🎉"
+        winning_choice_span_element_on_breakdown = self.selenium.find_element(
+            By.ID, "winning-choice-text-on-breakdown"
+        )
+
+        winning_choice_votes_on_breakdown_span_element = self.selenium.find_element(
+            By.ID, "winning-choice-votes-on-breakdown"
+        )
+
+        expected_winning_votes_text = f"{self.choice_2.votes} {self.pluralize(count=self.choice_2.votes, text='vote')}"
+
+        self.assertEqual(
+            winning_choice_p_element.text, expected_winning_choice_p_element_text
+        )
+        self.assertEqual(
+            winning_choice_span_element_on_breakdown.text, self.choice_2.choice_text
+        )
+
+        self.assertEqual(
+            winning_choice_votes_on_breakdown_span_element.text,
+            expected_winning_votes_text,
+        )
+
+        poll_detail_page_link = self.selenium.find_element(
+            By.ID, "poll-detail-page-link"
+        )
+
+        poll_detail_page_link.click()
+
+        self.pause(seconds=2)
+
+        # Second Voting
+
+        choice_radio_button_id = f"choice-{self.choice_2.pk}"
+        choice_button = self.selenium.find_element(By.ID, choice_radio_button_id)
+        choice_button.click()
+
+        self.pause(seconds=2)
+
+        submit_button = self.selenium.find_element(
+            By.CSS_SELECTOR, 'button[type="submit"]'
+        )
+        submit_button.click()
+        self.pause(seconds=2)
+
+        second_update_votes_after = sum(Choice.objects.values_list("votes", flat=True))
+
+        self.choice_2.refresh_from_db()
+        choice_2_votes_after = int(self.choice_2.votes)
+
+        self.assertGreater(choice_2_votes_after, self.choice_2_initial_votes + 1)
+        self.assertEqual(self.choice_2_initial_votes + 1 + 1, choice_2_votes_after)
+
+        expected_votes = (
+            self.choice_2_initial_votes + self.choice_1_initial_votes + 1 + 1
+        )
+        expected_text = f"{expected_votes} total responses logged"
+
+        self.assertIn(expected_text, self.selenium.page_source)
+        self.assertEqual(expected_votes, second_update_votes_after)
+
+        winning_choice_p_element = self.selenium.find_element(
+            By.ID, "winning-choice-text"
+        )
+
+        expected_winning_choice_p_element_text = self.choice_2.choice_text + " 🎉"
+        winning_choice_span_element_on_breakdown = self.selenium.find_element(
+            By.ID, "winning-choice-text-on-breakdown"
+        )
+
+        winning_choice_votes_on_breakdown_span_element = self.selenium.find_element(
+            By.ID, "winning-choice-votes-on-breakdown"
+        )
+
+        expected_winning_votes_text = f"{self.choice_2.votes} {self.pluralize(count=self.choice_2.votes, text='vote')}"
+
+        self.assertEqual(
+            winning_choice_p_element.text, expected_winning_choice_p_element_text
+        )
+        self.assertEqual(
+            winning_choice_span_element_on_breakdown.text, self.choice_2.choice_text
+        )
+
+        self.assertEqual(
+            winning_choice_votes_on_breakdown_span_element.text,
+            expected_winning_votes_text,
+        )
+
+        back_to_home_link = self.selenium.find_element(By.ID, "back-to-home-link")
+
+        back_to_home_link.click()
+
+        header = self.selenium.find_element(By.ID, "header-app-name")
+        expected_header_title = "PicklePolls"
+
+        self.assertEqual(header.text, expected_header_title)
+
+        self.pause(seconds=2)

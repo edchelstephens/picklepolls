@@ -45,6 +45,6 @@ class DjangoStaticLiveServerTestCase(QuerySetTestMixin, StaticLiveServerTestCase
 
         return webdriver
 
-    def pause(self, seconds: int) -> None:
+    def pause(self, seconds: int = 1) -> None:
         """Pause execution for amount of seconds."""
         time.sleep(seconds)
