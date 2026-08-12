@@ -43,15 +43,14 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         self.choice_1 = ChoiceFactory(question=self.question_1, votes=1)
         self.choice_2 = ChoiceFactory(question=self.question_1, votes=1)
 
+    @pytest.mark.solo
     def test_index_page_has_expected_header(self) -> None:
         """Test index page displays header text."""
         self.selenium.get(f"{self.live_server_url}/")
 
         self.pause(seconds=2)
         header = self.selenium.find_element(By.ID, "header-app-name")
-        expected_header_title = "PicklePolls"
-
-        self.assertEqual(header.text, expected_header_title)
+        self.assertEqual(header.text, "PicklePolls")
 
     def test_index_page_has_vote_now_button_given_that_there_is_a_published_question(
         self,
