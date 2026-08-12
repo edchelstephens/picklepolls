@@ -1,0 +1,3 @@
+# Test environment requirements
+
+-r ./test.txt
