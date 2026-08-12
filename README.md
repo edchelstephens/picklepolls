@@ -3,7 +3,6 @@
 
 # PicklePolls
 
-![PicklePolls](assets/images/PicklePolls.png)
 
 A Django-based polling application built with Python.
 
