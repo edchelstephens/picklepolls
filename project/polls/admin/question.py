@@ -20,6 +20,7 @@ class QuestionAdmin(admin.ModelAdmin):
         "publication_datetime",
         "published_recently",
     ]
+    list_filter = ["publication_datetime"]
 
     inlines = [ChoiceInLine]
 
