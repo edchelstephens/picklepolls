@@ -21,6 +21,7 @@ class QuestionAdmin(admin.ModelAdmin):
         "published_recently",
     ]
     list_filter = ["publication_datetime"]
+    search_fields = ["question_text"]
 
     inlines = [ChoiceInLine]
 
