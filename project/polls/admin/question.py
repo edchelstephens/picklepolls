@@ -20,7 +20,7 @@ class QuestionAdmin(admin.ModelAdmin):
         "publication_datetime",
         "published_recently",
     ]
-    list_filter = ["publication_datetime"]
+    list_filter = ["publication_datetime", "entity", "is_active"]
     search_fields = ["question_text"]
 
     inlines = [ChoiceInLine]
