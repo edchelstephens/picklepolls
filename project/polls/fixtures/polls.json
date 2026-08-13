@@ -1,0 +1,172 @@
+[
+    {
+        "model": "polls.question",
+        "pk": 1,
+        "fields": {
+            "question_text": "What is your preferred DUPR Format?",
+            "question_type": 4,
+            "publication_datetime": "2026-08-06T05:04:10.158Z",
+            "is_active": true,
+            "entity": 1,
+            "author": 1
+        }
+    },
+    {
+        "model": "polls.question",
+        "pk": 3,
+        "fields": {
+            "question_text": "Which is your preferred Court Venue for ACES?",
+            "question_type": 1,
+            "publication_datetime": "2026-07-27T10:08:15Z",
+            "is_active": true,
+            "entity": 1,
+            "author": 1
+        }
+    },
+    {
+        "model": "polls.question",
+        "pk": 4,
+        "fields": {
+            "question_text": "How frequent should we do DUPR sessions?",
+            "question_type": 5,
+            "publication_datetime": "2026-08-13T03:51:21Z",
+            "is_active": true,
+            "entity": 1,
+            "author": 1
+        }
+    },
+    {
+        "model": "polls.questiontype",
+        "pk": 1,
+        "fields": {
+            "name": "Venue"
+        }
+    },
+    {
+        "model": "polls.questiontype",
+        "pk": 2,
+        "fields": {
+            "name": "Schedule"
+        }
+    },
+    {
+        "model": "polls.questiontype",
+        "pk": 3,
+        "fields": {
+            "name": "Fee"
+        }
+    },
+    {
+        "model": "polls.questiontype",
+        "pk": 4,
+        "fields": {
+            "name": "Format"
+        }
+    },
+    {
+        "model": "polls.questiontype",
+        "pk": 5,
+        "fields": {
+            "name": "Frequency"
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 1,
+        "fields": {
+            "question": 1,
+            "choice_text": "🏆 Bracketed — Each category is further bracketed by DUPR and observed skill.",
+            "votes": 32
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 2,
+        "fields": {
+            "question": 1,
+            "choice_text": "🪜 Ladder Run — Players move up or down the ladder based on their game results.",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 3,
+        "fields": {
+            "question": 1,
+            "choice_text": "👥 Same-Gender — Separate Men’s DUPR and Women’s DUPR sessions.",
+            "votes": 6
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 4,
+        "fields": {
+            "question": 1,
+            "choice_text": "🔄 Keep the Current Format — Separate Novice and Intermediate categories, Winner vs Winner / Loser vs Loser, and rotating partners.",
+            "votes": 1
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 6,
+        "fields": {
+            "question": 3,
+            "choice_text": "Homecourt Bulua",
+            "votes": 1
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 7,
+        "fields": {
+            "question": 3,
+            "choice_text": "PaddlePlay",
+            "votes": 8
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 8,
+        "fields": {
+            "question": 3,
+            "choice_text": "MatchPoint",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 9,
+        "fields": {
+            "question": 3,
+            "choice_text": "One Paseo Sports Hub",
+            "votes": 9
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 10,
+        "fields": {
+            "question": 4,
+            "choice_text": "Every Sunday",
+            "votes": 2
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 11,
+        "fields": {
+            "question": 4,
+            "choice_text": "Every Other Sunday",
+            "votes": 8
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 12,
+        "fields": {
+            "question": 4,
+            "choice_text": "Once A Month",
+            "votes": 11
+        }
+    }
+]
