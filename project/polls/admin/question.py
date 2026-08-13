@@ -18,7 +18,10 @@ class QuestionAdmin(admin.ModelAdmin):
         "total_choices",
         "total_votes",
         "publication_datetime",
+        "published_recently",
     ]
+    list_filter = ["publication_datetime", "entity", "is_active"]
+    search_fields = ["question_text"]
 
     inlines = [ChoiceInLine]
 
@@ -33,6 +36,11 @@ class QuestionAdmin(admin.ModelAdmin):
 
         choices_votes = obj.choices.values_list("votes", flat=True)
         return sum(choices_votes)
+
+    @admin.display(boolean=True, description="Published Recently?")
+    def published_recently(self, obj):
+        """Return True if the question was published recently."""
+        return obj.was_published_recently()
 
 
 admin.site.register(Question, QuestionAdmin)

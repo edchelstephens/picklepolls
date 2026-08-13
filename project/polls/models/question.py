@@ -15,7 +15,9 @@ class Question(models.Model):
         blank=True,
         related_name="questions",
     )
-    publication_datetime = models.DateTimeField(verbose_name="datetime published")
+    publication_datetime = models.DateTimeField(
+        verbose_name="datetime published", default=timezone.now, blank=True
+    )
     is_active = models.BooleanField(default=True)
     entity = models.ForeignKey(
         to="accounts.Entity",

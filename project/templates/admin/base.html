@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    PicklePolls | Site Admin
+{% endblock %}
+
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="icon" type="image/x-icon" href="{% static 'polls/images/favicon.ico' %}" >
+{% endblock %}
