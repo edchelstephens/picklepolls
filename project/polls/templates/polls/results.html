@@ -1,67 +1,17 @@
-{% load static %}
+{% extends 'polls/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poll {{question.id}} | Results </title>
-    <link rel="icon" type="image/x-icon" href="{% static 'polls/images/favicon.ico' %}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{% static 'polls/js/script.js' %}"></script>
-    
-</head>
-<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+{% block title %}Reusable Poll {{ question.id }} | Results{% endblock %}
 
-    <!-- Navigation -->
- 
-    <nav class="sticky top-0 z-50 border-b border-green-100/80 bg-white/95 backdrop-blur-xl">
-        <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-6">
+{% block content %}
+<!-- Links and Header Nav -->
+<div class="mb-4 flex items-center justify-between">
+    <a href="{% url 'polls:index' %}" class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900">
+        <span class="text-sm">←</span> Back to Polls
+    </a>
+    <span class="rounded-full bg-yellow-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-yellow-800">🏆 Poll Results</span>
+</div>
 
-            <!-- Brand -->
-            <a href="{% url 'polls:index' %}" class="group flex items-center gap-3">
-
-                <!-- Circular Logo -->
-                <div class="relative flex h-14 w-14 shrink-0 items-center justify-center">
-                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-green-700 to-lime-500 opacity-10 blur-md transition duration-300 group-hover:opacity-20"></div>
-
-                    <img
-                        src="{% static 'polls/images/PicklePolls.png' %}"
-                        alt="PicklePolls"
-                        class="relative h-14 w-14 rounded-full object-contain transition duration-300 group-hover:scale-105"
-                    />
-                </div>
-
-                <!-- Brand Text -->
-                <div class="min-w-0">
-                    <h1 id="header-app-name"  class="text-lg font-black leading-none tracking-tight text-green-950 sm:text-xl">
-                        Pickle<span class="text-lime-500">Polls</span>
-                    </h1>
-
-                    <p class="mt-1 text-[10px] font-semibold tracking-wide text-green-600 sm:text-xs">
-                        Your community. Your voice.
-                    </p>
-                </div>
-            </a>
-
-        
-        </div>
-    </nav>
-
-    <!-- Main Container -->
-    <main class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8">
-        <!-- Links and Header Nav -->
-        <div class="mb-4 flex items-center justify-between">
-            <a
-                href="{% url 'polls:index' %}"    
-                class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900"
-            >
-                <span class="text-sm">←</span> Back to Polls
-            </a>
-            <span class="rounded-full bg-yellow-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-yellow-800">🏆 Poll Results</span>
-        </div>
-        
-        <!-- Main Grid Layout -->
+<!-- Main Grid Layout -->
         <div class="grid gap-6 md:grid-cols-12">
 
             <!-- Left column: Poll Info & Winnign Choice -->
@@ -158,117 +108,10 @@
              </div>
         </div>
 
-        <!-- Footer Message -->
+         <!-- Footer Message -->
          <div class="mt-8 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
             <div class="mb-2 text-3xl">🎾</div>
             <h3 class="text-lg font-black text-green-900">Thanks for participating!</h3>
             <p class="mt-1 text-sm text-green-700">Together, we make our pickleball community better.</p>
          </div>
-
-
-         <!-- Developer Credit -->
-        <div class="mt-8 flex justify-center pb-4">
-            <div class="inline-flex items-center gap-4 rounded-2xl px-5 py-4 transition hover:bg-white hover:shadow-sm">
-                <!-- Picture -->
-                 <a href="https://www.linkedin.com/in/edchelstephens/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="block text-sm font-bold text-green-700 transition hover:text-green-900"
-                 >
-                    <img
-                        src="https://avatars.githubusercontent.com/u/49672830?v=4"
-                        alt="Edchel Stephen Nini"
-                        class="h-11 w-11 rounded-full border-2 border-green-200 object-cover shadow-sm"
-                    >
-                 </a>
-
-                <!-- Text -->
-                 <div class="text-left">
-                    
-                    <p class="text-xs text-slate-400">Made with 💚 by</p>
-                    <a
-                        href="https://www.linkedin.com/in/edchelstephens/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="block text-sm font-bold text-green-700 transition hover:text-green-900"  
-                    >
-                        edchelstephens
-                    </a>
-                    <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" border="0" alt="Made with Django." title="Made with Django." /></a>
-
-                    <!-- Social Icons -->
-                     <div class="mt-2 flex items-center gap-3">
-                        <!-- GitHub -->
-                        <a
-                            href="https://github.com/edchelstephens"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                            class="text-slate-400 transition hover:text-slate-900"
-                        >
-                            <svg
-                                class="h-4 w-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.58 9.58 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.001 10.001 0 0 0 22 12C22 6.477 17.523 2 12 2Z"
-                                />
-                            </svg>
-                        </a>
-
-
-                        <!-- LinkedIn -->
-                         <a
-                            href="https://www.linkedin.com/in/edchelstephens/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                            class="text-slate-400 transition hover:text-[#0A66C2]" 
-                         >
-                            <svg
-                                class="h-4 w-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.119 20.452H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0Z"
-                                />
-                            </svg>
-                         </a>
-
-
-        
-                        <!-- Facebook -->
-                         <a
-                            href="https://www.facebook.com/edchelstephens"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Facebook"
-                            class="text-slate-400 transition hover:text-[#1877F2]"
-                         >
-                            <svg
-                                class="h-4 w-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <path 
-                                    d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.019 4.388 11.009 10.125 11.927v-8.437H7.078v-3.49h3.047V9.41c0-3.007 1.792-4.669 4.533-4.669 1.313 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.926-1.956 1.875v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.082 24 18.092 24 12.073z"
-                                />
-                            </svg>
-                         </a>
-
-                         
-                     </div>
-                 </div>
-            </div>
-        </div>
-
-    </main>
-</body>
-</html>
+{% endblock %}
