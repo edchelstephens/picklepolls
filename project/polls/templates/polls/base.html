@@ -50,19 +50,30 @@
 
     <!-- Main Content Container -->
     <main class="mx-auto max-w-7xl px-5 py-6 md:px-6 md:py-8">
-        {% block content %}
-        {% endblock content %}
+
+        {% block main_content %}
+        {% endblock main_content %}
+
     </main>
 
     <!-- Footer Section -->
     <footer class="mx-auto max-w-7xl px-5 pt-6 md:px-6 md:pt-8">
+
         {% block footer_callout %}
         {% endblock footer_callout %}
 
         <!-- Developer Credit -->
-         <div>
-            <div>
-                <a></a>
+         <div class="mt-8 flex justify-center pb-4">
+            <div class="inline-flex items-center gap-4 rounded-2xl px-5 py-4 transition hover:bg-white hover:shadow-sm">
+                <!-- Developer Avatar -->
+                <a
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block text-sm font-block text-green-700 transition hover:text-green-900"
+                >
+
+                </a>
 
                 <!-- Developer & Profile Link -->
                  <div>
