@@ -26,14 +26,14 @@
              </div>
             
             <!-- Stats -->
-             <div>
-                <div>
-                    <p></p>
-                    <p></p>
+             <div class="flex shrink-0 gap-3">
+                <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                    <p class="text-xl font-black text-white">{{ total_polls}}</p>
+                    <p class="text-xs text-green-100">Total Poll{{ total_polls|pluralize}}</p>
                 </div>
-                <div>
-                    <p></p>
-                    <p></p>
+                <div class="rounded-2xl bg-white/15 px-4 py-3 text-center backdrop-blur-sm">
+                    <p  class="text-xl font-black text-white">{{ total_votes}}</p>
+                    <p class="text-xs text-green-100">Community Vote{{ total_votes|pluralize}}</p>
                 </div>
              </div>
 
