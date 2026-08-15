@@ -5,8 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} PicklePolls {% endblock title %}</title>
-    <link rel="icon">
+    <link rel="icon" type="image/x-icon" href="{% static 'polls/images/favicon.ico' %}">
+
+    <!-- Tailwind CSS & Custom Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'polls/js/script.js' %}"></script>
+
+    <!-- extra head items block for template extension -->
+    {% block extra_head %}
+    {% endblock extra_head %}
 </head>
-<body>
+<body class="min-h-screen bg-[#F4FBF5] text-slate-900">
+
+    <!-- Header Navigation -->
+    <nav class="sticky top-0 z-50 border-b border-green-100/80 bg-white/95 backdrop-blur-xl">
+        <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-6">
+
+            <!-- Brand -->
+             <a href="{% url 'polls:index' %}" class="group flex items-center gap-3">
+
+                <!-- Circular Logo -->
+                 <div class="relative flex h-14 w-14 shrink-0 items-center justify-center">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-green-700 to-lime-500 opacity-10 blur-md transition duration-300 group-hover:opacity-20"></div>
+                    <img 
+                        src="{% static 'polls/images/PicklePolls.png' %}"
+                        alt="PicklePolls"
+                        class="relative h-14 w-14 rounded-full object-contain transition duration-300 group-hover:scale-105"
+                    />
+                 </div>
+
+                <!-- Brand Text -->
+                 <div>
+                 </div>
+
+             </a>
+        </div>
+    </nav>
+    
 </body>
 </html>
