@@ -42,6 +42,44 @@
  </section>
 
 
+<!-- Polls Section -->
+{% if has_polls %}
+<section class="mt-8">
+    <!-- Poll Call Out Header -->
+    <div class="mb-5 flex items-end justify-between">
+        <div>
+            <p class="mb-1 text-xs font-black uppercase tracking-widest text-green-600">Have your say</p>
+            <h2 class="text-2xl font-black text-green-950 md:text-3xl">Polls</h2>
+            <span class="hidden rounded-full bg-green-100 px-4 py-2 text-sm font-bold text-green-700 sm:block">
+                🟢 Voting is open
+            </span>
+        </div>
+    </div>
+
+    <!-- Poll Grid -->
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {% for question in question_list %}
+        <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-green-100 bg-white p-5 shadow-lg shadow-green-100/60 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+            <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 to-lime-400"></div>
+            <div class="mb-5 flex items-center justify-between pt-1">
+                <div class="flex items-center gap-3">
+                    <img src="{{ question.entity.logo_url }}" alt="{{ question.entity.name}}" class="h-12 w-12 rounded-2xl object-cover shadow-sm">
+                    <div>
+                        <p class="font-black text-green-950">{{ question.entity.name }}</p>
+                        <p class="text-xs font-medium text-green-600">Community Poll</p>
+                    </div>
+                    {% if question.is_active %}
+                        <span class="rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-black text-green-700">ACTIVE</span>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}
+
 {% endblock main_content %}
 
 {% block footer_callout %}
