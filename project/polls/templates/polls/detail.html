@@ -36,7 +36,11 @@
             </div>
         </div>
 
-
+        <!-- Poll Metrics -->
+        <div class="flex shrink-0 items-center justify-between gap-3 rounded-2xl bg-green-50 px-4 py-2 text-right sm:self-center">
+            <span class="text-xs font-semibold text-green-600">Total Vote{{ question.total_votes|pluralize}}</span>
+            <span class="text-lg font-black text-green-700 leading-none">{{ question.total_votes }}</span>
+        </div>
     </div>
     <form action=""></form>
    </div>
