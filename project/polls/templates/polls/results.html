@@ -1,1 +1,117 @@
-{% extends "polls/base.html" %}
+{% extends 'polls/base.html' %}
+
+{% block title %} Poll {{ question.id }} | Results{% endblock %}
+
+{% block main_content %}
+<!-- Links and Header Nav -->
+<div class="mb-4 flex items-center justify-between">
+    <a href="{% url 'polls:index' %}" class="inline-flex items-center gap-2 text-xs font-bold text-green-700 transition hover:text-green-900">
+        <span class="text-sm">←</span> Back to Polls
+    </a>
+    <span class="rounded-full bg-yellow-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-yellow-800">🏆 Poll Results</span>
+</div>
+
+<!-- Main Grid Layout -->
+        <div class="grid gap-6 md:grid-cols-12">
+
+            <!-- Left column: Poll Info & Winnign Choice -->
+             <div
+                class="flex flex-col justify-between md:col-span-5"
+             >
+                <div class="rounded-3xl border border-green-100 bg-white p-6 shadow-lg shadow-green-100/60">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                        <img src="{{ question.entity.logo_url }}" alt="{{ question.entity.name }}" class="h-10 w-10 rounded-xl object-cover shadow-sm"/>
+                        <div>
+                            <p class="text-xs font-black text-green-950">{{ question.entity.name }}</p>
+                            <p class="text-[11px] font-medium text-green-600">{{ question.question_type.name }}</p>
+                        </div>
+                    </div>
+                    <h2 class="mt-4 text-xl font-black leading-tight text-green-950">
+                        {{ question.question_text }}
+                    </h2>
+                    
+                    <!-- Winner banner-->
+                    {% if question.has_votes %}
+                    <div class="relative mt-4 overflow-hidden rounded-2xl bg-gradient-to-br from-green-600 via-green-500 to-lime-500 p-5 text-white shadow-md">
+                        <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10"></div>
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-green-100">Winning Choice</p>
+                        <div class="mt-1 flex items-baseline justify-between">
+                            <p id="winning-choice-text" class="text-2xl font-black">{{ question.winning_choice.choice_text }} 🎉</p>
+                          
+                        </div>
+                        <p class="text-xl font-black">🗳️ {{ question.winning_choice.vote_percentage}} %</p>
+                        <p class="mt-2 text-m text-green-100">🏆 {{ question.winning_choice.votes }} of {{question.total_votes}} total vote{{ question.total_votes | pluralize }}</p>
+                    </div>
+                    {% endif %}
+
+                    <!-- Navigation actions -->
+                     <div class="mt-4 grid grid-cols-2 gap-2">
+                        <a 
+                            id="poll-detail-page-link"
+                            href="{% url 'polls:detail' question.pk %}"
+                            class="flex items-center justify-center rounded-xl bg-green-600 py-3 text-xs font-black text-white transition hover:bg-green-700"
+                        >
+                            {% if question.has_choices %}Vote Again →{% else %}View Poll→{% endif %}
+                        </a>
+                        <a 
+                            id="back-to-home-link"
+                            href="{% url 'polls:index' %}"
+                            class="flex items-center justify-center rounded-xl border border-green-200 bg-white py-3 text-xs font-black text-green-700 transition hover:bg-green-50"
+                        >Back Home 🏠</a>
+
+                     </div>
+                </div>
+
+
+             </div>
+             
+            <!-- Right column: Breakdown List -->
+             <div class="relative overflow-hidden rounded-3xl border border-green-100 bg-white p-6 shadow-xl shadow-green-100/60 md:col-span-7">
+                <div class="absolute left-0 top-0 h-2 w-full bg-gradient-to-r from-green-500 via-lime-400 to-yellow-300"></div>
+                <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 pt-1">
+                    <div>
+                        <h3 class="text-base font-black text-green-950">Vote Breakdown</h3>
+                        <p class="text-xs text-slate-500">{{ question.total_votes}} total response{{ question.total_votes | pluralize }} logged</p>
+                    </div>
+                    <span class="text-xl">📊</span>
+                </div>
+                <div class="space-y-4">
+                    {% for choice in question.get_choices_ordered_by_winning_votes %}
+                       {%  if forloop.counter == 1 %}
+                            <!-- Winning Choice -->
+                             <div class="rounded-2xl border border-green-200 bg-green-50/40 p-4">
+                                <div class="mb-2 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-yellow-100 text-xs">🏆</span>
+                                        <span id="winning-choice-text-on-breakdown" class="text-sm font-black text-green-950">{{ choice.choice_text}}</span>
+                                    </div>
+                                    <span  id="winning-choice-votes-on-breakdown" class="text-xs font-black text-green-700">{{ choice.votes}} vote{{ choice.votes | pluralize }}</span>
+                                </div>
+                                <div class="h-2.5 overflow-hidden rounded-full bg-green-100">
+                                    <div class="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-400" style="width: {{choice.vote_percentage}}%;"></div>
+                                </div>
+                             </div>
+                       {% else %}
+                            <div class="p-1">
+                                <div class="mb-2 flex items-center justify-between">
+                                    <span class="text-sm font-bold text-slate-800">{{choice.choice_text}}</span>
+                                    <span class="text-xs font-bold text-slate-500">{{ choice.votes}} vote{% if choice.votes != 1 %}s{% endif %}</span>
+                                </div>
+                                <div class="h-2.5 overflow-hidden rounded-full bg-slate-100">
+                                    <div class="h-full rounded-full bg-green-400" style="width: {{choice.vote_percentage}}%;"></div>
+                                </div>
+                            </div>
+                       {% endif %}
+                    {% endfor %}
+
+                </div>
+             </div>
+        </div>
+
+         <!-- Footer Message -->
+         <div class="mt-8 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
+            <div class="mb-2 text-3xl">🎾</div>
+            <h3 class="text-lg font-black text-green-900">Thanks for participating!</h3>
+            <p class="mt-1 text-sm text-green-700">Together, we make our pickleball community better.</p>
+         </div>
+{% endblock main_content %}
