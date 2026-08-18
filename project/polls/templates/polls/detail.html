@@ -60,7 +60,14 @@
                 {% endfor %}
             </div>
         </fieldset>
-        <button></button>
+        <!-- Submit button -->
+        <button
+            type="submit"
+            class="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 px-6 py-4 text-sm font-black text-white shadow-lg shadow-green-200 transition hover:from-green-700 hover:to-green-600"
+        >
+            Submit My Vote
+            <span class="text-base">→</span>
+        </button>
     </form>
     {% endif %}
    </div>
@@ -68,5 +75,9 @@
 {% endblock main_content %}
 
 {% block footer_callout %}
-
+   <div class="rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
+    <div class="mb-2 text-3xl">🤝</div>
+    <h3 class="text-lg font-black text-green-900">Every vote counts.</h3>
+    <p class="mt-1 text-sm text-green-700">Your vote helps shape the next community decision.</p>
+   </div>
 {% endblock footer_callout %}
