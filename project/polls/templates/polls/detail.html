@@ -42,7 +42,27 @@
             <span class="text-lg font-black text-green-700 leading-none">{{ question.total_votes }}</span>
         </div>
     </div>
-    <form action=""></form>
+    {% if question.has_choices %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend class="sr-only">Poll Choices</legend>
+            <div class="flex flex-col gap-3">
+                {% for choice in question.choices.all %}
+                <label class="group relative flex cursor-pointer items-center justify-between rounded-2xl border-2 border-slate-150 bg-slate-50/50 px-5 py-3.5 transition duration-200 hover:border-green-500 hover:bg-green-50/50">
+                    <div class="flex items-center gap-3">
+                        <input type="radio" id="choice-{{choice.pk}}" name="choice" value="{{ choice.pk }}" 
+                            class="h-4 w-4 accent-green-600"
+                        >
+                        <p class="text-base font-black text-green-950">{{ choice.choice_text }}</p>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+        </fieldset>
+        <button></button>
+    </form>
+    {% endif %}
    </div>
 
 {% endblock main_content %}
