@@ -5,10 +5,10 @@
         "fields": {
             "question_text": "What is your preferred DUPR Format?",
             "question_type": 4,
-            "publication_datetime": "2026-08-06T05:04:10.158Z",
+            "publication_datetime": "2026-08-06T05:04:10Z",
             "is_active": true,
             "entity": 1,
-            "author": 1
+            "author": null
         }
     },
     {
@@ -20,7 +20,7 @@
             "publication_datetime": "2026-07-27T10:08:15Z",
             "is_active": true,
             "entity": 1,
-            "author": 1
+            "author": null
         }
     },
     {
@@ -32,7 +32,7 @@
             "publication_datetime": "2026-08-13T03:51:21Z",
             "is_active": true,
             "entity": 1,
-            "author": 1
+            "author": null
         }
     },
     {
@@ -157,7 +157,7 @@
         "fields": {
             "question": 4,
             "choice_text": "Every Other Sunday",
-            "votes": 8
+            "votes": 14
         }
     },
     {
@@ -166,7 +166,7 @@
         "fields": {
             "question": 4,
             "choice_text": "Once A Month",
-            "votes": 11
+            "votes": 15
         }
     }
 ]

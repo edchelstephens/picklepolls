@@ -1,0 +1,11 @@
+[
+    {
+        "model": "accounts.entity",
+        "pk": 1,
+        "fields": {
+            "name": "ACES",
+            "parent": null,
+            "logo_url": "https://assets.reclub.co/group-avatars/154681.webp"
+        }
+    }
+]
