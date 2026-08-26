@@ -98,3 +98,7 @@ class Question(models.Model):
     def get_choices_ordered_by_winning_votes(self) -> models.QuerySet:
         """Get choices ordered by winning votes."""
         return self.choices.order_by("-votes")
+
+    def get_choices_ordered_by_choice_text(self) -> models.QuerySet:
+        """Get choices ordered by choice text."""
+        return self.choices.order_by("choice_text")

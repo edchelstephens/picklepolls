@@ -36,6 +36,18 @@
         }
     },
     {
+        "model": "polls.question",
+        "pk": 5,
+        "fields": {
+            "question_text": "We Picked Top 15 Pickleball Courts around CDO — Which one is The Best?",
+            "question_type": 1,
+            "publication_datetime": "2026-08-26T08:09:37Z",
+            "is_active": true,
+            "entity": 1,
+            "author": null
+        }
+    },
+    {
         "model": "polls.questiontype",
         "pk": 1,
         "fields": {
@@ -167,6 +179,141 @@
             "question": 4,
             "choice_text": "Once A Month",
             "votes": 15
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 13,
+        "fields": {
+            "question": 5,
+            "choice_text": "0-0-2 Pickle Courts",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 18,
+        "fields": {
+            "question": 5,
+            "choice_text": "Courtly",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 20,
+        "fields": {
+            "question": 5,
+            "choice_text": "Dink District",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 22,
+        "fields": {
+            "question": 5,
+            "choice_text": "Dula Lifestyle Hub",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 24,
+        "fields": {
+            "question": 5,
+            "choice_text": "Homecourt Bulua",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 25,
+        "fields": {
+            "question": 5,
+            "choice_text": "Homecourt Downtown",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 27,
+        "fields": {
+            "question": 5,
+            "choice_text": "Match Point Sports Center",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 29,
+        "fields": {
+            "question": 5,
+            "choice_text": "Middleton Pickleball Club",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 30,
+        "fields": {
+            "question": 5,
+            "choice_text": "Paddle Play Pickleball Courts",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 35,
+        "fields": {
+            "question": 5,
+            "choice_text": "Sideout",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 39,
+        "fields": {
+            "question": 5,
+            "choice_text": "BounZ Pickleball Hub",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 40,
+        "fields": {
+            "question": 5,
+            "choice_text": "Del Carmen Beach Pickleball Court",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 41,
+        "fields": {
+            "question": 5,
+            "choice_text": "Fliqshot Pickleball Courts",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 42,
+        "fields": {
+            "question": 5,
+            "choice_text": "Pickle World Limketkai",
+            "votes": 0
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 43,
+        "fields": {
+            "question": 5,
+            "choice_text": "DinkNest",
+            "votes": 0
         }
     }
 ]
