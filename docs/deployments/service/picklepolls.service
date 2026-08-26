@@ -1,0 +1,9 @@
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/picklepolls/project
+ExecStart=/home/ubuntu/picklepolls/project/picklepolls_venv/bin/gunicorn --bind 0.0.0.0:8020 picklepolls.wsgi:application --workers 2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
