@@ -52,6 +52,21 @@ source picklepolls_venv/bin/activate
 
 
 pip install -r _requirements/prod.txt
+
+
+```
+
+## 5.1 Make sure to migrate database and collectstatic
+```
+python manage.py migrate
+
+# First, ensure that in the settings.py, you have configured the STATIC_URL and STATIC_ROOT
+# STATIC_URL = "/static/"
+# STATIC_ROOT = "staticfiles"
+
+python manage.py collectstatic
+
+
 ```
 
 ## 6. Create picklepolls service
@@ -100,6 +115,10 @@ server {
                 proxy_pass http://127.0.0.1:8020;
                 include proxy_params;
         }
+
+        location /static/ {
+		alias /home/ubuntu/picklepolls/project/staticfiles/;
+	}
 }
 ``` 
 
