@@ -48,7 +48,7 @@
         <fieldset>
             <legend class="sr-only">Poll Choices</legend>
             <div class="flex flex-col gap-3">
-                {% for choice in question.get_choices_ordered_by_choice_text %}
+                {% for choice in question.get_choices_ordered_by_choice_text.all %}
                 <label class="group relative flex cursor-pointer items-center justify-between rounded-2xl border-2 border-slate-150 bg-slate-50/50 px-5 py-3.5 transition duration-200 hover:border-green-500 hover:bg-green-50/50">
                     <div class="flex items-center gap-3">
                         <input type="radio" id="choice-{{choice.pk}}" name="choice" value="{{ choice.pk }}" 
