@@ -68,7 +68,7 @@ sudo nano /etc/systemd/system/picklepolls.service
 User=ubuntu
 Group=ubuntu
 WorkingDirectory=/home/ubuntu/picklepolls
-ExecStart=/home/ubuntu/picklepolls/picklepolls_venv/bin/gunicorn --bind 0.0.0.0:8010 sherlock.wsgi:application --workers 2
+ExecStart=/home/ubuntu/picklepolls/picklepolls_venv/bin/gunicorn --bind 0.0.0.0:8010 project.picklepolls.wsgi:application --workers 2
 Restart=always
 
 [Install]
