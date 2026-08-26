@@ -94,11 +94,10 @@ sudo nano /etc/nginx/sites-available/picklepolls
 
 ``` 
 server {
-        listen 80;
         server_name picklepolls.go2courts.com;
 
         location / {
-                proxy_pass http://127.0.0.0.1:8020;
+                proxy_pass http://127.0.0.1:8020;
                 include proxy_params;
         }
 }
