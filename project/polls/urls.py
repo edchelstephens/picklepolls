@@ -9,4 +9,9 @@ urlpatterns = [
     path("polls/<int:pk>/", views.PollDetailView.as_view(), name="detail"),
     path("pols/<int:pk>/results/", views.PollResultsView.as_view(), name="results"),
     path("polls/<int:pk>/vote/", views.PollVoteView.as_view(), name="vote"),
+    path(
+        "error-page-renderer/<int:error_page>/",
+        views.ErrorPageRendererView.as_view(),
+        name="error-page-renderer",
+    ),
 ]
