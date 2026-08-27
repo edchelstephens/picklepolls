@@ -98,6 +98,13 @@ jobs:
             cd /home/ubuntu/picklepolls
             pwd
 
+
+            echo "================"
+            echo "Evaluating ssh keys and adding in order to pull to github"
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/ed-alpha-server-v2
+
+
             echo "================"
             echo "Pulling latest production branch changes..."
             git pull
