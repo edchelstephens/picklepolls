@@ -3,5 +3,4 @@ from polls.views.question import (
     PollDetailView,
     PollResultsView,
     PollVoteView,
-    ErrorPageRendererView,
 )

@@ -72,15 +72,3 @@ class PollVoteView(DjangoView):
             selected_choice.save()
 
             return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
-
-
-class ErrorPageRendererView(DjangoView):
-    """Error page renderer view."""
-
-    def get(self, request, error_page: int, *args, **kwargs):
-        """Render error page based on"""
-        template = f"{error_page}.html"
-        if not error_page in [400, 403, 404, 500]:
-            template = "404.html"
-
-        return render(request, template)
