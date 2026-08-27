@@ -136,9 +136,8 @@ jobs:
             python manage.py collectstatic --no-input
 
             echo "================"
-            echo "Restarting daemon and service"
+            echo "Restarting service..."
 
-            sudo systemctl daemon-reload
             sudo systemctl restart picklepolls   
 
             echo "================"
