@@ -43,7 +43,6 @@ class IndexSeleniumTestCase(DjangoStaticLiveServerTestCase):
         self.choice_1 = ChoiceFactory(question=self.question_1, votes=1)
         self.choice_2 = ChoiceFactory(question=self.question_1, votes=1)
 
-    @pytest.mark.solo
     def test_index_page_has_expected_header(self) -> None:
         """Test index page displays header text."""
         self.selenium.get(f"{self.live_server_url}/")

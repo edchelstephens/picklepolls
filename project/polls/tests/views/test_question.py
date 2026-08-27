@@ -144,7 +144,7 @@ class PollVoteViewTestCase(DjangoViewTestCase):
 
     def get_url(self, question: Question) -> str:
         """Get url."""
-        return "/{}/vote/".format(question.pk)
+        return reverse("polls:vote", kwargs={"pk": question.pk})
 
 
 class PollVoteViewWithClientTestCase(PollVoteViewTestCase):
