@@ -79,7 +79,8 @@ class ErrorPageRendererView(DjangoView):
 
     def get(self, request, error_page: int, *args, **kwargs):
         """Render error page based on"""
-
-        self.pprint_data(error_page, "error_page")
         template = f"{error_page}.html"
+        if not error_page in [400, 403, 404, 500]:
+            template = "404.html"
+
         return render(request, template)
