@@ -68,3 +68,9 @@ jobs:
         run: |
           coverage run -m pytest -sv -m "not skip_on_ci"
           coverage report
+
+
+  deploy: 
+    name: Deploy to Production Server
+    runs-on: ubuntu-latest
+    needs: run-unit-tests
