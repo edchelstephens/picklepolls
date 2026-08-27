@@ -8,7 +8,6 @@ RUN pip install -r _requirements/dev.txt
 
 COPY project ./project
 
-COPY .gitignore ./.gitignore
-COPY Dockerfile ./Dockerfile
+
 
 CMD ["python", "project/manage.py", "runserver", "0.0.0.0:8000"]
