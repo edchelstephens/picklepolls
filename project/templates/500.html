@@ -1,46 +1,45 @@
 {% extends "error.html" %}
 
 {% block main_content %}
+    <!-- Contained 500 Hero Section -->
+    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60">
 
-        <!-- Contained 500 Hero Section -->
-        <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60">
+        <!-- Decorative Circles -->
+        <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
+        <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"></div>
 
-            <!-- Decorative Circles -->
-            <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
-            <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"></div>
-
-            <!-- Content -->
-            <div class="relative px-6 py-12 text-center md:px-12 md:py-16">
-                
-                <!-- Badge -->
-                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-                    ⚙️ Technical Issue
-                </div>
-
-                <!-- 500 Big Number -->
-                <h1 class="text-7xl font-black text-white md:text-9xl tracking-tight opacity-90 drop-shadow-sm">
-                    5<span class="text-lime-200">0</span>0
-                </h1>
-
-                <!-- Heading -->
-                <h2 class="mt-2 text-2xl font-black text-white md:text-4xl">
-                    Net violation on our end!
-                </h2>
-
-                <!-- Subtext -->
-                <p class="mx-auto mt-3 max-w-lg text-sm text-green-50 md:text-base leading-relaxed">
-                    Something went wrong while processing your request. We're working on the fix to get things back in play.
-                </p>
-
-                <!-- Action Buttons -->
-                <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    
-                    <a 
-                            href="{% url 'polls:index' %}"
-                            class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-black text-green-800 shadow-lg shadow-green-900/20 transition hover:bg-green-50 hover:text-green-900 hover:scale-105"
-                        >← Back to Home 🏠</a>
-                </div>
-
+        <!-- Content -->
+        <div class="relative px-6 py-12 text-center md:px-12 md:py-16">
+            
+            <!-- Badge -->
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
+                ⚙️ Technical Issue
             </div>
-        </section>
+
+            <!-- 500 Big Number -->
+            <h1 class="text-7xl font-black text-white md:text-9xl tracking-tight opacity-90 drop-shadow-sm">
+                5<span class="text-lime-200">0</span>0
+            </h1>
+
+            <!-- Heading -->
+            <h2 class="mt-2 text-2xl font-black text-white md:text-4xl">
+                Court maintenance on our end!
+            </h2>
+
+            <!-- Subtext -->
+            <p class="mx-auto mt-3 max-w-lg text-sm text-green-50 md:text-base leading-relaxed">
+                Something went wrong while processing your request. We're working on the fix to get things back in play.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                
+                <a 
+                        href="{% url 'polls:index' %}"
+                        class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-black text-green-800 shadow-lg shadow-green-900/20 transition hover:bg-green-50 hover:text-green-900 hover:scale-105"
+                    >← Back to Home 🏠</a>
+            </div>
+
+        </div>
+    </section>
 {% endblock main_content %}
