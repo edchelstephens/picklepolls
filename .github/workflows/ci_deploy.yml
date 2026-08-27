@@ -139,8 +139,7 @@ jobs:
             echo "Restarting daemon and service"
 
             sudo systemctl daemon-reload
-            sudo systemctl start picklepolls
-            sudo systemctl enable picklepolls        
+            sudo systemctl restart picklepolls   
 
             echo "================"
             echo "Check service status"
