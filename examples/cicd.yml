@@ -1,4 +1,4 @@
-name: Continuous Integration(CI) Test
+name: Continuous Integration Test and Continuous Deployment
 
 on:
   pull_request:
