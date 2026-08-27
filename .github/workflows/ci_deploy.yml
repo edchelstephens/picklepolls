@@ -104,15 +104,6 @@ jobs:
 
 
             echo "================"
-            echo "Check current branch"
-            git branch
-
-
-            echo "================"
-            echo "Checkout to production"
-            git checkout production
-
-            echo "================"
             echo "Pulling latest production branch changes..."
             git pull
 
