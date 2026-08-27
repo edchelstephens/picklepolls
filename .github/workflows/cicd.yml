@@ -81,7 +81,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: $${{ secrets.SERVER_SSH_PORT }}
+          port: 22
           script: |
             set -e
 
@@ -123,4 +123,3 @@ jobs:
             echo "================"
             echo "Check service status"
             sudo systemctl status picklepolls
-
