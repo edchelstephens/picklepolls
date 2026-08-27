@@ -137,7 +137,6 @@ jobs:
 
             echo "================"
             echo "Restarting service..."
-
             sudo systemctl restart picklepolls   
 
             echo "================"
