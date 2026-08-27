@@ -1,8 +1,13 @@
-FROM python
+FROM python:3.13-slim-bookworm
 
-# 1. Install python and pip
-# 2. Clone source code to image
-# 3. create virtual environment
-# 4. Install dependencies
-# 5. Run server
+WORKDIR /app
 
+COPY _requirements ./_requirements
+
+RUN pip install -r _requirements/dev.txt
+
+COPY project ./project
+COPY .env ./.env
+COPY .gitignore ./.gitignore
+
+CMD ["python", "project/manage.py", "runserver"]
