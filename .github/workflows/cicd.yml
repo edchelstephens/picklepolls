@@ -114,6 +114,12 @@ jobs:
             cd project
             pwd
 
+
+            echo "================"
+            echo "Activating python virtual environment"
+            source picklepolls_venv/bin/activate
+            python --version
+
             echo "================"
             echo "Running database migrations..."
             python manage.py migrate --no-input
