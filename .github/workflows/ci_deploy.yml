@@ -119,6 +119,10 @@ jobs:
             python --version
 
             echo "================"
+            echo "Install latest dependencies"
+            pip install -r ../_requirements/prod.txt
+
+            echo "================"
             echo "Running database migrations..."
             python manage.py migrate --no-input
 
