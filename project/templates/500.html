@@ -1,115 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>500 - Technical Issue | PicklePolls</title>
+{% extends "error.html" %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        pickle: {
-                            50: '#F0FDF4',
-                            100: '#DCFCE7',
-                            200: '#BBF7D0',
-                            300: '#86EFAC',
-                            400: '#4ADE80',
-                            500: '#22C55E',
-                            600: '#16A34A',
-                            700: '#15803D',
-                            800: '#166534',
-                            900: '#14532D',
-                        },
-                        lime: {
-                            400: '#A3E635',
-                            500: '#84CC16',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="flex min-h-screen flex-col bg-[#F4FBF5] text-slate-900">
+{% block main_content %}
+    <!-- Contained 500 Hero Section -->
+    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60">
 
-    <!-- Navigation -->
-    <nav class="border-b border-green-100 bg-white">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6">
-            <!-- Brand -->
-            <a href="/" class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-lime-400 text-xl shadow-md shadow-green-200">
-                    🎾
-                </div>
-                <div>
-                    <h1 class="text-lg font-black tracking-tight text-green-900">
-                        PicklePolls
-                    </h1>
-                    <p class="text-[11px] font-medium text-green-600">
-                        Your community. Your voice.
-                    </p>
-                </div>
-            </a>
-        </div>
-    </nav>
+        <!-- Decorative Circles -->
+        <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
+        <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"></div>
 
-    <!-- Main -->
-    <main class="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 py-8 md:px-6 md:py-12">
-
-        <!-- Contained 500 Hero Section -->
-        <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-700 via-green-600 to-lime-500 shadow-xl shadow-green-200/60">
-
-            <!-- Decorative Circles -->
-            <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10"></div>
-            <div class="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-lime-300/20"></div>
-
-            <!-- Content -->
-            <div class="relative px-6 py-12 text-center md:px-12 md:py-16">
-                
-                <!-- Badge -->
-                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-                    ⚙️ Technical Issue
-                </div>
-
-                <!-- 500 Big Number -->
-                <h1 class="text-7xl font-black text-white md:text-9xl tracking-tight opacity-90 drop-shadow-sm">
-                    5<span class="text-lime-200">0</span>0
-                </h1>
-
-                <!-- Heading -->
-                <h2 class="mt-2 text-2xl font-black text-white md:text-4xl">
-                    Net violation on our end!
-                </h2>
-
-                <!-- Subtext -->
-                <p class="mx-auto mt-3 max-w-lg text-sm text-green-50 md:text-base leading-relaxed">
-                    Something went wrong while processing your request. We're working on the fix to get things back in play.
-                </p>
-
-                <!-- Action Buttons -->
-                <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    
-                    <a 
-                            href="{% url 'polls:index' %}"
-                            class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-black text-green-800 shadow-lg shadow-green-900/20 transition hover:bg-green-50 hover:text-green-900 hover:scale-105"
-                        >← Back to Home 🏠</a>
-                </div>
-
+        <!-- Content -->
+        <div class="relative px-6 py-12 text-center md:px-12 md:py-16">
+            
+            <!-- Badge -->
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
+                ⚙️ Technical Issue
             </div>
-        </section>
 
-        <!-- Footer Card -->
-        <div class="mt-10 rounded-3xl border border-green-100 bg-gradient-to-r from-green-50 to-lime-50 p-6 text-center">
-            <div class="mb-2 text-3xl">🎾</div>
-            <h3 class="text-lg font-black text-green-900">Every vote makes a difference.</h3>
-            <p class="mt-1 text-sm text-green-700">Together, we make our pickleball community better.</p>
+            <!-- 500 Big Number -->
+            <h1 class="text-7xl font-black text-white md:text-9xl tracking-tight opacity-90 drop-shadow-sm">
+                5<span class="text-lime-200">0</span>0
+            </h1>
+
+            <!-- Heading -->
+            <h2 class="mt-2 text-2xl font-black text-white md:text-4xl">
+                Court maintenance on our end!
+            </h2>
+
+            <!-- Subtext -->
+            <p class="mx-auto mt-3 max-w-lg text-sm text-green-50 md:text-base leading-relaxed">
+                Something went wrong while processing your request. We're working on the fix to get things back in play.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                
+                <a 
+                        href="{% url 'polls:index' %}"
+                        class="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-black text-green-800 shadow-lg shadow-green-900/20 transition hover:bg-green-50 hover:text-green-900 hover:scale-105"
+                    >← Back to Home 🏠</a>
+            </div>
+
         </div>
-
-        
-
-    </main>
-
-</body>
-</html>
+    </section>
+{% endblock main_content %}
