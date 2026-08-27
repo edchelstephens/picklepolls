@@ -104,15 +104,6 @@ jobs:
 
 
             echo "================"
-            echo "Check current branch"
-            git branch
-
-
-            echo "================"
-            echo "Checkout to production"
-            git checkout production
-
-            echo "================"
             echo "Pulling latest production branch changes..."
             git pull
 
@@ -136,9 +127,7 @@ jobs:
             python manage.py collectstatic --no-input
 
             echo "================"
-            echo "Restarting daemon and service"
-
-            sudo systemctl daemon-reload
+            echo "Restarting service..."
             sudo systemctl restart picklepolls   
 
             echo "================"
