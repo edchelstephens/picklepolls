@@ -1,8 +1,6 @@
 name: Continuous Integration Test and Continuous Deployment
 
 on:
-  pull_request:
-    branches: [production]
   push:
     branches: [production]
 
@@ -139,7 +137,7 @@ jobs:
 
             echo "================"
             echo "Restarting daemon and service"
-            
+
             sudo systemctl daemon-reload
             sudo systemctl start picklepolls
             sudo systemctl enable picklepolls        
