@@ -7,12 +7,15 @@ services:
     env_file:
       - .env
 
+    volumes:
+      - ./project:/app/project
+
     ports:
       - "8020:8000"
 
     networks:
       - picklepolls
-      
+
     restart: unless-stopped
 
 networks:
