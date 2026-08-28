@@ -1,5 +1,8 @@
+name: picklepolls
+
 services:
   web:
+    image: picklepolls
     build:
       context: .
       dockerfile: Dockerfile

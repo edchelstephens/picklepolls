@@ -10,4 +10,4 @@ services:
     ports:
       - "8020:8000"
 
-    restart: unless-stopped
+    restart: always
