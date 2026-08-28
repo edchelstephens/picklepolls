@@ -161,9 +161,8 @@ python manage.py migrate
 
 ## CI
 
-The project includes GitHub Actions for automated testing.
-
-The CI pipeline runs the test suite automatically to help ensure changes do not introduce regressions.
+The project includes GitHub Actions for automated testing and deployment.
+The CI pipeline runs the test suite automatically to help ensure changes do not introduce regressions and automatically deploys on merge to production branch.
 
 ## License
 
