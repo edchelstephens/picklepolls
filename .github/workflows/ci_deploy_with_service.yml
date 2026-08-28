@@ -2,7 +2,7 @@ name: Continuous Integration Test and Continuous Deployment
 
 on:
   push:
-    branches: [production]
+    branches: [production-with-service]
 
 jobs:
   run-unit-tests:
@@ -117,6 +117,10 @@ jobs:
             echo "Activating python virtual environment"
             source picklepolls_venv/bin/activate
             python --version
+
+            echo "================"
+            echo "Install latest dependencies"
+            pip install -r ../_requirements/prod.txt
 
             echo "================"
             echo "Running database migrations..."
