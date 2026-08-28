@@ -1,4 +1,4 @@
-name: picklepolls-project
+name: picklepolls
 
 services:
   django:
