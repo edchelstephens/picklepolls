@@ -113,10 +113,9 @@ jobs:
             sudo docker image build -f Dockerfile.prod -t picklepolls .
 
             echo "================"
-            echo "Kill the current running container of picklepolls image..."
-            sudo docker kill $(sudo docker ps -q --filter ancestor=picklepolls)
+            echo "Kill the current running container of picklepolls image if it exists..."
+            if [ -n "$(sudo docker ps -q --filter ancestor=picklepolls)" ]; then sudo docker kill $(sudo docker ps -q --filter ancestor=picklepolls); else echo "No running picklepolls container detected."; fi
 
             echo "================"
-            echo "Run a new container with the latest built image"
+            echo "Running a new container with the latest built image..."
             sudo docker run --env-file .env -d -p 8020:8000 picklepolls
-
