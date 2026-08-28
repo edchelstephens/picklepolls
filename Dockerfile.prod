@@ -1,0 +1,8 @@
+FROM python:3.13-slim-bookworm
+
+WORKDIR /app
+
+COPY _requirements ./_requirements
+RUN pip install -r _requirements/prod.txt
+
+COPY project ./project

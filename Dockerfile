@@ -9,5 +9,4 @@ RUN pip install -r _requirements/dev.txt
 COPY project ./project
 
 
-
-CMD ["python", "project/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python project/manage.py migrate && python project/manage.py runserver 0.0.0.0:8000"]
