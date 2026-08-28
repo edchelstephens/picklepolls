@@ -98,7 +98,7 @@ docker run --env-file .env -it  --rm -p 8080:8000 picklepolls
 
 ### Deployment
 1. Install Docker
-2. Build the image:
+2. Build the production image:
 ```
 docker image build -f Dockerfile.prod -t picklepolls .
 ```
