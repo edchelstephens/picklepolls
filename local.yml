@@ -10,4 +10,12 @@ services:
     ports:
       - "8020:8000"
 
+    networks:
+      - picklepolls
+      
     restart: unless-stopped
+
+networks:
+  picklepolls:
+    name: picklepolls_network
+    driver: bridge
