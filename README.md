@@ -96,7 +96,16 @@ docker run --env-file .env -it  --rm -p 8080:8000 picklepolls
 ```
 4. Visit the app at http://127.0.0.1:8080/
 
+
+## Running with docker-compose
+
+1. Build the containers and run with this command
+```
+sudo docker compose -f local.yml up --build
+```
+
 ### Deployment
+### With Docker
 1. Install Docker
 2. Build the production image:
 ```
