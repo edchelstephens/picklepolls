@@ -6,3 +6,6 @@ COPY _requirements ./_requirements
 RUN pip install -r _requirements/prod.txt
 
 COPY project ./project
+
+
+CMD ["sh", "-c", "python project/manage.py migrate --no-input && python  && python project/manage.py runserver 0.0.0.0:8000"]
