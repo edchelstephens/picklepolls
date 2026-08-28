@@ -1,5 +1,8 @@
+name: picklepolls
+
 services:
-  web:
+  django:
+    image: picklepolls-django
     build:
       context: .
       dockerfile: Dockerfile
@@ -7,7 +10,18 @@ services:
     env_file:
       - .env
 
+    volumes:
+      - ./project:/app/project
+
     ports:
       - "8020:8000"
 
+    networks:
+      - picklepolls-network
+
     restart: unless-stopped
+
+networks:
+  picklepolls-network:
+    name: picklepolls-bridge-network
+    driver: bridge
