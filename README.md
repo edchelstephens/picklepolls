@@ -103,6 +103,12 @@ docker run --env-file .env -it  --rm -p 8080:8000 picklepolls
 ```
 sudo docker compose -f local.yml up --build
 ```
+or run in daemon mode:
+```
+1. Build the containers and run with this command
+```
+sudo docker compose -f local.yml up --build -d
+```
 
 ### Deployment
 ### With Docker
