@@ -2,7 +2,7 @@ name: picklepolls
 
 services:
   django:
-    image: picklepolls-django-image
+    image: picklepolls-django
     build:
       context: .
       dockerfile: Dockerfile
