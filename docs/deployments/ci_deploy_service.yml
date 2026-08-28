@@ -2,7 +2,7 @@ name: Continuous Integration Test and Continuous Deployment
 
 on:
   push:
-    branches: [uat]
+    branches: [production]
 
 jobs:
   run-unit-tests:
