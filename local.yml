@@ -1,8 +1,8 @@
-name: picklepolls
+name: picklepolls-project
 
 services:
   django:
-    image: picklepolls
+    image: picklepolls-django-image
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,11 +17,11 @@ services:
       - "8020:8000"
 
     networks:
-      - picklepolls
+      - picklepolls-network
 
     restart: unless-stopped
 
 networks:
-  picklepolls:
-    name: picklepolls_network
+  picklepolls-network:
+    name: picklepolls-bridge-network
     driver: bridge
