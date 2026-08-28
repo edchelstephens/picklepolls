@@ -1,5 +1,8 @@
 FROM python:3.13-slim-bookworm
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
 COPY _requirements ./_requirements
@@ -8,5 +11,7 @@ RUN pip install -r _requirements/prod.txt
 COPY project ./project
 
 WORKDIR /app/project
+
+EXPOSE 8000
 
 CMD ["sh", "-c", "python manage.py migrate --no-input && python manage.py collectstatic --no-input  && gunicorn --bind 0.0.0.0:8000 --access-logfile -  --workers 2 picklepolls.wsgi:application"]

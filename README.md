@@ -96,7 +96,20 @@ docker run --env-file .env -it  --rm -p 8080:8000 picklepolls
 ```
 4. Visit the app at http://127.0.0.1:8080/
 
+
+## Running with docker-compose
+
+1. Build the containers and run with this command
+```
+sudo docker compose -f local.yml up --build
+```
+or run in daemon mode:
+```
+sudo docker compose -f local.yml up --build -d
+```
+
 ### Deployment
+### With Docker
 1. Install Docker
 2. Build the production image:
 ```
@@ -108,6 +121,19 @@ docker run --env-file .env -it  --rm -d -p 8080:8000 picklepolls
 ```
 4. Update ngix config to listen to proxy_pass http://127.0.0.1:8020
 
+### With Docker Compose
+1. Install docker-compose if not yet available, then check version
+```
+sudo apt update
+sudo apt install docker-compose-v2
+
+sudo docker compose version
+```
+
+2. Build and run the production.yml docker compose file
+```
+sudo docker compose -f production.yml up --build -d
+```
 
 ## Testing
 
