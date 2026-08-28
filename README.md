@@ -28,26 +28,7 @@ A Django-based polling application built with Python.
 * Selenium
 * GitHub Actions
 
-## Project Structure
 
-```text
-PicklePolls/
-├── assets/
-│   └── images/
-│       └── PicklePolls.png
-├── polls/
-│   ├── models/
-│   ├── tests/
-│   ├── views/
-│   └── ...
-├── picklepolls/
-│   ├── settings.py
-│   ├── urls.py
-│   └── ...
-├── manage.py
-├── pytest.ini
-└── README.md
-```
 
 ## Getting Started
 
@@ -101,6 +82,32 @@ Open:
 ```text
 http://127.0.0.1:8000/
 ```
+## Running with Docker
+
+### Locally
+1. Install Docker
+2. Run this command to build docker image locally:
+```
+docker image build -t picklepolls .
+```
+3. Spawn a container of the image:
+```
+docker run --env-file .env -it  --rm -p 8080:8000 picklepolls
+```
+4. Visit the app at http://127.0.0.1:8080/
+
+### Deployment
+1. Install Docker
+2. Build the image:
+```
+docker image build -f Dockerfile.prod -t picklepolls .
+```
+3. Spawn a container of the image in dameon mode:
+```
+docker run --env-file .env -it  --rm -d -p 8080:8000 picklepolls
+```
+4. Update ngix config to listen to proxy_pass http://127.0.0.1:8020
+
 
 ## Testing
 
