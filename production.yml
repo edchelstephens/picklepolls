@@ -21,7 +21,8 @@ services:
       retries: 5
 
   django:
-    image: picklepolls-django
+    image: picklepolls-django-image
+    container_name: picklepolls-django
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -32,10 +33,17 @@ services:
     ports:
       - "8020:8000"
 
+    depends_on:
+      db:
+        condition: service_healthy
+
     networks:
       - picklepolls-network
 
     restart: always
+
+volumes:
+  postgres_data:
 
 networks:
   picklepolls-network:
