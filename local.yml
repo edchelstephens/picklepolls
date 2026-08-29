@@ -14,6 +14,16 @@ services:
     networks:
       - picklepolls-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-picklepolls}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   django:
     image: picklepolls-django
     build:
@@ -37,6 +47,9 @@ services:
       - picklepolls-network
 
     restart: unless-stopped
+
+volumes:
+  postgres_data:
 
 networks:
   picklepolls-network:
