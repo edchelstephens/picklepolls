@@ -150,6 +150,11 @@ coverage run -m pytest
 coverage report
 ```
 
+Run full command with coverage report on chrome
+```
+coverage run -m pytest -sv && coverage report && coverage html && open -a 'Google Chrome' htmlcov/index.html
+```
+
 ## Development
 
 The project uses Django's standard development workflow. After making model changes, create and apply migrations:
