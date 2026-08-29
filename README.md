@@ -135,6 +135,34 @@ sudo docker compose version
 sudo docker compose -f production.yml up --build -d
 ```
 
+3. With postgres on docker compose. Run the database first
+```
+sudo docker compose -f local.yml up db
+```
+Execute bash on the container
+
+```
+sudo docker exec -it <container_id> bash
+```
+
+Run psql
+```
+psql -U postgres
+```
+
+Create the database and the user, grant priviledges
+```
+CREATE USER <user_name>;
+
+ALTER USER <user_name> WITH PASSWORD '<password>';
+
+CREATE DATABASE <db_name>;
+
+GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <user_name>;
+GRANT ALL ON SCHEMA public TO <user_name>;
+
+```
+
 ## Testing
 
 Run the test suite with pytest:
