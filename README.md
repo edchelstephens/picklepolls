@@ -24,7 +24,7 @@ A Django-based polling application built with Python.
 * 🐍 Python
 * 🌐 Django
 * 🐘 PostgreSQL
-* 🎨 HTML / CSS
+* 🎨 HTML / CSS , Tailwind CSS
 * ⚡ JavaScript
 * 🧪 pytest
 * 🌐 Selenium
