@@ -2,7 +2,7 @@ name: Continuous Integration Test and Continuous Deployment
 
 on:
   push:
-    branches: [production-with-docker-compose]
+    branches: [production]
 
 jobs:
   run-unit-tests:
