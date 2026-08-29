@@ -143,7 +143,11 @@ for local
 sudo docker compose -f local.yml up db
 ```
 
-for production
+## for production on initialization
+make sure 
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
 ```
 sudo docker compose -f production.yml up db
 ```
@@ -167,6 +171,7 @@ ALTER USER <user_name> WITH PASSWORD '<password>';
 CREATE DATABASE <db_name>;
 
 GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <user_name>;
+\c <db_name>;
 GRANT ALL ON SCHEMA public TO <user_name>;
 
 ```
