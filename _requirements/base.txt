@@ -1,6 +1,6 @@
 Django==6.0 # https://pypi.org/project/Django/
 
-psycopg2-binary==2.9.12 # https://pypi.org/project/psycopg2-binary/
+psycopg==3.3.4 # https://pypi.org/project/psycopg/
 
 djangorestframework==3.18.0 # https://pypi.org/project/djangorestframework/
 
