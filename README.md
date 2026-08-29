@@ -136,8 +136,16 @@ sudo docker compose -f production.yml up --build -d
 ```
 
 3. With postgres on docker compose. Run the database first
+
+for local
+
 ```
 sudo docker compose -f local.yml up db
+```
+
+for production
+```
+sudo docker compose -f production.yml up db
 ```
 Execute bash on the container
 
