@@ -47,5 +47,5 @@ volumes:
 
 networks:
   picklepolls-network:
-    name: picklepolls-network-bridge
+    name: picklepolls-bridge-network
     driver: bridge
