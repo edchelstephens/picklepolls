@@ -7,8 +7,11 @@ services:
     restart: unless-stopped
 
     command:
+      # Docker provider
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+
+      # HTTP entrypoint
       - "--entrypoints.web.address=:80"
 
     ports:
@@ -24,12 +27,16 @@ services:
     image: postgres:18.6-bookworm
     container_name: picklepolls-db
     restart: unless-stopped
+
     env_file:
       - .env
+
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql
+
     networks:
       - picklepolls-network
 
@@ -41,7 +48,9 @@ services:
 
   django:
     image: picklepolls-django-image
+
     container_name: picklepolls-django
+
     build:
       context: .
       dockerfile: Dockerfile
@@ -52,8 +61,8 @@ services:
     volumes:
       - ./project:/app/project
 
-    ports:
-      - "8020:8000"
+    expose:
+      - "8000"
 
     depends_on:
       db:
@@ -65,10 +74,19 @@ services:
     restart: unless-stopped
 
     labels:
-      - "traefik.enabled=true"
+      # Enable Traefik
+      - "traefik.enable=true"
+
+      # Route localhost to Django
       - "traefik.http.routers.picklepolls.rule=Host(`localhost`)"
+
+      # Use HTTP
       - "traefik.http.routers.picklepolls.entrypoints=web"
+
+      # Django listens on 8000 inside the container
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
+
+      # Docker network
       - "traefik.docker.network=picklepolls-network"
 
 volumes:
