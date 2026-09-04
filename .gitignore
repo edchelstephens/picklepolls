@@ -223,5 +223,6 @@ __marimo__/
 */picklepolls_venv/*
 
 .env.local
+.env.test
 
 */staticfiles/*
