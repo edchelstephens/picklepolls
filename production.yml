@@ -74,4 +74,18 @@ services:
 
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.django.rule=Host(`picklepolls.go2courts.com`)"
+      - "traefik.http.routers.picklepolls.entrypoints=websecure"
+      - "traefik.http.routers.picklepolls.tls=true"
+      - "traefik.http.routers.picklpolls.tls.certresolver=letsencrypt"
+      - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
+      - "traefik.docker.network=picklepolls-network"
       
+volumes:
+  postgres_data:
+  traefik_letsencrypt:
+
+networks:
+  picklepolls-network:
+    name: picklepolls-bridge-network
+    driver: bridge
