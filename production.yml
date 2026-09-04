@@ -78,7 +78,7 @@ services:
       - "traefik.http.routers.picklepolls.tls=true"
       - "traefik.http.routers.picklepolls.tls.certresolver=letsencrypt"
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
-      - "traefik.docker.network=picklepolls-network"
+      - "traefik.docker.network=picklepolls-bridge-network"
 
 volumes:
   postgres_data:

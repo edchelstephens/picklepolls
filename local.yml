@@ -73,7 +73,7 @@ services:
       - "traefik.http.routers.picklepolls.rule=Host(`localhost`)"
       - "traefik.http.routers.picklepolls.entrypoints=web"
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
-      - "traefik.docker.network=picklepolls-network"
+      - "traefik.docker.network=picklepolls-bridge-network"
 
 volumes:
   postgres_data:
