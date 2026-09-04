@@ -48,3 +48,30 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+
+  django:
+    image: picklepolls-django-image
+    container_name: picklepolls-django
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+
+    env_file:
+      - .env
+
+    expose:
+      - "8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - picklepolls-network
+
+    restart: always
+
+    labels:
+      - "traefik.enable=true"
+      
