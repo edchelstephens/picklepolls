@@ -1,0 +1,19 @@
+name: picklepolls
+
+services:
+  traefik:
+    image: traefik:v3.7.12
+    container_name: picklepolls-traefik
+    restart: unless-stopped
+
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:4443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificateresolvers.letsencrypt.acme.email=edchelstephens@gmail.com"
+      - "--certificateresolvers.letsencrpt.acme.storage=/letsencrypt/acme.json"
+      - "--certificateresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificateresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
