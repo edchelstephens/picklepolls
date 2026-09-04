@@ -69,12 +69,20 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
+staticfiles_storage_backend = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+LOCAL_UNIT_TESTS = env.bool("LOCAL_UNIT_TESTS", default=False)
+if LOCAL_UNIT_TESTS:
+    staticfiles_storage_backend = (
+        "django.contrib.staticfiles.storage.StaticFilesStorage"
+    )
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": staticfiles_storage_backend,
     },
 }
 

@@ -246,10 +246,12 @@ pytest
 ## 📊 Run Tests with Coverage
 
 # Important:
-1. If running on local machine to spawn selenium browser test, you must export POSTGRES_HOST=localhost to use local postgresql database, instead of docker database
+1. If running on local machine to spawn selenium browser test, you must export POSTGRES_HOST=localhost to use local postgresql database, instead of docker database.
+
+2. Also, you must run collect static since now the engine is whitenoise
 
 ```bash
-export POSTGRES_HOST=localhost
+export LOCAL_UNIT_TESTS=True && export POSTGRES_HOST=localhost
 coverage run -m pytest
 coverage report
 ```
