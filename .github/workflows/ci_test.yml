@@ -8,6 +8,16 @@ jobs:
   run-unit-tests:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: picklepolls_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
     env:
       CICD: true
       DEBUG: true
@@ -15,6 +25,12 @@ jobs:
       SECRET_KEY: django-insecure-ui7r8@z1y^geibe_d&ixx(q8zn!_4k-9-dos4dle4)bi$ve%(@
       ALLOWED_HOSTS: localhost,127.0.0.1
       CSRF_TRUSTED_ORIGINS: localhost,127.0.0.1
+
+      POSTGRES_DB: picklepolls_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
 
     strategy:
       max-parallel: 4
@@ -60,17 +76,10 @@ jobs:
           echo "tree -L 2"
           tree -L 2
 
-      - name: Run Collect Static
-        working-directory: project
-        env:
-          DJANGO_SETTINGS_MODULE: picklepolls.settings
-        run: |
-          python manage.py collectstatic --noinput
-
       - name: Run Pytest tests and Get Coverage Report
         working-directory: project
         env:
-          DJANGO_SETTINGS_MODULE: picklepolls.settings
+          DJANGO_SETTINGS_MODULE: picklepolls.settings.test
         run: |
           coverage run -m pytest -sv -m "not skip_on_ci"
           coverage report
