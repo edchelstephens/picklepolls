@@ -76,17 +76,10 @@ jobs:
           echo "tree -L 2"
           tree -L 2
 
-      - name: Run Collect Static
-        working-directory: project
-        env:
-          DJANGO_SETTINGS_MODULE: picklepolls.settings
-        run: |
-          python manage.py collectstatic --noinput
-
       - name: Run Pytest tests and Get Coverage Report
         working-directory: project
         env:
-          DJANGO_SETTINGS_MODULE: picklepolls.settings
+          DJANGO_SETTINGS_MODULE: picklepolls.settings.test
         run: |
           coverage run -m pytest -sv -m "not skip_on_ci"
           coverage report
