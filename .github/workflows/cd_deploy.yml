@@ -60,6 +60,13 @@ jobs:
           echo "tree -L 2"
           tree -L 2
 
+      - name: Run Collect Static
+        working-directory: project
+        env:
+          DJANGO_SETTINGS_MODULE: picklepolls.settings
+        run: |
+          python manage.py collectstatic --noinput
+
       - name: Run Pytest tests and Get Coverage Report
         working-directory: project
         env:
