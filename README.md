@@ -274,7 +274,7 @@ python manage.py migrate
 
 # 🕵️ Observability
 
-1. When adding Data Sources in Grafana for Promethues, the url should be:
+1. With docker compose setup, When adding Data Sources in Grafana for Promethues, the url should be:
     http://prometheus:9090 
 
 
