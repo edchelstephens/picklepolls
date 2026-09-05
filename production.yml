@@ -123,11 +123,14 @@ services:
 
     labels:
       - "traefik.enable=true"
+
       - "traefik.http.routers.grafana.rule=Host(`grafana.picklepolls.go2courts.com`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
-      - "traefik.http.routers.grafana.tls.=true"
+      - "traefik.http.routers.grafana.tls=true"
       - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
+
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+
       - "traefik.docker.network=picklepolls-bridge-network"
 
 volumes:
