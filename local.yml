@@ -90,6 +90,20 @@ services:
     depends_on:
       - django
 
+  grafana:
+    image: grafana/grafana:13.2.1
+    container_name: picklepolls-grafana
+    restart: unless-stopped
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - prometheus
+
 volumes:
   postgres_data:
 
