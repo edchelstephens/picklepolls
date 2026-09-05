@@ -84,6 +84,23 @@ services:
       - "traefik.docker.network=picklepolls-bridge-network"
 
 
+  prometheus:
+    image: prom/promethues:v3.14.0
+    container_name: picklepolls-prometheus
+    restart: unless-stopped
+
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/promethues.yml:ro
+      - promethues_data:/promethues
+
+    expose:
+      - "9090"
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - django
   
  
 
