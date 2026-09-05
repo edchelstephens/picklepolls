@@ -59,6 +59,9 @@ services:
     env_file:
       - .env
 
+    environment:
+      DJANGO_SETTINGS_MODULE: picklepolls.settings.production
+
     expose:
       - "8000"
 
