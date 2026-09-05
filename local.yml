@@ -76,12 +76,13 @@ services:
       - "traefik.docker.network=picklepolls-bridge-network"
 
   prometheus:
-    image: prom/prometheus:v.3.14.0
+    image: prom/prometheus:v3.14.0
     container_name: picklepolls-prometheus
     restart: unless-stopped
 
     volumes:
-      - ./promethues/promethues.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
 
     networks:
       - picklepolls-network
