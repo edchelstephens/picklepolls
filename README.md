@@ -278,6 +278,10 @@ python manage.py migrate
     http://prometheus:9090 when adding Data Sources in Grafana for local
 
 
+2. Grafana import dashboards
+Django dashboards
+⭐ 20693 — Django / django-prometheus
+⭐ 17616 — Django / Requests / Overview
 
 
 
