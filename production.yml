@@ -101,6 +101,27 @@ services:
     depends_on:
       - django
 
+  grafana:
+    image: grafana/grafana:13.2.1
+    container_name: picklepolls-grafana
+    restart: unless-stopped
+    
+    env_file:
+      - .env
+    
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+    expose:
+      - "3000"
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - prometheus
+
+
 volumes:
   postgres_data:
   traefik_letsencrypt:
