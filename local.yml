@@ -82,7 +82,9 @@ services:
 
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus
+
+    ports:
+      - "9090:9090"
 
     networks:
       - picklepolls-network
@@ -94,6 +96,9 @@ services:
     image: grafana/grafana:13.2.1
     container_name: picklepolls-grafana
     restart: unless-stopped
+
+    ports:
+      - "3000:3000"
 
     volumes:
       - grafana_data:/var/lib/grafana
