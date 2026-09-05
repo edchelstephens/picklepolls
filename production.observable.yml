@@ -9,10 +9,13 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
       - "--certificatesresolvers.letsencrypt.acme.email=edchelstephens@gmail.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
@@ -51,10 +54,12 @@ services:
 
   django:
     image: picklepolls-django-image
-    container_name: picklepolls-django
+
     build:
       context: .
       dockerfile: Dockerfile.prod
+
+    container_name: picklepolls-django
 
     env_file:
       - .env
@@ -76,19 +81,70 @@ services:
 
     labels:
       - "traefik.enable=true"
+
       - "traefik.http.routers.picklepolls.rule=Host(`picklepolls.go2courts.com`)"
       - "traefik.http.routers.picklepolls.entrypoints=websecure"
       - "traefik.http.routers.picklepolls.tls=true"
       - "traefik.http.routers.picklepolls.tls.certresolver=letsencrypt"
+
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
+
       - "traefik.docker.network=picklepolls-bridge-network"
 
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    container_name: picklepolls-prometheus
+    restart: unless-stopped
 
-  
- 
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+
+    expose:
+      - "9090"
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - django
+
+  grafana:
+    image: grafana/grafana:13.2.1
+    container_name: picklepolls-grafana
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+    expose:
+      - "3000"
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - prometheus
+
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.grafana.rule=Host(`grafana.picklepolls.go2courts.com`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
+
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+
+      - "traefik.docker.network=picklepolls-bridge-network"
 
 volumes:
   postgres_data:
+  prometheus_data:
+  grafana_data:
   traefik_letsencrypt:
 
 networks:
