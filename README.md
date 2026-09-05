@@ -275,7 +275,7 @@ python manage.py migrate
 # 🕵️ Observability
 
 1. With docker compose the promethues server url is 
-    http://prometheus:9090 when adding Data Sources in Grafana
+    http://prometheus:9090 when adding Data Sources in Grafana for local
 
 
 
