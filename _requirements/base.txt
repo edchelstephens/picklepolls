@@ -9,3 +9,4 @@ pytz==2026.3.post1 # https://pypi.org/project/pytz/2026.3.post1/
 
 django-environ==0.14.0 # https://pypi.org/project/django-environ/
 
+django-prometheus==2.5.0 # https://pypi.org/project/django-prometheus/

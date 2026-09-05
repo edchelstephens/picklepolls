@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_prometheus",
 ]
 
 
@@ -64,6 +65,16 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+MIDDLEWARE = (
+    [
+        "django_prometheus.middleware.PrometheusBeforeMiddleware",
+    ]
+    + MIDDLEWARE
+    + [
+        "django_prometheus.middleware.PrometheusAfterMiddleware",
+    ]
+)
 
 
 ROOT_URLCONF = "picklepolls.urls"
@@ -94,7 +105,7 @@ USES_POSTGRES = env.bool("USES_POSTGRES", default=False)
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django_prometheus.db.backends.postgresql",
         "NAME": env.str("POSTGRES_DB"),
         "USER": env.str("POSTGRES_USER"),
         "PASSWORD": env.str("POSTGRES_PASSWORD"),
