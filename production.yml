@@ -135,9 +135,9 @@ services:
 
 volumes:
   postgres_data:
-  traefik_letsencrypt:
   prometheus_data:
   grafana_data:
+  traefik_letsencrypt:
 
 networks:
   picklepolls-network:
