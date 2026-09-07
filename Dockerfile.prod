@@ -14,8 +14,4 @@ WORKDIR /app/project
 
 EXPOSE 8000
 
-COPY entrypoint.production.sh /entrypoint.sh
-
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["sh", "-c", "python manage.py migrate --no-input && python manage.py collectstatic --no-input  && gunicorn --bind 0.0.0.0:8000 --access-logfile -  --workers 1 picklepolls.wsgi:application"]
