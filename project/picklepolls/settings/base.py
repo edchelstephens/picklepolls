@@ -66,16 +66,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-MIDDLEWARE = (
-    [
-        "django_prometheus.middleware.PrometheusBeforeMiddleware",
-    ]
-    + MIDDLEWARE
-    + [
-        "django_prometheus.middleware.PrometheusAfterMiddleware",
-    ]
-)
-
 
 ROOT_URLCONF = "picklepolls.urls"
 
