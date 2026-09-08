@@ -8,7 +8,7 @@ scrape_configs:
       - targets:
           - "django:8000"
 
-  - job_name: "server"
+  - job_name: "node"
     static_configs:
       -targets:
         - "node-exporter:9100"
