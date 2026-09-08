@@ -16,6 +16,7 @@ A Django-based polling application built with Python.
 * 🧪 Automated testing with pytest
 * 🌐 Selenium-based functional tests
 * 🚀 CI/CD with GitHub Actions
+* 🕵️ Observability with Promethues and Grafana
 
 ---
 
