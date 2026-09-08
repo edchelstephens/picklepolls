@@ -4,6 +4,15 @@
 
 A Django-based polling application built with Python.
 
+
+---
+Made with 💚 by Edchel Stephen Nini
+
+
+📩 edchelstephens@gmail.com
+💼 https://www.linkedin.com/in/edchelstephens/
+👋 https://www.facebook.com/edchelstephens/
+
 ---
 
 ## ✨ Features
@@ -16,6 +25,7 @@ A Django-based polling application built with Python.
 * 🧪 Automated testing with pytest
 * 🌐 Selenium-based functional tests
 * 🚀 CI/CD with GitHub Actions
+* 🕵️ Observability with Promethues and Grafana
 
 ---
 
@@ -282,7 +292,7 @@ python manage.py migrate
 Django dashboards
 ⭐ 20693 — Django / django-prometheus
 ⭐ 17616 — Django / Requests / Overview
-
+⭐ 1860 — Node Exporter Full (Ubuntu Server Metrics)
 
 
 # 🤖 CI/CD
