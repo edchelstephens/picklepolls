@@ -4,6 +4,15 @@
 
 A Django-based polling application built with Python.
 
+
+---
+Made with 💚 by Edchel Stephen Nini
+
+
+📩 edchelstephens@gmail.com
+💼 https://www.linkedin.com/in/edchelstephens/
+👋 https://www.facebook.com/edchelstephens/
+
 ---
 
 ## ✨ Features
