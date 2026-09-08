@@ -282,7 +282,7 @@ python manage.py migrate
 Django dashboards
 ⭐ 20693 — Django / django-prometheus
 ⭐ 17616 — Django / Requests / Overview
-
+⭐ 1860 — Node Exporter Full (Ubuntu Server Metrics)
 
 
 # 🤖 CI/CD
