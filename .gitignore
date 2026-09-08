@@ -226,3 +226,5 @@ __marimo__/
 .env.test
 
 */staticfiles/*
+
+.DS_Store
