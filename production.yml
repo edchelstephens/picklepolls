@@ -83,7 +83,6 @@ services:
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
       - "traefik.docker.network=picklepolls-bridge-network"
 
-
   node-exporter:
     image: prom/node-exporter:v1.12.1
     container_name: server-node-exporter
@@ -107,7 +106,7 @@ services:
     restart: unless-stopped
 
     volumes:
-      - ./prometheus/prometheus.production.yml:/etc/prometheus/prometheus.production.yml:ro
+      - ./prometheus/prometheus.production.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
 
     expose:
@@ -118,6 +117,7 @@ services:
 
     depends_on:
       - django
+      - node-exporter
 
   grafana:
     image: grafana/grafana:13.2.1
