@@ -83,6 +83,41 @@ services:
       - "traefik.http.services.picklepolls.loadbalancer.server.port=8000"
       - "traefik.docker.network=picklepolls-bridge-network"
 
+
+  node-exporter1:
+    image: prom/node-exporter:v1.10.2
+    container_name: picklepolls-node-exporter
+    restart: unless-stopped
+
+    command:
+      - "--path.rootfs=/host"
+
+    volumes:
+      - "/:/host:ro,rslave"
+
+    expose:
+      - "9100"
+
+    networks:
+      - picklepolls-network
+
+  node-exporter:
+    image: prom/node-exporter:v1.12.1
+    container_name: server-node-exporter
+    restart: unless-stopped
+
+    command:
+      - "--path.rootfs=/host"
+
+    volumes:
+      - "/:/host:ro,rslave"
+
+    expose:
+      - "9100"
+
+    networks:
+      - picklepolls-network
+
   prometheus:
     image: prom/prometheus:v3.14.0
     container_name: picklepolls-prometheus
