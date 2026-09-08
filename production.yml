@@ -106,7 +106,7 @@ services:
     restart: unless-stopped
 
     volumes:
-      - ./prometheus/prometheus.production.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/prometheus.production.yml:/etc/prometheus/prometheus.production.yml:ro
       - prometheus_data:/prometheus
 
     expose:
