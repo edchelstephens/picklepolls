@@ -163,6 +163,15 @@ networks:
     name: picklepolls-bridge-network
     driver: bridge
 
+  # Shared network for the server-wide Traefik reverse proxy.
+
+  # This network is created and managed by the PicklePolls Compose
+  # configuration because the Traefik container is started here.
+
+  # Other independent applications, such as Sherlock, can connect
+  # to this network using `external: true` in their own Compose
+  # configuration. This allows a single Traefik instance to route
+  # traffic to multiple web applications on the same server.
   traefik-proxy:
     name: traefik-proxy
     driver: bridge
