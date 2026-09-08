@@ -161,3 +161,8 @@ networks:
   picklepolls-network:
     name: picklepolls-bridge-network
     driver: bridge
+
+
+  traefik-proxy:
+    name: traefik-proxy
+    driver: bridge
