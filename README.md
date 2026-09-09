@@ -245,19 +245,18 @@ GRANT ALL ON SCHEMA public TO <user_name>;
 
 # 🧪 Testing
 
-## ▶️ Run the Test Suite
-
-Run the test suite with pytest:
-
-```bash
-pytest
-```
-
 ## 📊 Run Tests with Coverage
 
 
+To run tests locally (not from docker container) and spawn mozilla browser with selenium from machine.
+First alter the POSTGRES_HOST=localhost in the .env file
+
+
+Run the test suite with pytest:
+
+
 ```bash
-coverage run -m pytest
+coverage run -m pytest -sv
 coverage report
 ```
 
@@ -278,6 +277,7 @@ After making model changes, create and apply migrations:
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+
 ```
 
 ---
