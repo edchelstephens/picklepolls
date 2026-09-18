@@ -10,3 +10,12 @@ pytz==2026.3.post1 # https://pypi.org/project/pytz/2026.3.post1/
 django-environ==0.14.0 # https://pypi.org/project/django-environ/
 
 django-prometheus==2.5.0 # https://pypi.org/project/django-prometheus/
+
+
+
+# Note that these are pre-release version
+# Just revisit them and pin correct versions once they are officially released
+
+opentelemetry-distro==0.65b0 # https://pypi.org/project/opentelemetry-distro/
+opentelemetry-exporter-otlp==1.44.0 # https://pypi.org/project/opentelemetry-exporter-otlp/
+opentelemetry-instrumentation-django==0.65b0 # https://pypi.org/project/opentelemetry-instrumentation-django/
