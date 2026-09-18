@@ -120,6 +120,24 @@ services:
       - django
       - node-exporter
 
+  loki:
+    image: grafana/loki:3.7.7
+    container_name: picklepolls-loki
+    restart: unless-stopped
+
+    command:
+      - "-config.file=/etc/loki/loki-config.yaml"
+
+    expose:
+      - "3100"
+
+    volumes:
+      - ./loki/loki-config.yaml:etc/loki/loki-config.yaml:ro
+      - loki_data:/loki
+
+    networks:
+      - picklepolls-network
+
   grafana:
     image: grafana/grafana:13.2.1
     container_name: picklepolls-grafana
