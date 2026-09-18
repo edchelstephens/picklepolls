@@ -224,6 +224,7 @@ __marimo__/
 
 .env.local
 .env.test
+.env.docker
 
 */staticfiles/*
 

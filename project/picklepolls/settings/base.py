@@ -90,8 +90,6 @@ WSGI_APPLICATION = "picklepolls.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-USES_POSTGRES = env.bool("USES_POSTGRES", default=False)
-
 
 DATABASES = {
     "default": {

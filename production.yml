@@ -120,6 +120,49 @@ services:
       - django
       - node-exporter
 
+  loki:
+    image: grafana/loki:3.7.7
+    container_name: picklepolls-loki
+    restart: unless-stopped
+
+    command:
+      - "-config.file=/etc/loki/loki-config.yaml"
+
+    expose:
+      - "3100"
+
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki_data:/loki
+
+    networks:
+      - picklepolls-network
+
+  alloy:
+    image: grafana/alloy:v1.19.2
+    container_name: picklepolls-alloy
+    restart: unless-stopped
+
+    command:
+      - "run"
+      - "/etc/alloy/config.alloy"
+      - "--server.http.listen-addr=0.0.0.0:12345"
+
+    expose:
+      - "12345"
+    
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - alloy_data:/var/lib/alloy
+
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - loki
+
   grafana:
     image: grafana/grafana:13.2.1
     container_name: picklepolls-grafana
@@ -139,23 +182,23 @@ services:
 
     depends_on:
       - prometheus
+      - loki
 
     labels:
       - "traefik.enable=true"
-
       - "traefik.http.routers.grafana.rule=Host(`grafana.picklepolls.go2courts.com`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls=true"
       - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
-
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
-
       - "traefik.docker.network=picklepolls-bridge-network"
 
 volumes:
   postgres_data:
   prometheus_data:
   grafana_data:
+  loki_data:
+  alloy_data:
   traefik_letsencrypt:
 
 networks:
@@ -163,6 +206,15 @@ networks:
     name: picklepolls-bridge-network
     driver: bridge
 
+  # Shared network for the server-wide Traefik reverse proxy.
+
+  # This network is created and managed by the PicklePolls Compose
+  # configuration because the Traefik container is started here.
+
+  # Other independent applications, such as Sherlock, can connect
+  # to this network using `external: true` in their own Compose
+  # configuration. This allows a single Traefik instance to route
+  # traffic to multiple web applications on the same server.
   traefik-proxy:
     name: traefik-proxy
     driver: bridge

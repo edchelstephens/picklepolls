@@ -10,6 +10,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+
     ports:
       - "80:80"
 
@@ -81,7 +82,7 @@ services:
     restart: unless-stopped
 
     volumes:
-      - ./prometheus/prometheus.local.yml:/etc/prometheus/prometheus.local.yml:ro
+      - ./prometheus/prometheus.local.yml:/etc/prometheus/prometheus.yml:ro
 
     ports:
       - "9090:9090"
@@ -91,6 +92,48 @@ services:
 
     depends_on:
       - django
+
+  loki:
+    image: grafana/loki:3.7.7
+    container_name: picklepolls-loki
+    restart: unless-stopped
+
+    command:
+      - "-config.file=/etc/loki/loki-config.yaml"
+
+    ports:
+      - "3100:3100"
+
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki_data:/loki
+
+    networks:
+      - picklepolls-network
+
+  alloy:
+    image: grafana/alloy:v1.19.2
+    container_name: picklepolls-alloy
+    restart: unless-stopped
+
+    command:
+      - "run"
+      - "/etc/alloy/config.alloy"
+      - "--server.http.listen-addr=0.0.0.0:12345"
+
+    ports:
+      - "12345:12345"
+
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - alloy_data:/var/lib/alloy
+
+    networks:
+      - picklepolls-network
+
+    depends_on:
+      - loki
 
   grafana:
     image: grafana/grafana:13.2.1
@@ -111,10 +154,13 @@ services:
 
     depends_on:
       - prometheus
+      - loki
 
 volumes:
   postgres_data:
   grafana_data:
+  loki_data:
+  alloy_data:
 
 networks:
   picklepolls-network:

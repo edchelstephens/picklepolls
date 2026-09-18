@@ -1,0 +1,47 @@
+// =========================================================
+// DOCKER DISCOVERY
+// =========================================================
+
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+
+// =========================================================
+// DOCKER LOG LABELS
+// =========================================================
+
+// Use Docker container name as the service name.
+discovery.relabel "docker_logs" {
+  targets = discovery.docker.containers.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "service_name"
+  }
+}
+
+// =========================================================
+// DOCKER LOG COLLECTION
+// =========================================================
+
+loki.source.docker "containers" {
+  host    = "unix:///var/run/docker.sock"
+  targets = discovery.relabel.docker_logs.output
+
+  labels = {
+    platform = "docker",
+  }
+
+  forward_to = [loki.write.local.receiver]
+}
+
+// =========================================================
+// LOKI
+// =========================================================
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
