@@ -181,6 +181,7 @@ volumes:
   grafana_data:
   loki_data:
   alloy_data:
+  tempo_data:
 
 networks:
   picklepolls-network:
