@@ -125,7 +125,7 @@ services:
       - "12345:12345"
 
     volumes:
-      - ./alloy/config.local.alloy:/etc/alloy/config.alloy:ro
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - alloy_data:/var/lib/alloy
 
