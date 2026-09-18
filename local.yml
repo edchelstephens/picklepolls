@@ -175,6 +175,7 @@ services:
     depends_on:
       - prometheus
       - loki
+      - tempo
 
 volumes:
   postgres_data:
