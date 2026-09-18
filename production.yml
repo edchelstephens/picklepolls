@@ -200,6 +200,8 @@ volumes:
   postgres_data:
   prometheus_data:
   grafana_data:
+  loki_data:
+  alloy_data:
   traefik_letsencrypt:
 
 networks:
