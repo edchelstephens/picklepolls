@@ -140,7 +140,7 @@ services:
     container_name: picklepolls-tempo
     restart: unless-stopped
 
-    commands:
+    command:
       - "-config.file=/etc/tempo/tempo.yaml"
 
     volumes:
