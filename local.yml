@@ -124,6 +124,10 @@ services:
     ports:
       - "12345:12345"
 
+    expose:
+      - "4317"
+      - "4318"
+
     volumes:
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -134,6 +138,7 @@ services:
 
     depends_on:
       - loki
+      - tempo
 
   tempo:
     image: grafana/tempo:3.0.3
