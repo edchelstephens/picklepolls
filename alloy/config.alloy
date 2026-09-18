@@ -50,13 +50,14 @@ loki.write "local" {
 // =========================================================
 // OTLP TRACE RECEIVER
 // =========================================================
+
 otelcol.receiver.otlp "traces" {
   grpc {
     endpoint = "0.0.0.0:4317"
   }
 
   http {
-    endpoint = "0.0.0.0:4318
+    endpoint = "0.0.0.0:4318"
   }
 
   output {
@@ -67,11 +68,13 @@ otelcol.receiver.otlp "traces" {
 // =========================================================
 // TEMPO EXPORTER
 // =========================================================
+
 otelcol.exporter.otlp "tempo" {
   client {
-    endpoint = "tempo:4317
-  }
-  tls {
-    insecure = true
+    endpoint = "tempo:4317"
+
+    tls {
+      insecure = true
+    }
   }
 }
