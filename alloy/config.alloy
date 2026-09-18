@@ -3,13 +3,26 @@ discovery.docker "containers" {
   host = "unix:///var/run/docker.sock"
 }
 
+// Use the Docker container name as the service name.
+discovery.relabel "docker_logs" {
+  targets = discovery.docker.containers.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "service_name"
+  }
+}
+
 // Collect logs from all discovered Docker containers.
 loki.source.docker "containers" {
-  host       = "unix:///var/run/docker.sock"
-  targets    = discovery.docker.containers.targets
-  labels     = {
+  host    = "unix:///var/run/docker.sock"
+  targets = discovery.relabel.docker_logs.output
+
+  labels = {
     platform = "docker",
   }
+
   forward_to = [loki.write.local.receiver]
 }
 
