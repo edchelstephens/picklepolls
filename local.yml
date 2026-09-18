@@ -135,6 +135,26 @@ services:
     depends_on:
       - loki
 
+  tempo:
+    image: grafana/tempo:3.0.3
+    container_name: picklepolls-tempo
+    restart: unless-stopped
+
+    commands:
+      - "-config.file=/etc/tempo/tempo.yaml"
+
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo/tempo.yaml:ro
+      - tempo_data:/var/tempo
+
+    expose:
+      - "3200"
+      - "4317"
+      - "4318"
+
+    networks:
+      - picklepolls-network
+
   grafana:
     image: grafana/grafana:13.2.1
     container_name: picklepolls-grafana
