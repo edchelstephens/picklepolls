@@ -63,8 +63,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      alloy:
-        condition: service_started
 
     networks:
       - picklepolls-network
