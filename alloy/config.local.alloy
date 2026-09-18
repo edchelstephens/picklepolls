@@ -1,9 +1,13 @@
-// Discover all Docker containers running on the host.
+// =========================================================
+// DOCKER DISCOVERY
+// =========================================================
 discovery.docker "containers" {
   host = "unix:///var/run/docker.sock"
 }
 
-// Use the Docker container name as the service name.
+// =========================================================
+// DOCKER LOG LABELS
+// =========================================================
 discovery.relabel "docker_logs" {
   targets = discovery.docker.containers.targets
 
@@ -14,7 +18,9 @@ discovery.relabel "docker_logs" {
   }
 }
 
-// Collect logs from all discovered Docker containers.
+// =========================================================
+// DOCKER LOG COLLECTION
+// =========================================================
 loki.source.docker "containers" {
   host    = "unix:///var/run/docker.sock"
   targets = discovery.relabel.docker_logs.output
@@ -26,7 +32,9 @@ loki.source.docker "containers" {
   forward_to = [loki.write.local.receiver]
 }
 
-// Send logs to Loki.
+// =========================================================
+// LOKI
+// =========================================================
 loki.write "local" {
   endpoint {
     url = "http://loki:3100/loki/api/v1/push"
