@@ -112,19 +112,19 @@ services:
 
   alloy:
     image: grafana/alloy:v1.19.2
-    container_name: picklepolls-allow
+    container_name: picklepolls-alloy
     restart: unless-stopped
 
     command:
       - "run"
-      - "etc/alloy/config.alloy"
+      - "/etc/alloy/config.alloy"
       - "--server.http.listen-addr=0.0.0.0:12345"
-    
+
     ports:
       - "12345:12345"
 
     volumes:
-      - ./alloy/config.alloy/:etc/alloy/config.alloy:ro
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - alloy_data:/var/lib/alloy
 
