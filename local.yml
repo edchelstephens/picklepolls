@@ -98,17 +98,19 @@ services:
     restart: unless-stopped
 
     command:
-      - "-config.file=/etc/loki/loki-config.yml"
+      - "-config.file=/etc/loki/loki-config.yaml"
 
     ports:
       - "3100:3100"
 
     volumes:
-      - ./loki/loki-config.yml:/etc/loki-config.yml:ro
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
       - loki_data:/loki
 
     networks:
       - picklepolls-network
+
+  
 
   grafana:
     image: grafana/grafana:13.2.1
