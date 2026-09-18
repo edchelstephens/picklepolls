@@ -182,6 +182,7 @@ services:
 
     depends_on:
       - prometheus
+      - loki
 
     labels:
       - "traefik.enable=true"
