@@ -1,0 +1,21 @@
+// Discover all Docker containers running on the host.
+discovery.docker "containers" {
+    host = "unix://var/run/docker.sock"
+}
+
+// Collect logs from all discovered Docker containers
+loki.source.docker "containers" {
+    host        = "unix://var/run/docker.sock"
+    targets     = discovery.docker.containers.targets
+    labels      = {
+        platform: "docker
+    }
+    forward_to = [loki.write.local.receiver]
+}
+
+// Send logs to Loki.
+loki.write "local" {
+    endpoint {
+        url = "http://loki:3100/loki/api/v1/push
+    }
+}
