@@ -3,7 +3,7 @@ server:
 
 distributor:
   receivers:
-    oltp:
+    otlp:
       protocols:
         grpc:
         http:
@@ -12,7 +12,7 @@ storage:
   trace:
     backend: local
     local:
-      paht: /var/tempo/traces
+      path: /var/tempo/traces
 
 compactor:
   compaction:
