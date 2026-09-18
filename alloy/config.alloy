@@ -45,3 +45,33 @@ loki.write "local" {
     url = "http://loki:3100/loki/api/v1/push"
   }
 }
+
+
+// =========================================================
+// OTLP TRACE RECEIVER
+// =========================================================
+otelcol.receiver.otlp "traces" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+
+  http {
+    endpoint = "0.0.0.0:4318
+  }
+
+  output {
+    traces = [otelcol.exporter.otlp.tempo.input]
+  }
+}
+
+// =========================================================
+// TEMPO EXPORTER
+// =========================================================
+otelcol.exporter.otlp "tempo" {
+  client {
+    endpoint = "tempo:4317
+  }
+  tls {
+    insecure = true
+  }
+}
