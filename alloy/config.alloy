@@ -6,6 +6,7 @@ discovery.docker "containers" {
   host = "unix:///var/run/docker.sock"
 }
 
+
 // =========================================================
 // DOCKER LOG LABELS
 // =========================================================
@@ -20,6 +21,7 @@ discovery.relabel "docker_logs" {
     target_label  = "service_name"
   }
 }
+
 
 // =========================================================
 // DOCKER LOG COLLECTION
@@ -36,6 +38,7 @@ loki.source.docker "containers" {
   forward_to = [loki.write.local.receiver]
 }
 
+
 // =========================================================
 // LOKI
 // =========================================================
@@ -51,6 +54,11 @@ loki.write "local" {
 // OTLP TRACE RECEIVER
 // =========================================================
 
+// Django sends OTLP/HTTP traces to:
+//     http://alloy:4318
+//
+// We also expose OTLP/gRPC on :4317 for other applications.
+
 otelcol.receiver.otlp "traces" {
   grpc {
     endpoint = "0.0.0.0:4317"
@@ -65,9 +73,12 @@ otelcol.receiver.otlp "traces" {
   }
 }
 
+
 // =========================================================
-// TEMPO BATCH PROCESSOR
+// TRACE BATCH PROCESSOR
 // =========================================================
+
+// Batch spans before sending them to Tempo.
 
 otelcol.processor.batch "traces" {
   output {
@@ -75,9 +86,15 @@ otelcol.processor.batch "traces" {
   }
 }
 
+
 // =========================================================
-// TEMPO EXPORTER
+// TEMPO TRACE EXPORTER
 // =========================================================
+
+// Alloy → Tempo
+//
+// Tempo is reachable inside Docker at:
+//     tempo:4317
 
 otelcol.exporter.otlp "tempo" {
   client {
