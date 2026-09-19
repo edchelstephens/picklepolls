@@ -66,6 +66,16 @@ otelcol.receiver.otlp "traces" {
 }
 
 // =========================================================
+// TEMPO BATCH PROCESSOR
+// =========================================================
+
+otelcol.processor.batch "traces" {
+  output {
+    traces = [otelcol.exporter.otlp.tempo.input]
+  }
+}
+
+// =========================================================
 // TEMPO EXPORTER
 // =========================================================
 
