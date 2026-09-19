@@ -61,7 +61,7 @@ otelcol.receiver.otlp "traces" {
   }
 
   output {
-    traces = [otelcol.exporter.otlp.tempo.input]
+    traces = [otelcol.processor.batch.traces.input]
   }
 }
 
