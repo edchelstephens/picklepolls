@@ -51,6 +51,10 @@ services:
       context: .
       dockerfile: Dockerfile
 
+    # Explicitly set DJANGO_SETTINGS_MODULE so it will always be found when auto instrumenting telemetry
+    environment:
+      DJANGO_SETTINGS_MODULE: "picklepolls.settings.dev"
+
     env_file:
       - .env
 
