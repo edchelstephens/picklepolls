@@ -194,6 +194,7 @@ services:
     depends_on:
       - prometheus
       - loki
+      - tempo
 
     labels:
       - "traefik.enable=true"
