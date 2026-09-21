@@ -53,8 +53,9 @@ Made with 💚 by Edchel Stephen Nini
 ## ⚙️ CI/CD
 
 ![CI/CD Pull Request Automated Tests](assets/images/cicd/cicd_pull_request_automated_tests.png)
-
+![CI/CD Pull Request Automated Full Run](assets/images/cicd/cicd_unit_test_run_with_github_action.png)
 ![CI/CD Tests and Automated Deployment](assets/images/cicd/cicd_tests_and_then_automated_deploy_to_server_after_tests_passes.png)
+![CI/CD Tests and Automated Deployment Run](assets/images/cicd/cicd_deploy_with_github_action.png)
 
 
 
@@ -78,6 +79,7 @@ Made with 💚 by Edchel Stephen Nini
 * 🐘 PostgreSQL
 * 🎨 HTML / CSS , Tailwind CSS
 * ⚡ JavaScript
+* 🐳 Docker
 * 🧪 pytest
 * 🌐 Selenium
 * 🚀 GitHub Actions
