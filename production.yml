@@ -177,6 +177,7 @@ services:
 
     depends_on:
       - loki
+      - tempo
 
   grafana:
     image: grafana/grafana:13.2.1
