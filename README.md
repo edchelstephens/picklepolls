@@ -28,9 +28,47 @@ Made with 💚 by Edchel Stephen Nini
 * 🕵️ Observability with Promethues and Grafana
 
 
-## 📷 Application Screenshots
-![PicklePolls](assets/images/PicklePolls.png)
+## 📸 Screenshots
+## 📱 App
+#### Home
+![PicklePolls Home](assets/images/app/index.png)
 
+#### Home with Developer Credit
+![PicklePolls Home with Developer Credit](assets/images/app/index_with_developer_credit.png)
+
+#### Poll Detail
+![Poll Detail](assets/images/app/poll_detail.png)
+
+#### Poll Results
+![Poll Results](assets/images/app/poll_results.png)
+
+
+## 🧪 Unit Tests
+
+![Unit Tests](assets/images/tests/unit_tests.png)
+![Full Unit Tests](assets/images/tests/unit_tests_full.png)
+![Unit Test Code Coverage](assets/images/tests/unit_test_code_coverage.png)
+![Automated Browser Test with Selenium](assets/images/tests/automated_browser_test_with_selenium.png)
+
+## ⚙️ CI/CD
+
+![CI/CD Pull Request Automated Tests](assets/images/cicd/cicd_pull_request_automated_tests.png)
+
+![CI/CD Tests and Automated Deployment](assets/images/cicd/cicd_tests_and_then_automated_deploy_to_server_after_tests_passes.png)
+
+
+
+## 👀🖥️📊 Observability & Monitoring
+
+![Grafana Django Dashboard](assets/images/observability/grafana_django_dashboard.png)
+
+![Grafana Node Exporter](assets/images/observability/grafana_node_exporter.png)
+
+![Grafana Logs with Loki](assets/images/observability/grafana_logs_with_loki.png)
+
+![Grafana Traces with Tempo](assets/images/observability/grafana_traces_with_tempo.png)
+
+![Grafana Request Cycle Full Trace](assets/images/observability/grafana_request_cycle_full_trace.png)
 ---
 
 ## 🛠️ Tech Stack
