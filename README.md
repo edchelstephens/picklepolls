@@ -27,6 +27,10 @@ Made with 💚 by Edchel Stephen Nini
 * 🚀 CI/CD with GitHub Actions
 * 🕵️ Observability with Promethues and Grafana
 
+
+## 📷 Application Screenshots
+![PicklePolls](assets/images/PicklePolls.png)
+
 ---
 
 ## 🛠️ Tech Stack
@@ -287,8 +291,15 @@ python manage.py migrate
 1. With docker compose setup, When adding Data Sources in Grafana for Promethues, the url should be:
     http://prometheus:9090 
 
+2. With docker compose setup, When adding Data Sources in Grafana for Loki, the url should be:
+    http://loki:3100 
 
-2. Grafana import dashboards
+
+3. With docker compose setup, When adding Data Sources in Grafana for Tempo, the url should be:
+    http://tempo:3200 
+
+
+4. Grafana import dashboards
 Django dashboards
 ⭐ 20693 — Django / django-prometheus
 ⭐ 17616 — Django / Requests / Overview
