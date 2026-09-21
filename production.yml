@@ -214,6 +214,7 @@ volumes:
   grafana_data:
   loki_data:
   alloy_data:
+  tempo_data:
   traefik_letsencrypt:
 
 networks:
