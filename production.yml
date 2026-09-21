@@ -144,16 +144,13 @@ services:
     restart: unless-stopped
     command:
       - "-config.file=/etc/tempo/tempo.yaml"
-
     volumes:
-      - ./tempo/tempo.yaml:/etc/tempo/tempo.yml:ro
+      - ./tempo/tempo.yaml:/etc/tempo/tempo.yaml:ro
       - tempo_data:/var/tempo
-    
     expose:
       - "3200"
       - "4317"
       - "4318"
-    
     networks:
       - picklepolls-network
 
@@ -169,12 +166,11 @@ services:
 
     expose:
       - "12345"
-    
+
     volumes:
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - alloy_data:/var/lib/alloy
-
 
     networks:
       - picklepolls-network
