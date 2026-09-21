@@ -30,45 +30,64 @@ Made with 💚 by Edchel Stephen Nini
 
 ## 📸 Screenshots
 ## 📱 App
-#### Home
+#### 🏠 Home
 ![PicklePolls Home](assets/images/app/index.png)
 
-#### Home with Developer Credit
+#### 👨‍💻 Home with Developer Credit
 ![PicklePolls Home with Developer Credit](assets/images/app/index_with_developer_credit.png)
 
-#### Poll Detail
+#### 🗳️ Poll Detail
 ![Poll Detail](assets/images/app/poll_detail.png)
 
-#### Poll Results
+#### 📊 Poll Results
 ![Poll Results](assets/images/app/poll_results.png)
 
 
 ## 🧪 Unit Tests
 
+#### 🧪 Unit Tests
 ![Unit Tests](assets/images/tests/unit_tests.png)
+
+#### ✅ Full Unit Test Suite
 ![Full Unit Tests](assets/images/tests/unit_tests_full.png)
+
+#### 📊 Code Coverage
 ![Unit Test Code Coverage](assets/images/tests/unit_test_code_coverage.png)
+
+#### 🌐 Automated Browser Test with Selenium
 ![Automated Browser Test with Selenium](assets/images/tests/automated_browser_test_with_selenium.png)
+
 
 ## ⚙️ CI/CD
 
+#### 🔀 Pull Request — Automated Tests
 ![CI/CD Pull Request Automated Tests](assets/images/cicd/cicd_pull_request_automated_tests.png)
-![CI/CD Pull Request Automated Full Run](assets/images/cicd/cicd_unit_test_run_with_github_action.png)
-![CI/CD Tests and Automated Deployment](assets/images/cicd/cicd_tests_and_then_automated_deploy_to_server_after_tests_passes.png)
-![CI/CD Tests and Automated Deployment Run](assets/images/cicd/cicd_deploy_with_github_action.png)
 
+#### 🧪 GitHub Actions — Full Test Run
+![CI/CD Pull Request Automated Full Run](assets/images/cicd/cicd_unit_test_run_with_github_action.png)
+
+#### 🚀 Automated Deployment
+![CI/CD Tests and Automated Deployment](assets/images/cicd/cicd_tests_and_then_automated_deploy_to_server_after_tests_passes.png)
+
+#### 🚀 GitHub Actions — Deployment Run
+![CI/CD Tests and Automated Deployment Run](assets/images/cicd/cicd_deploy_with_github_action.png)
 
 
 ## 👀🖥️📊 Observability & Monitoring
 
+#### 📊 Grafana Django Dashboard
 ![Grafana Django Dashboard](assets/images/observability/grafana_django_dashboard.png)
 
+#### 🖥️ Grafana Node Exporter — Server Metrics
 ![Grafana Node Exporter](assets/images/observability/grafana_node_exporter.png)
 
+#### 📝 Grafana Logs with Loki
 ![Grafana Logs with Loki](assets/images/observability/grafana_logs_with_loki.png)
 
+#### 🔭 Grafana Traces with Tempo
 ![Grafana Traces with Tempo](assets/images/observability/grafana_traces_with_tempo.png)
 
+#### 🔍 Full Request Cycle Trace
 ![Grafana Request Cycle Full Trace](assets/images/observability/grafana_request_cycle_full_trace.png)
 ---
 
