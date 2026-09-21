@@ -51,6 +51,10 @@ services:
       context: .
       dockerfile: Dockerfile
 
+    # Explicitly set DJANGO_SETTINGS_MODULE so it will always be found when auto instrumenting telemetry
+    environment:
+      DJANGO_SETTINGS_MODULE: "picklepolls.settings.dev"
+
     env_file:
       - .env
 
@@ -111,6 +115,26 @@ services:
     networks:
       - picklepolls-network
 
+  tempo:
+    image: grafana/tempo:3.0.3
+    container_name: picklepolls-tempo
+    restart: unless-stopped
+
+    command:
+      - "-config.file=/etc/tempo/tempo.yaml"
+
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo/tempo.yaml:ro
+      - tempo_data:/var/tempo
+
+    expose:
+      - "3200"
+      - "4317"
+      - "4318"
+
+    networks:
+      - picklepolls-network
+
   alloy:
     image: grafana/alloy:v1.19.2
     container_name: picklepolls-alloy
@@ -124,6 +148,10 @@ services:
     ports:
       - "12345:12345"
 
+    expose:
+      - "4317"
+      - "4318"
+
     volumes:
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -134,6 +162,7 @@ services:
 
     depends_on:
       - loki
+      - tempo
 
   grafana:
     image: grafana/grafana:13.2.1
@@ -155,12 +184,14 @@ services:
     depends_on:
       - prometheus
       - loki
+      - tempo
 
 volumes:
   postgres_data:
   grafana_data:
   loki_data:
   alloy_data:
+  tempo_data:
 
 networks:
   picklepolls-network:

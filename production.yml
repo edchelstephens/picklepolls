@@ -138,30 +138,41 @@ services:
     networks:
       - picklepolls-network
 
+  tempo:
+    image: grafana/tempo:3.0.3
+    container_name: picklepolls-tempo
+    restart: unless-stopped
+    command:
+      - "-config.file=/etc/tempo/tempo.yaml"
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo/tempo.yaml:ro
+      - tempo_data:/var/tempo
+    expose:
+      - "3200"
+      - "4317"
+      - "4318"
+    networks:
+      - picklepolls-network
+
   alloy:
     image: grafana/alloy:v1.19.2
     container_name: picklepolls-alloy
     restart: unless-stopped
-
     command:
       - "run"
       - "/etc/alloy/config.alloy"
       - "--server.http.listen-addr=0.0.0.0:12345"
-
     expose:
       - "12345"
-    
     volumes:
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - alloy_data:/var/lib/alloy
-
-
     networks:
       - picklepolls-network
-
     depends_on:
       - loki
+      - tempo
 
   grafana:
     image: grafana/grafana:13.2.1
@@ -183,6 +194,7 @@ services:
     depends_on:
       - prometheus
       - loki
+      - tempo
 
     labels:
       - "traefik.enable=true"
@@ -199,6 +211,7 @@ volumes:
   grafana_data:
   loki_data:
   alloy_data:
+  tempo_data:
   traefik_letsencrypt:
 
 networks:
