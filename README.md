@@ -364,6 +364,44 @@ Django dashboards
 ⭐ 17616 — Django / Requests / Overview
 ⭐ 1860 — Node Exporter Full (Ubuntu Server Metrics)
 
+# Docker Logs
+
+## Make sure docker has max size for logs so it won't grow indefinitely 
+
+1. Check the current Docker logging driver
+
+SSH into your EC2 server and run:
+
+docker info --format '{{.LoggingDriver}}'
+
+If you're currently using Docker's default, you'll probably see:
+
+json-file
+2. Check your current Docker configuration
+
+Run:
+
+sudo cat /etc/docker/daemon.json
+
+If the file doesn't exist:
+
+ls -l /etc/docker/daemon.json
+
+Your existing configuration may contain other settings, so don't overwrite it blindly.
+
+3. Edit /etc/docker/daemon.json
+sudo nano /etc/docker/daemon.json
+
+Add:
+
+{
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "50m",
+    "max-file": "5"
+  }
+}
+
 
 # 🤖 CI/CD
 
