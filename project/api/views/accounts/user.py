@@ -7,9 +7,6 @@ from utils.view import RestAPIView
 from utils.exceptions import HumanReadableError
 
 
-from rest_framework.authtoken.views import ObtainAuthToken
-
-
 class TokenAPIView(ObtainAuthToken, RestAPIView):
     """Obtain Auth token APIView."""
 
@@ -20,7 +17,7 @@ class TokenAPIView(ObtainAuthToken, RestAPIView):
         try:
             data = request.data
 
-            serializer = AuthTokenSerializer(data)
+            serializer = AuthTokenSerializer(data=data)
 
             if serializer.is_valid():
                 user = serializer.validated_data["user"]
