@@ -23,3 +23,12 @@ class User(AbstractUser):
     def has_image(self) -> bool:
         """Check if has profile pic url."""
         return len(self.profile_pic_url) > 4
+
+    def get_data(self) -> dict:
+        """Get object data."""
+        data = {
+            "id": self.pk,
+            "email": self.email,
+        }
+
+        return data
