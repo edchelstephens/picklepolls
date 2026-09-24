@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from accounts.serializers import EntitySerializer
 from accounts.models import Entity
 
@@ -12,8 +14,8 @@ class EntitiesAPIView(LoginRequiredRestAPIView):
         """Handle get request."""
         try:
             user = self.get_user_instance(request)
-
-            queryset = Entity.objects.filter(owner=user)
+            filters = Q(owner=user) | Q(admins=user)
+            queryset = Entity.objects.filter(filters)
             serializer = EntitySerializer(instance=queryset, many=True)
 
             data = serializer.data

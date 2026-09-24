@@ -17,7 +17,7 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         """Human readable string representation of the instance."""
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.email}"
 
     @property
     def has_image(self) -> bool:
