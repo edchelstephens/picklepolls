@@ -10,6 +10,7 @@ class EntityAdmin(admin.ModelAdmin):
         "id",
         "name",
         "parent",
+        "owner",
         "image_preview",
     ]
 

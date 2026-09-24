@@ -14,6 +14,14 @@ class Entity(models.Model):
     )
     logo_url = models.URLField(blank=True)
 
+    owner = models.ForeignKey(
+        to="accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="entities_owned",
+    )
+
     def __repr__(self) -> str:
         """Machine readable string representation of the instance."""
         return f"Entity(pk={self.pk}, name={self.name})"
