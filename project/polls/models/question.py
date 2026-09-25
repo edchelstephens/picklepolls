@@ -102,3 +102,23 @@ class Question(models.Model):
     def get_choices_ordered_by_choice_text(self) -> models.QuerySet:
         """Get choices ordered by choice text."""
         return self.choices.order_by("choice_text")
+
+    def get_data(self) -> dict:
+        """Get data from object."""
+        data = {
+            "id": self.pk,
+            "question_text": self.question_text,
+            "question_type__id": (
+                self.question_type.pk if self.question_type is not None else None
+            ),
+            "question_type_name": (
+                self.question_type.name if self.question_type is not None else None
+            ),
+            "is_active": self.is_active,
+            "entity__id": self.entity.id if self.entity is not None else None,
+            "entity__name": self.entity.name if self.entity is not None else None,
+            "author__id": self.author.id if self.author is not None else None,
+            "author__email": self.author.email if self.author is not None else None,
+        }
+
+        return data
