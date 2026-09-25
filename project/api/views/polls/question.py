@@ -1,7 +1,7 @@
 from utils.view import LoginRequiredRestAPIView
 from utils.exceptions import HumanReadableError
 
-from polls.serializers import QuestionSerializer
+from polls.serializers import QuestionSerializer, ChoiceSerializer
 from polls.models import Question
 from accounts.models import Entity
 
@@ -16,6 +16,7 @@ class QuestionAPIView(LoginRequiredRestAPIView):
             user = self.get_user_instance(request)
             entity = Entity.objects.get(owner=user)
 
+            choices = request_data["choices"]
             data = {
                 "question_text": request_data["question_text"],
                 "question_type": request_data["question_type"],
@@ -23,13 +24,26 @@ class QuestionAPIView(LoginRequiredRestAPIView):
                 "author": user.pk,
             }
 
-            serializer = QuestionSerializer(data=data)
-            if serializer.is_valid():
-                instance = serializer.save()
-                response = instance.get_data()
+            question_serializer = QuestionSerializer(data=data)
+            if question_serializer.is_valid():
+                question = question_serializer.save()
+
+                choices_data = [
+                    {"question": question.pk, "choice_text": choice_text}
+                    for choice_text in choices
+                ]
+
+                choices_serializer = ChoiceSerializer(data=choices_data, many=True)
+                if choices_serializer.is_valid():
+                    choices_serializer.save()
+                else:
+                    self.raise_error(errors=choices_serializer.errors)
+
+                response = question.get_data()
+
                 return self.success_response(response)
             else:
-                self.raise_error(errors=serializer.errors)
+                self.raise_error(errors=question_serializer.errors)
 
         except HumanReadableError as exc:
             return self.error_response(exc)
