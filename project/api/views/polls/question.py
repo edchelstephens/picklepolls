@@ -35,7 +35,8 @@ class QuestionAPIView(LoginRequiredRestAPIView):
 
                 choices_serializer = ChoiceSerializer(data=choices_data, many=True)
                 if choices_serializer.is_valid():
-                    choices_serializer.save()
+                    choices_saved = choices_serializer.save()
+
                 else:
                     self.raise_error(errors=choices_serializer.errors)
 
