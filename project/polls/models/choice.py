@@ -27,3 +27,13 @@ class Choice(models.Model):
         percentage = round((self.votes / total_votes) * 100)
 
         return percentage
+
+    def get_data(self) -> dict:
+        """Get data."""
+        data = {
+            "id": self.pk,
+            "question": self.question.pk,
+            "choice_text": self.choice_text,
+            "votes": self.votes,
+        }
+        return data

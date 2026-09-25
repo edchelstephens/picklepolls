@@ -119,6 +119,7 @@ class Question(models.Model):
             "entity__name": self.entity.name if self.entity is not None else None,
             "author__id": self.author.id if self.author is not None else None,
             "author__email": self.author.email if self.author is not None else None,
+            "choices": [choice.get_data() for choice in self.choices.all()],
         }
 
         return data
