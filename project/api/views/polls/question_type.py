@@ -2,11 +2,11 @@ from polls.serializers import QuestionTypeSerializer
 from polls.models import QuestionType
 
 
-from utils.view import LoginRequiredRestAPIView
+from utils.view import RestAPIView
 from utils.exceptions import HumanReadableError
 
 
-class QuestionTypesAPIView(LoginRequiredRestAPIView):
+class QuestionTypesAPIView(RestAPIView):
     """Question types api view."""
 
     def get(self, request, *args, **kwargs):

@@ -10,7 +10,7 @@ from django.views.generic.base import View
 from django.http.response import JsonResponse, HttpResponse
 
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.status import (
     is_success,

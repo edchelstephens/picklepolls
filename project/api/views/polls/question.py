@@ -1,9 +1,26 @@
-from utils.view import LoginRequiredRestAPIView
+from utils.view import LoginRequiredRestAPIView, RestAPIView
 from utils.exceptions import HumanReadableError
 
 from polls.serializers import QuestionSerializer, ChoiceSerializer
 from polls.models import Question
 from accounts.models import Entity
+
+
+class PublicQuestionsAPIView(RestAPIView):
+    """Public api endpoint for questions."""
+
+    def get(self, request, *args, **kwargs):
+        """Get all active polls."""
+        try:
+            questions = Question.objects.filter(is_active=True)
+            data = [question.get_data() for question in questions]
+
+            response = {"data": data, "count": len(data)}
+            return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
 
 
 class QuestionAPIView(LoginRequiredRestAPIView):
