@@ -38,3 +38,9 @@ class Entity(models.Model):
     def has_image(self) -> bool:
         """Check if logo url is filled."""
         return len(self.logo_url) > 4
+
+    def get_data(self) -> dict:
+        """Get data."""
+
+        data = {"id": self.pk, "name": self.name, "logo_url": self.logo_url}
+        return data

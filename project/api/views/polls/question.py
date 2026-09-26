@@ -25,6 +25,44 @@ class PublicQuestionsAPIView(RestAPIView):
             return self.server_error_response(exc)
 
 
+class PublicQuestionAPIView(RestAPIView):
+    """Public api endpoint for question."""
+
+    def get(self, pk, request, *args, **kwargs):
+        """Get all active polls."""
+        try:
+            questions = Question.objects.filter(is_active=True)
+
+            response = {}
+            return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
+
+
+class PublicQuestionAPIView(RestAPIView):
+    """Public api endpoint for question."""
+
+    def get(self, request, pk, *args, **kwargs):
+        """Handle get request."""
+        try:
+            if not Question.objects.filter(pk=pk).exists():
+                self.raise_error(
+                    title="Not Found", message="Question not found", status=404
+                )
+
+            question = Question.objects.get(pk=pk)
+
+            response = question.get_data()
+
+            return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
+
+
 class PublicQuestionVoteAPIView(RestAPIView):
     """Public vote on a question choice."""
 

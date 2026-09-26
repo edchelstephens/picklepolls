@@ -13,3 +13,9 @@ class QuestionType(models.Model):
     def __str__(self) -> str:
         """Human readable string representation of the instance"""
         return self.name
+
+    def get_data(self) -> dict:
+        """Get data."""
+        data = {"id": self.pk, "name": self.name}
+
+        return data

@@ -28,4 +28,16 @@ class Choice(models.Model):
 
         return percentage
 
-    
+    def get_data(self) -> dict:
+        """Get data."""
+        data = {
+            "id": self.pk,
+            "question": {
+                "id": self.question.pk,
+                "question_text": self.question.question_text,
+            },
+            "choice_text": self.choice_text,
+            "votes": self.votes,
+        }
+
+        return data
