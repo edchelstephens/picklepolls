@@ -96,6 +96,7 @@ Made with 💚 by Edchel Stephen Nini
 * 🐍 Python
 * 🌐 Django
 * 🐘 PostgreSQL
+* ⚙️ Django Rest Framework
 * 🎨 HTML / CSS , Tailwind CSS
 * ⚡ JavaScript
 * 🐳 Docker
