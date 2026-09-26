@@ -10,6 +10,7 @@ from django.views.generic.base import View
 from django.http.response import JsonResponse, HttpResponse
 
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import (
     is_success,
@@ -21,7 +22,6 @@ from rest_framework.status import (
 from utils.request import DjangoRequestMixin, RestRequestMixin
 from utils.exceptions import HumanReadableError
 from utils.debug import DebuggerMixin
-
 
 RequestResponseData = Union[List, Dict]
 
@@ -258,6 +258,12 @@ class RestAPIView(DjangoViewAPIMixin, RestRequestMixin, APIView):
     """
 
     RESPONSE = Response
+
+
+class LoginRequiredRestAPIView(RestAPIView):
+    """Login required rest api view."""
+
+    permission_classes = [IsAuthenticated]
 
 
 class DjangoView(DjangoViewAPIMixin, DjangoRequestMixin, View):

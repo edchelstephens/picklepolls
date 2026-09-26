@@ -25,8 +25,70 @@ Made with 💚 by Edchel Stephen Nini
 * 🧪 Automated testing with pytest
 * 🌐 Selenium-based functional tests
 * 🚀 CI/CD with GitHub Actions
-* 🕵️ Observability with Promethues and Grafana
+* 🕵️ Observability with Grafana, Prometheus for Metrics, Loki fo Logs and Tempo for Tracing. 
 
+
+## 📸 Screenshots
+## 📱 App
+#### 🏠 Home
+![PicklePolls Home](assets/images/app/index.png)
+
+#### 👨‍💻 Home with Developer Credit
+![PicklePolls Home with Developer Credit](assets/images/app/index_with_developer_credit.png)
+
+#### 🗳️ Poll Detail
+![Poll Detail](assets/images/app/poll_detail.png)
+
+#### 📊 Poll Results
+![Poll Results](assets/images/app/poll_results.png)
+
+
+## 🧪 Unit Tests
+
+#### 🧪 Unit Tests
+![Unit Tests](assets/images/tests/unit_tests.png)
+
+#### ✅ Full Unit Test Suite
+![Full Unit Tests](assets/images/tests/unit_tests_full.png)
+
+#### 📊 Code Coverage
+![Unit Test Code Coverage](assets/images/tests/unit_test_code_coverage.png)
+
+#### 🌐 Automated Browser Test with Selenium
+![Automated Browser Test with Selenium](assets/images/tests/automated_browser_test_with_selenium.png)
+
+
+## ⚙️ CI/CD
+
+#### 🔀 Pull Request — Automated Tests
+![CI/CD Pull Request Automated Tests](assets/images/cicd/cicd_pull_request_automated_tests.png)
+
+#### 🧪 GitHub Actions — Full Test Run
+![CI/CD Pull Request Automated Full Run](assets/images/cicd/cicd_unit_test_run_with_github_action.png)
+
+#### 🚀 Automated Deployment
+![CI/CD Tests and Automated Deployment](assets/images/cicd/cicd_tests_and_then_automated_deploy_to_server_after_tests_passes.png)
+
+#### 🚀 GitHub Actions — Deployment Run
+![CI/CD Tests and Automated Deployment Run](assets/images/cicd/cicd_deploy_with_github_action.png)
+
+
+## 👀🖥️📊 Observability & Monitoring
+
+#### 📊 Grafana Django Dashboard
+![Grafana Django Dashboard](assets/images/observability/grafana_django_dashboard.png)
+
+#### 🖥️ Grafana Node Exporter — Server Metrics
+![Grafana Node Exporter](assets/images/observability/grafana_node_exporter.png)
+
+#### 📝 Grafana Logs with Loki
+![Grafana Logs with Loki](assets/images/observability/grafana_logs_with_loki.png)
+
+#### 🔭 Grafana Traces with Tempo
+![Grafana Traces with Tempo](assets/images/observability/grafana_traces_with_tempo.png)
+
+#### 🔍 Full Request Cycle Trace
+![Grafana Request Cycle Full Trace](assets/images/observability/grafana_request_cycle_full_trace.png)
 ---
 
 ## 🛠️ Tech Stack
@@ -36,6 +98,7 @@ Made with 💚 by Edchel Stephen Nini
 * 🐘 PostgreSQL
 * 🎨 HTML / CSS , Tailwind CSS
 * ⚡ JavaScript
+* 🐳 Docker
 * 🧪 pytest
 * 🌐 Selenium
 * 🚀 GitHub Actions
@@ -287,12 +350,57 @@ python manage.py migrate
 1. With docker compose setup, When adding Data Sources in Grafana for Promethues, the url should be:
     http://prometheus:9090 
 
+2. With docker compose setup, When adding Data Sources in Grafana for Loki, the url should be:
+    http://loki:3100 
 
-2. Grafana import dashboards
+
+3. With docker compose setup, When adding Data Sources in Grafana for Tempo, the url should be:
+    http://tempo:3200 
+
+
+4. Grafana import dashboards
 Django dashboards
 ⭐ 20693 — Django / django-prometheus
 ⭐ 17616 — Django / Requests / Overview
 ⭐ 1860 — Node Exporter Full (Ubuntu Server Metrics)
+
+# Docker Logs
+
+## Make sure docker has max size for logs so it won't grow indefinitely 
+
+1. Check the current Docker logging driver
+
+SSH into your EC2 server and run:
+
+docker info --format '{{.LoggingDriver}}'
+
+If you're currently using Docker's default, you'll probably see:
+
+json-file
+2. Check your current Docker configuration
+
+Run:
+
+sudo cat /etc/docker/daemon.json
+
+If the file doesn't exist:
+
+ls -l /etc/docker/daemon.json
+
+Your existing configuration may contain other settings, so don't overwrite it blindly.
+
+3. Edit /etc/docker/daemon.json
+sudo nano /etc/docker/daemon.json
+
+Add:
+
+{
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "50m",
+    "max-file": "5"
+  }
+}
 
 
 # 🤖 CI/CD

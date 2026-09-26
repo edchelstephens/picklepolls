@@ -1,0 +1,73 @@
+from utils.view import LoginRequiredRestAPIView
+from utils.exceptions import HumanReadableError
+
+from polls.serializers import QuestionSerializer, ChoiceSerializer
+from polls.models import Question
+from accounts.models import Entity
+
+
+class QuestionAPIView(LoginRequiredRestAPIView):
+    """Question api view."""
+
+    def post(self, request, *args, **kwargs):
+        """Handle post request for creation of question."""
+        try:
+            request_data = request.data
+            user = self.get_user_instance(request)
+            entity = Entity.objects.get(owner=user)
+
+            choices = request_data["choices"]
+            data = {
+                "question_text": request_data["question_text"],
+                "question_type": request_data["question_type"],
+                "entity": entity.pk,
+                "author": user.pk,
+            }
+
+            question_serializer = QuestionSerializer(data=data)
+            if question_serializer.is_valid():
+                question = question_serializer.save()
+
+                choices_data = [
+                    {"question": question.pk, "choice_text": choice_text}
+                    for choice_text in choices
+                ]
+
+                choices_serializer = ChoiceSerializer(data=choices_data, many=True)
+                if choices_serializer.is_valid():
+                    choices_saved = choices_serializer.save()
+
+                else:
+                    self.raise_error(errors=choices_serializer.errors)
+
+                response = question.get_data()
+
+                return self.success_response(response)
+            else:
+                self.raise_error(errors=question_serializer.errors)
+
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
+
+    def delete(self, request, pk, *args, **kwargs):
+        """Handle post request for creation of question."""
+        try:
+            if not Question.objects.filter(pk=pk, author=request.user).exists():
+                self.raise_error(title="Not Found", message="Question does not exist")
+
+            instance = Question.objects.get(pk=pk, author=request.user)
+            instance.delete()
+
+            response = {
+                "is_success": True,
+                "title": "Success",
+                "message": "Question deleted.",
+            }
+
+            return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)

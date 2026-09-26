@@ -17,9 +17,18 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         """Human readable string representation of the instance."""
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.email}"
 
     @property
     def has_image(self) -> bool:
         """Check if has profile pic url."""
         return len(self.profile_pic_url) > 4
+
+    def get_data(self) -> dict:
+        """Get object data."""
+        data = {
+            "id": self.pk,
+            "email": self.email,
+        }
+
+        return data
