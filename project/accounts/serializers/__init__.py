@@ -1,1 +1,2 @@
 from accounts.serializers.entity import EntitySerializer
+from accounts.serializers.user import EmailAuthTokenSerializer
