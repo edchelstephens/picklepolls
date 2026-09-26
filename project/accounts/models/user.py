@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
@@ -10,6 +11,11 @@ class User(AbstractUser):
     company = models.ForeignKey(
         to="accounts.Entity", on_delete=models.SET_NULL, blank=True, null=True
     )
+
+    email = models.EmailField(_("email address"), unique=True)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     def __repr__(self) -> str:
         """Machine readable string representation of the instance."""
