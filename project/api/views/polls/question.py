@@ -1,8 +1,10 @@
 from utils.view import LoginRequiredRestAPIView, RestAPIView
 from utils.exceptions import HumanReadableError
 
+from django.db.models import F
+
 from polls.serializers import QuestionSerializer, ChoiceSerializer
-from polls.models import Question
+from polls.models import Question, Choice
 from accounts.models import Entity
 
 
@@ -17,6 +19,37 @@ class PublicQuestionsAPIView(RestAPIView):
             data = serializer.data
             response = {"data": data, "count": len(data)}
             return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
+
+
+class PublicQuestionVoteAPIView(RestAPIView):
+    """Public vote on a question choice."""
+
+    def post(self, request, pk, *args, **kwargs):
+        """Handle post request."""
+        try:
+
+            choice_id = request.data.get("choice")
+
+            if not Choice.objects.filter(pk=choice_id, question__id=pk).exists():
+                self.raise_error(
+                    title="Not Found",
+                    message="Unable to find choice for given question id.",
+                    status=404,
+                )
+
+            choice = Choice.objects.get(pk=choice_id, question__id=pk)
+
+            choice.votes = F("votes") + 1
+            choice.save()
+
+            response = {"title": "Success", "message": "Voted on question."}
+
+            return self.success_response(response)
+
         except HumanReadableError as exc:
             return self.error_response(exc)
         except Exception as exc:

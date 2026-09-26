@@ -6,6 +6,7 @@ from api.views import (
     QuestionAPIView,
     PublicQuestionTypesAPIView,
     PublicQuestionsAPIView,
+    PublicQuestionVoteAPIView,
     PublicChoicesAPIView,
     PublicEntitiesAPIView,
 )
@@ -19,6 +20,7 @@ urlpatterns = [
     path("polls/question/<int:pk>/", QuestionAPIView.as_view()),
     path("public/entities/", PublicEntitiesAPIView.as_view()),
     path("public/question_types/", PublicQuestionTypesAPIView.as_view()),
-    path("public/questions/", PublicQuestionsAPIView.as_view()),
     path("public/choices/", PublicChoicesAPIView.as_view()),
+    path("public/questions/", PublicQuestionsAPIView.as_view()),
+    path("public/question/<int:pk>/vote/", PublicQuestionVoteAPIView.as_view()),
 ]
