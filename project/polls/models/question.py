@@ -104,22 +104,20 @@ class Question(models.Model):
         return self.choices.order_by("choice_text")
 
     def get_data(self) -> dict:
-        """Get data from object."""
+        """Get data."""
         data = {
             "id": self.pk,
             "question_text": self.question_text,
-            "question_type__id": (
-                self.question_type.pk if self.question_type is not None else None
-            ),
-            "question_type_name": (
-                self.question_type.name if self.question_type is not None else None
+            "question_type": (
+                self.question_type.get_data()
+                if self.question_type is not None
+                else None
             ),
             "is_active": self.is_active,
-            "entity__id": self.entity.id if self.entity is not None else None,
-            "entity__name": self.entity.name if self.entity is not None else None,
-            "author__id": self.author.id if self.author is not None else None,
-            "author__email": self.author.email if self.author is not None else None,
-            "choices": [choice.get_data() for choice in self.choices.all()],
+            "entity": self.entity.get_data() if self.entity is not None else None,
+            "author": self.author.get_data() if self.author is not None else None,
+            "choices": [
+                choice.get_data() for choice in self.choices.all().order_by("-votes")
+            ],
         }
-
         return data

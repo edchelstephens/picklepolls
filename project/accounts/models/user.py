@@ -31,10 +31,6 @@ class User(AbstractUser):
         return len(self.profile_pic_url) > 4
 
     def get_data(self) -> dict:
-        """Get object data."""
-        data = {
-            "id": self.pk,
-            "email": self.email,
-        }
-
+        """Get data."""
+        data = {"id": self.pk, "email": self.email}
         return data

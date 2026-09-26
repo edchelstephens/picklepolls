@@ -12,5 +12,4 @@ class QuestionSerializer(ModelSerializer):
             "question_text",
             "question_type",
             "entity",
-            "author",
         ]

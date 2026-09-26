@@ -32,8 +32,12 @@ class Choice(models.Model):
         """Get data."""
         data = {
             "id": self.pk,
-            "question": self.question.pk,
+            "question": {
+                "id": self.question.pk,
+                "question_text": self.question.question_text,
+            },
             "choice_text": self.choice_text,
             "votes": self.votes,
         }
+
         return data
