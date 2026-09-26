@@ -28,7 +28,7 @@ class UserModelTestCase(ModelTestCase):
     def test_str_method(self):
         """Test string method."""
         actual = self.user.__str__()
-        expected = f"{self.user.first_name} {self.user.last_name}"
+        expected = self.email
 
         self.assertEqual(actual, expected)
 
