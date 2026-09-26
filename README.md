@@ -94,9 +94,9 @@ Made with 💚 by Edchel Stephen Nini
 ## 🛠️ Tech Stack
 
 * 🐍 Python
-* 🌐 Django
+* ⚙️ Django
 * 🐘 PostgreSQL
-* ⚙️ Django Rest Framework
+* 🌐 Django Rest Framework
 * 🎨 HTML / CSS , Tailwind CSS
 * ⚡ JavaScript
 * 🐳 Docker
