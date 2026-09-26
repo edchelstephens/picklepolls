@@ -13,8 +13,8 @@ class PublicQuestionsAPIView(RestAPIView):
         """Get all active polls."""
         try:
             questions = Question.objects.filter(is_active=True)
-            data = [question.get_data() for question in questions]
-
+            serializer = QuestionSerializer(questions, many=True)
+            data = serializer.data
             response = {"data": data, "count": len(data)}
             return self.success_response(response)
         except HumanReadableError as exc:
@@ -57,7 +57,7 @@ class QuestionAPIView(LoginRequiredRestAPIView):
                 else:
                     self.raise_error(errors=choices_serializer.errors)
 
-                response = question.get_data()
+                response = question_serializer.data
 
                 return self.success_response(response)
             else:
