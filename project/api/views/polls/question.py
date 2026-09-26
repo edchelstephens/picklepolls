@@ -28,22 +28,6 @@ class PublicQuestionsAPIView(RestAPIView):
 class PublicQuestionAPIView(RestAPIView):
     """Public api endpoint for question."""
 
-    def get(self, pk, request, *args, **kwargs):
-        """Get all active polls."""
-        try:
-            questions = Question.objects.filter(is_active=True)
-
-            response = {}
-            return self.success_response(response)
-        except HumanReadableError as exc:
-            return self.error_response(exc)
-        except Exception as exc:
-            return self.server_error_response(exc)
-
-
-class PublicQuestionAPIView(RestAPIView):
-    """Public api endpoint for question."""
-
     def get(self, request, pk, *args, **kwargs):
         """Handle get request."""
         try:
@@ -84,7 +68,12 @@ class PublicQuestionVoteAPIView(RestAPIView):
             choice.votes = F("votes") + 1
             choice.save()
 
-            response = {"title": "Success", "message": "Voted on question."}
+            question = choice.question
+            response = {
+                "title": "Success",
+                "message": "Voted on question.",
+                "question": question.get_data(),
+            }
 
             return self.success_response(response)
 
