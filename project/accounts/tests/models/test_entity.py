@@ -1,3 +1,5 @@
+import pytest
+
 from accounts.tests.factories.entity import EntityFactory
 
 from utils.testing_utils.testcases import ModelTestCase
@@ -36,3 +38,15 @@ class EntityModelTest(ModelTestCase):
         self.entity.save()
         self.entity.refresh_from_db()
         self.assertFalse(self.entity.has_image)
+
+    @pytest.mark.current
+    def test_get_data(self) -> None:
+        """Test get_data() returns expected value."""
+        expected = {
+            "id": self.entity.pk,
+            "name": self.entity.name,
+            "logo_url": self.entity.logo_url,
+        }
+        actual = self.entity.get_data()
+
+        self.assertEqual(actual, expected)
