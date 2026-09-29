@@ -1,8 +1,4 @@
-import datetime
-
-
-from django.utils import timezone
-
+import pytest
 
 from polls.tests.factories import ChoiceFactory
 from utils.testing_utils.testcases import ModelTestCase
@@ -47,3 +43,16 @@ class ChoiceModelTestCase(ModelTestCase):
         actual = self.choice.vote_percentage
 
         self.assertEqual(actual, expected)
+
+    @pytest.mark.current
+    def test_get_data(self) -> None:
+        """Test get_data() returns expected value."""
+        expected = {
+            "id": self.choice.pk,
+            "question": {
+                "id": self.question.pk,
+                "question_text": self.question.question_text,
+            },
+            "choice_text": self.choice_text,
+            "votes": self.votes,
+        }
