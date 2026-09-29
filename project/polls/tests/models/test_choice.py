@@ -56,3 +56,5 @@ class ChoiceModelTestCase(ModelTestCase):
             "choice_text": self.choice_text,
             "votes": self.votes,
         }
+        actual = self.choice.get_data()
+        self.assertEqual(actual, expected)

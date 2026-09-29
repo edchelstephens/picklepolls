@@ -1,3 +1,5 @@
+import pytest
+
 from polls.tests.factories import QuestionTypeFactory
 
 from utils.testing_utils.testcases import ModelTestCase
@@ -24,5 +26,15 @@ class QuestionTypeModelTest(ModelTestCase):
         expected = (
             f"QuestionType(pk={self.question_type.pk}, question_type={self.name})"
         )
+
+        self.assertEqual(actual, expected)
+
+    @pytest.mark.current
+    def test_get_data(self) -> None:
+        """Test get_data() returns expected value."""
+
+        expected = {"id": self.question_type.pk, "name": self.question_type.name}
+
+        actual = self.question_type.get_data()
 
         self.assertEqual(actual, expected)
