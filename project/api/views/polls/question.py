@@ -83,6 +83,28 @@ class PublicQuestionVoteAPIView(RestAPIView):
             return self.server_error_response(exc)
 
 
+class QuestionsAPIView(LoginRequiredRestAPIView):
+    """Questions api view."""
+
+    def get(self, request, *args, **kwargs):
+        """Handle post request."""
+        try:
+            user = self.get_user_instance(request)
+
+            questions = Question.objects.filter(author=user)
+
+            serializer = QuestionSerializer(questions, many=True)
+
+            data = serializer.data
+
+            response = {"data": data, "count": data}
+            return self.success_response(response)
+        except HumanReadableError as exc:
+            return self.error_response(exc)
+        except Exception as exc:
+            return self.server_error_response(exc)
+
+
 class QuestionAPIView(LoginRequiredRestAPIView):
     """Question api view."""
 
