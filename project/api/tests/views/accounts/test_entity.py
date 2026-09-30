@@ -36,7 +36,6 @@ class EntityAPIVIewsTestCase(RestAPITestCase):
         return data
 
 
-@pytest.mark.solo
 class EntitiesAPIViewTestCase(EntityAPIVIewsTestCase):
     """EntitiesAPIView test case."""
 
@@ -63,7 +62,6 @@ class EntitiesAPIViewTestCase(EntityAPIVIewsTestCase):
         self.assertEqual(response_data, expected_data)
 
 
-@pytest.mark.solo
 class PublicEntitiesAPIViewTestCase(EntityAPIVIewsTestCase):
     """PublicEntitiesAPIView test case."""
 
