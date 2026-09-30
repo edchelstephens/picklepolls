@@ -76,3 +76,22 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         expected_message = "Question deleted."
         self.assertEqual(response_data["message"], expected_message)
         self.assertFalse(Question.objects.filter(pk=question_id).exists())
+
+    def test_delete_prevents_user_from_deleting_a_question_he_is_not_the_author_of(
+        self,
+    ) -> None:
+        """Delete prevents user from deleting a question he is not the author of."""
+
+        another_user = UserFactory()
+        question = QuestionFactory(author=another_user)
+        question_id = int(question.pk)
+
+        request = self.request_factory.delete(self.url)
+        self.set_user(request=request, user=self.user)
+
+        response = self.view(request, pk=question.pk)
+        response_data = response.data
+
+        expected_message = "Question does not exist"
+        self.assertEqual(response_data["message"], expected_message)
+        self.assertTrue(Question.objects.filter(id=question_id).exists())
