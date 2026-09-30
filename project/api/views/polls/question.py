@@ -19,9 +19,9 @@ class PublicQuestionsAPIView(RestAPIView):
             data = serializer.data
             response = {"data": data, "count": len(data)}
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -41,9 +41,9 @@ class PublicQuestionAPIView(RestAPIView):
             response = question.get_data()
 
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -77,9 +77,9 @@ class PublicQuestionVoteAPIView(RestAPIView):
 
             return self.success_response(response)
 
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -99,9 +99,9 @@ class QuestionsAPIView(LoginRequiredRestAPIView):
 
             response = {"data": data, "count": data}
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 

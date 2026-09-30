@@ -103,22 +103,6 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         self.assertTrue(Question.objects.filter(id=question_id).exists())
 
 
-# urlpatterns = [
-#     path("accounts/login/", ObtainTokenAPIView.as_view()),
-#     path("accounts/logout/", DestroyTokenAPIView.as_view()),
-#     path("accounts/entities/", EntitiesAPIView.as_view()),
-#     path("polls/question/", QuestionAPIView.as_view()),
-#     path("polls/questions/", QuestionsAPIView.as_view()),
-#     path("polls/question/<int:pk>/", QuestionAPIView.as_view()),
-#     path("public/entities/", PublicEntitiesAPIView.as_view()),
-#     path("public/question_types/", PublicQuestionTypesAPIView.as_view()),
-#     path("public/choices/", PublicChoicesAPIView.as_view()),
-#     path("public/questions/", PublicQuestionsAPIView.as_view()),
-#     path("public/question/<int:pk>/", PublicQuestionAPIView.as_view()),
-#     path("public/question/<int:pk>/vote/", PublicQuestionVoteAPIView.as_view()),
-# ]
-
-
 @pytest.mark.solo
 class PublicQuestionAPIViewTestCase(RestAPITestCase):
     """PublicQuestionAPIView test case."""
