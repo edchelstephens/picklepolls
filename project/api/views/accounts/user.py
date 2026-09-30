@@ -31,7 +31,10 @@ class ObtainTokenAPIView(ObtainAuthToken, RestAPIView):
 
                 return self.success_response(response_data)
             else:
-                self.raise_error(errors=serializer.errors)
+                self.raise_error(
+                    message="Unable to login with given credentials",
+                    errors=serializer.errors,
+                )
         except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exception=exc)
         except Exception as exc:  # pragma no cover
@@ -51,5 +54,5 @@ class DestroyTokenAPIView(LoginRequiredRestAPIView):
             return self.success_response(response)
         except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)

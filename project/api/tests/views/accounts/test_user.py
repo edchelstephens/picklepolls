@@ -5,7 +5,7 @@ from accounts.models import User
 from accounts.tests.factories import UserFactory
 
 from utils.testing_utils.testcases import RestAPITestCase
-from api.views.accounts.user import TokenAPIView
+from api.views.accounts.user import ObtainTokenAPIView, DestroyTokenAPIView
 
 
 @pytest.mark.solo
@@ -17,7 +17,7 @@ class TokenAPIViewTestCase(RestAPITestCase):
         super().setUp()
         self.request_factory = self.get_request_factory()
 
-        self.view = TokenAPIView.as_view()
+        self.view = ObtainTokenAPIView.as_view()
         self.url = "/api/accounts/login/"
         self.email = "tester@picklepolls.com"
         self.password = "password@1234"
@@ -48,8 +48,26 @@ class TokenAPIViewTestCase(RestAPITestCase):
 
         response_data = response.data
 
-        self.pprint_response(response_data)
-
         expected_data = self.get_expected_data(user=self.user)
 
         self.assertEqual(response_data, expected_data)
+
+    def test_post_request_with_incorrect_credentials_returns_expected_message(
+        self,
+    ) -> None:
+        """Test post request with incorrect credentials returns expected error message."""
+
+        data = {"email": self.email, "password": "IncorrectPassword"}
+
+        request = self.request_factory.post(
+            path=self.url, data=data, content_type="application/json"
+        )
+
+        response = self.view(request)
+
+        response_data = response.data
+
+        expected_message = "Unable to login with given credentials"
+
+        self.assertNotIn("token", response_data.keys())
+        self.assertEqual(response_data["message"], expected_message)
