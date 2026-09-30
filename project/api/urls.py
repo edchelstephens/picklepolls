@@ -1,7 +1,8 @@
 from django.urls import path
 
 from api.views import (
-    TokenAPIView,
+    ObtainTokenAPIView,
+    DestroyTokenAPIView,
     EntitiesAPIView,
     QuestionAPIView,
     QuestionsAPIView,
@@ -16,7 +17,8 @@ from api.views import (
 app_name = "api"
 
 urlpatterns = [
-    path("accounts/login/", TokenAPIView.as_view()),
+    path("accounts/login/", ObtainTokenAPIView.as_view()),
+    path("accounts/logout/", DestroyTokenAPIView.as_view()),
     path("accounts/entities/", EntitiesAPIView.as_view()),
     path("polls/question/", QuestionAPIView.as_view()),
     path("polls/questions/", QuestionsAPIView.as_view()),
