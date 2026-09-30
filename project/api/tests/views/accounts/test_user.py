@@ -9,6 +9,33 @@ from api.views.accounts.user import ObtainTokenAPIView, DestroyTokenAPIView
 
 
 @pytest.mark.solo
+class DestroyTokenAPIViewTestCase(RestAPITestCase):
+    """DestroyTokenAPIView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = DestroyTokenAPIView.as_view()
+        self.url = "/api/accounts/logout/"
+        self.user = UserFactory()
+
+    def test_post_request_destroys_all_tokens_of_user(self) -> None:
+        """Post request destoys all tokens of user."""
+
+        Token.objects.get_or_create(user=self.user)
+
+        request = self.request_factory.post(path=self.url)
+        self.set_user(request=request, user=self.user)
+        response = self.view(request)
+        response_data = response.data
+
+        expected_message = "Logged out successfully!"
+        self.assertEqual(response_data["message"], expected_message)
+        self.assertFalse(Token.objects.filter(user=self.user).exists())
+
+
+@pytest.mark.solo
 class TokenAPIViewTestCase(RestAPITestCase):
     """TokenAPIView test case."""
 
@@ -16,7 +43,6 @@ class TokenAPIViewTestCase(RestAPITestCase):
         """Run this setUp before each test."""
         super().setUp()
         self.request_factory = self.get_request_factory()
-
         self.view = ObtainTokenAPIView.as_view()
         self.url = "/api/accounts/login/"
         self.email = "tester@picklepolls.com"
