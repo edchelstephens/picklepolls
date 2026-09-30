@@ -2,8 +2,9 @@ import pytest
 
 from accounts.tests.factories import EntityFactory, UserFactory
 from polls.models import Question, Choice
+from polls.serializers import QuestionSerializer
 from polls.tests.factories import QuestionFactory, QuestionTypeFactory
-from api.views.polls import QuestionAPIView, QuestionsAPIView
+from api.views.polls import QuestionAPIView, QuestionsAPIView, PublicQuestionsAPIView
 
 from utils.testing_utils.testcases import RestAPITestCase
 
@@ -95,3 +96,63 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         expected_message = "Question does not exist"
         self.assertEqual(response_data["message"], expected_message)
         self.assertTrue(Question.objects.filter(id=question_id).exists())
+
+
+# urlpatterns = [
+#     path("accounts/login/", ObtainTokenAPIView.as_view()),
+#     path("accounts/logout/", DestroyTokenAPIView.as_view()),
+#     path("accounts/entities/", EntitiesAPIView.as_view()),
+#     path("polls/question/", QuestionAPIView.as_view()),
+#     path("polls/questions/", QuestionsAPIView.as_view()),
+#     path("polls/question/<int:pk>/", QuestionAPIView.as_view()),
+#     path("public/entities/", PublicEntitiesAPIView.as_view()),
+#     path("public/question_types/", PublicQuestionTypesAPIView.as_view()),
+#     path("public/choices/", PublicChoicesAPIView.as_view()),
+#     path("public/questions/", PublicQuestionsAPIView.as_view()),
+#     path("public/question/<int:pk>/", PublicQuestionAPIView.as_view()),
+#     path("public/question/<int:pk>/vote/", PublicQuestionVoteAPIView.as_view()),
+# ]
+
+
+@pytest.mark.solo
+class PublicQuestionsAPIViewTestCase(RestAPITestCase):
+    """PublicQuestionsAPIView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = PublicQuestionsAPIView.as_view()
+        self.url = "/api/public/questions/"
+        self.active_questions = [
+            QuestionFactory(),
+            QuestionFactory(),
+            QuestionFactory(),
+        ]
+        self.in_active_question = QuestionFactory(is_active=False)
+
+    def get_expected_data(self) -> dict:
+        """Get expected data."""
+
+        questions = Question.objects.filter(is_active=True)
+        serializer = QuestionSerializer(questions, many=True)
+        serializer_data = serializer.data
+
+        data = {"data": serializer_data, "count": len(serializer_data)}
+
+        return data
+
+    def test_get_request_returns_all_active_questions(self) -> None:
+        """Get request returns all active questions."""
+
+        request = self.request_factory.get(self.url)
+        response = self.view(request)
+        response_data = response.data
+
+        response_questions_ids = [question["id"] for question in response_data["data"]]
+
+        expected_data = self.get_expected_data()
+
+        self.assertEqual(response_data, expected_data)
+        self.assertEqual(response_data["count"], len(self.active_questions))
+        self.assertNotIn(self.in_active_question.pk, response_questions_ids)
