@@ -4,7 +4,12 @@ from accounts.tests.factories import EntityFactory, UserFactory
 from polls.models import Question, Choice
 from polls.serializers import QuestionSerializer
 from polls.tests.factories import QuestionFactory, QuestionTypeFactory
-from api.views.polls import QuestionAPIView, QuestionsAPIView, PublicQuestionsAPIView
+from api.views.polls import (
+    QuestionAPIView,
+    QuestionsAPIView,
+    PublicQuestionsAPIView,
+    PublicQuestionAPIView,
+)
 
 from utils.testing_utils.testcases import RestAPITestCase
 
@@ -115,6 +120,35 @@ class QuestionAPIViewTestCase(RestAPITestCase):
 
 
 @pytest.mark.solo
+class PublicQuestionAPIViewTestCase(RestAPITestCase):
+    """PublicQuestionAPIView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = PublicQuestionAPIView.as_view()
+        self.question = QuestionFactory()
+        self.url = self.get_url(question=self.question)
+
+    def get_url(self, question: Question) -> str:
+        """Get url."""
+
+        url = f"/api/public/question/{question.pk}/"
+        return url
+
+    def test_get_request_returns_question_data(self) -> None:
+        """Get request returns question data."""
+
+        request = self.request_factory.get(self.url)
+        response = self.view(request, pk=self.question.pk)
+        response_data = response.data
+
+        expected_data = self.question.get_data()
+
+        self.assertEqual(response_data, expected_data)
+
+
 class PublicQuestionsAPIViewTestCase(RestAPITestCase):
     """PublicQuestionsAPIView test case."""
 
