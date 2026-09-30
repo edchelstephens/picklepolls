@@ -139,15 +139,15 @@ class QuestionAPIView(LoginRequiredRestAPIView):
                 else:
                     self.raise_error(errors=choices_serializer.errors)
 
-                response = question_serializer.data
+                response = question.get_data()
 
                 return self.success_response(response)
             else:
                 self.raise_error(errors=question_serializer.errors)
 
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
     def delete(self, request, pk, *args, **kwargs):
