@@ -39,7 +39,6 @@ class EntityModelTest(ModelTestCase):
         self.entity.refresh_from_db()
         self.assertFalse(self.entity.has_image)
 
-    @pytest.mark.current
     def test_get_data(self) -> None:
         """Test get_data() returns expected value."""
         expected = {

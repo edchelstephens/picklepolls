@@ -8,7 +8,6 @@ from utils.testing_utils.testcases import RestAPITestCase
 from api.views.accounts.user import ObtainTokenAPIView, DestroyTokenAPIView
 
 
-@pytest.mark.solo
 class DestroyTokenAPIViewTestCase(RestAPITestCase):
     """DestroyTokenAPIView test case."""
 
@@ -35,7 +34,6 @@ class DestroyTokenAPIViewTestCase(RestAPITestCase):
         self.assertFalse(Token.objects.filter(user=self.user).exists())
 
 
-@pytest.mark.solo
 class TokenAPIViewTestCase(RestAPITestCase):
     """TokenAPIView test case."""
 

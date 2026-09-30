@@ -173,7 +173,6 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertEqual(first, self.choice_1)
         self.assertEqual(last, self.choice_2)
 
-    @pytest.mark.current
     def test_get_data(self) -> None:
         """get_data() returns expected value."""
 

@@ -47,7 +47,6 @@ class UserModelTestCase(ModelTestCase):
         self.user.refresh_from_db()
         self.assertFalse(self.user.has_image)
 
-    @pytest.mark.current
     def test_get_data(self) -> None:
         """Test get_data() returns expected value."""
         expected = {"id": self.user.pk, "email": self.user.email}

@@ -29,7 +29,6 @@ class QuestionTypeModelTest(ModelTestCase):
 
         self.assertEqual(actual, expected)
 
-    @pytest.mark.current
     def test_get_data(self) -> None:
         """Test get_data() returns expected value."""
 
