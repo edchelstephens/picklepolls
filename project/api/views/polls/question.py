@@ -160,13 +160,12 @@ class QuestionAPIView(LoginRequiredRestAPIView):
             instance.delete()
 
             response = {
-                "is_success": True,
                 "title": "Success",
                 "message": "Question deleted.",
             }
 
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)

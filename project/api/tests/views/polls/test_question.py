@@ -2,7 +2,7 @@ import pytest
 
 from accounts.tests.factories import EntityFactory, UserFactory
 from polls.models import Question, Choice
-from polls.tests.factories import QuestionTypeFactory
+from polls.tests.factories import QuestionFactory, QuestionTypeFactory
 from api.views.polls import QuestionAPIView, QuestionsAPIView
 
 from utils.testing_utils.testcases import RestAPITestCase
@@ -60,3 +60,19 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         self.assertEqual(
             Choice.objects.filter(question=question_created).count(), len(choices)
         )
+
+    def test_delete_properly_deletes_question_authored_by_user(self) -> None:
+        """Delete request deletes question authored by user."""
+
+        question = QuestionFactory(author=self.user)
+        question_id = int(question.pk)
+
+        request = self.request_factory.delete(self.url)
+        self.set_user(request=request, user=self.user)
+
+        response = self.view(request, pk=question_id)
+        response_data = response.data
+
+        expected_message = "Question deleted."
+        self.assertEqual(response_data["message"], expected_message)
+        self.assertFalse(Question.objects.filter(pk=question_id).exists())
