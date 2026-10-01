@@ -16,7 +16,6 @@ from api.views.polls import (
 from utils.testing_utils.testcases import RestAPITestCase
 
 
-
 class QuestionsAPIViewTestCase(RestAPITestCase):
     """QuestionsAPIView test case."""
 
@@ -147,7 +146,7 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         request = self.request_factory.delete(self.url)
         self.set_user(request=request, user=self.user)
 
-        response = self.view(request, pk=question.pk)
+        response = self.view(request, pk=question_id)
         response_data = response.data
 
         expected_message = "Question does not exist"
@@ -164,12 +163,12 @@ class PublicQuestionAPIViewTestCase(RestAPITestCase):
         self.request_factory = self.get_request_factory()
         self.view = PublicQuestionAPIView.as_view()
         self.question = QuestionFactory()
-        self.url = self.get_url(question=self.question)
+        self.url = self.get_url(question_id=self.question.pk)
 
-    def get_url(self, question: Question) -> str:
+    def get_url(self, question_id) -> str:
         """Get url."""
 
-        url = f"/api/public/question/{question.pk}/"
+        url = f"/api/public/question/{question_id}/"
         return url
 
     def test_get_request_returns_question_data(self) -> None:
@@ -182,6 +181,23 @@ class PublicQuestionAPIViewTestCase(RestAPITestCase):
         expected_data = self.question.get_data()
 
         self.assertEqual(response_data, expected_data)
+
+    @pytest.mark.solo
+    def test_get_request_returns_404_if_question_does_not_exists(self) -> None:
+        """GET request on non existing question returns 404."""
+
+        non_existing_question_id = 9_999_999_999
+        url = self.get_url(question_id=non_existing_question_id)
+
+        request = self.request_factory.get(url)
+        response = self.view(request, pk=non_existing_question_id)
+
+        response_data = response.data
+
+        expected_message = "Question not found"
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response_data["message"], expected_message)
 
 
 class PublicQuestionsAPIViewTestCase(RestAPITestCase):
