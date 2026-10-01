@@ -1,7 +1,4 @@
-import datetime
-
-
-from django.utils import timezone
+import pytest
 
 
 from accounts.tests.factories import UserFactory
@@ -49,3 +46,10 @@ class UserModelTestCase(ModelTestCase):
         self.user.save()
         self.user.refresh_from_db()
         self.assertFalse(self.user.has_image)
+
+    def test_get_data(self) -> None:
+        """Test get_data() returns expected value."""
+        expected = {"id": self.user.pk, "email": self.user.email}
+        actual = self.user.get_data()
+
+        self.assertEqual(actual, expected)

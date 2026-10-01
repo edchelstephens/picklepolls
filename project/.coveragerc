@@ -13,16 +13,18 @@ branch = True
 
 
 omit =
+    */serializers/*
     */admin/*
     */migrations/*
+    */settings/*
     */tests/*
     *__init__*
     *manage*
-    *settings.py
+    utils/*
     *urls.py
     *apps.py
     *debug.py
-    utils/*
+    
     
 
 

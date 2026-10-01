@@ -14,6 +14,7 @@ class QuestionAdmin(admin.ModelAdmin):
     """Question model admin."""
 
     list_display = [
+        "id",
         "question_text",
         "total_choices",
         "total_votes",

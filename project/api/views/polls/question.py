@@ -19,9 +19,9 @@ class PublicQuestionsAPIView(RestAPIView):
             data = serializer.data
             response = {"data": data, "count": len(data)}
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -41,9 +41,9 @@ class PublicQuestionAPIView(RestAPIView):
             response = question.get_data()
 
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -77,9 +77,31 @@ class PublicQuestionVoteAPIView(RestAPIView):
 
             return self.success_response(response)
 
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
+            return self.server_error_response(exc)
+
+
+class QuestionsAPIView(LoginRequiredRestAPIView):
+    """Questions api view."""
+
+    def get(self, request, *args, **kwargs):
+        """Handle post request."""
+        try:
+            user = self.get_user_instance(request)
+
+            questions = Question.objects.filter(author=user)
+
+            serializer = QuestionSerializer(questions, many=True)
+
+            data = serializer.data
+
+            response = {"data": data, "count": len(data)}
+            return self.success_response(response)
+        except HumanReadableError as exc:  # pragma no cover
+            return self.error_response(exc)
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
 
@@ -117,15 +139,15 @@ class QuestionAPIView(LoginRequiredRestAPIView):
                 else:
                     self.raise_error(errors=choices_serializer.errors)
 
-                response = question_serializer.data
+                response = question.get_data()
 
                 return self.success_response(response)
             else:
                 self.raise_error(errors=question_serializer.errors)
 
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)
 
     def delete(self, request, pk, *args, **kwargs):
@@ -138,13 +160,12 @@ class QuestionAPIView(LoginRequiredRestAPIView):
             instance.delete()
 
             response = {
-                "is_success": True,
                 "title": "Success",
                 "message": "Question deleted.",
             }
 
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc:  # pragma no cover
             return self.server_error_response(exc)

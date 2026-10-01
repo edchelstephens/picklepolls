@@ -172,3 +172,23 @@ class QuestionModelTestCase(ModelTestCase):
         self.assertEqual(expected_ids, actual_ids)
         self.assertEqual(first, self.choice_1)
         self.assertEqual(last, self.choice_2)
+
+    def test_get_data(self) -> None:
+        """get_data() returns expected value."""
+
+        choices = [
+            choice.get_data() for choice in self.question.choices.order_by("-votes")
+        ]
+        expected = {
+            "id": self.question.pk,
+            "question_text": self.question.question_text,
+            "question_type": self.question.question_type.get_data(),
+            "is_active": self.question.is_active,
+            "entity": self.question.entity.get_data(),
+            "author": self.question.author.get_data(),
+            "choices": choices,
+        }
+
+        actual = self.question.get_data()
+
+        self.assertEqual(actual, expected)

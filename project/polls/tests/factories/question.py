@@ -4,6 +4,7 @@ from factory.django import DjangoModelFactory
 from factory import SubFactory
 from factory import Faker
 from polls.tests.factories import QuestionTypeFactory
+from accounts.tests.factories import EntityFactory, UserFactory
 
 
 from polls.models import Question
@@ -20,3 +21,5 @@ class QuestionFactory(DjangoModelFactory):
     publication_datetime = Faker(
         "date_time_this_decade", tzinfo=ZoneInfo("Asia/Manila")
     )
+    entity = SubFactory(EntityFactory)
+    author = SubFactory(UserFactory)
