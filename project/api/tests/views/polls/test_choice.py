@@ -9,7 +9,6 @@ from api.views.polls import PublicChoicesAPIView
 from utils.testing_utils.testcases import RestAPITestCase
 
 
-@pytest.mark.solo
 class PublicChoicesAPIViewTestCase(RestAPITestCase):
     """PublicChoicesAPIView test case."""
 

@@ -14,7 +14,6 @@ from api.views.polls import (
 from utils.testing_utils.testcases import RestAPITestCase
 
 
-@pytest.mark.solo
 class QuestionAPIViewTestCase(RestAPITestCase):
     """QuestionAPIView test case."""
 
@@ -103,7 +102,6 @@ class QuestionAPIViewTestCase(RestAPITestCase):
         self.assertTrue(Question.objects.filter(id=question_id).exists())
 
 
-@pytest.mark.solo
 class PublicQuestionAPIViewTestCase(RestAPITestCase):
     """PublicQuestionAPIView test case."""
 
