@@ -97,7 +97,7 @@ class QuestionsAPIView(LoginRequiredRestAPIView):
 
             data = serializer.data
 
-            response = {"data": data, "count": data}
+            response = {"data": data, "count": len(data)}
             return self.success_response(response)
         except HumanReadableError as exc:  # pragma no cover
             return self.error_response(exc)

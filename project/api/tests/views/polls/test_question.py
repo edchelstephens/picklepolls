@@ -1,6 +1,8 @@
 import pytest
 
 from accounts.tests.factories import EntityFactory, UserFactory
+
+from accounts.models import User
 from polls.models import Question, Choice
 from polls.serializers import QuestionSerializer
 from polls.tests.factories import QuestionFactory, QuestionTypeFactory
@@ -12,6 +14,57 @@ from api.views.polls import (
 )
 
 from utils.testing_utils.testcases import RestAPITestCase
+
+
+
+class QuestionsAPIViewTestCase(RestAPITestCase):
+    """QuestionsAPIView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = QuestionsAPIView.as_view()
+        self.url = "/api/polls/questions/"
+        self.user = UserFactory()
+        self.questions = [
+            QuestionFactory(author=self.user),
+            QuestionFactory(author=self.user),
+            QuestionFactory(author=self.user),
+        ]
+        self.another_user = UserFactory()
+        self.questions_by_another_user = [
+            QuestionFactory(author=self.another_user),
+            QuestionFactory(author=self.another_user),
+        ]
+
+    def get_expected_data(self, author: User) -> dict:
+        """Get expected data."""
+
+        questions = Question.objects.filter(author=author)
+        serializer = QuestionSerializer(questions, many=True)
+        serializer_data = serializer.data
+
+        data = {
+            "data": serializer_data,
+            "count": len(serializer_data),
+        }
+
+        return data
+
+    def test_get_request_returns_all_questions_authored_by_user(self) -> None:
+        """GET request returns all questions authored by user."""
+
+        request = self.request_factory.get(self.url)
+        self.set_user(request=request, user=self.user)
+
+        response = self.view(request)
+        response_data = response.data
+
+        expected_data = self.get_expected_data(author=self.user)
+
+        self.assertEqual(response_data["count"], len(self.questions))
+        self.assertEqual(response_data, expected_data)
 
 
 class QuestionAPIViewTestCase(RestAPITestCase):
