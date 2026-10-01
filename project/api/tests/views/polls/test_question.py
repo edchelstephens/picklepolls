@@ -17,7 +17,6 @@ from api.views.polls import (
 from utils.testing_utils.testcases import RestAPITestCase
 
 
-
 class PublicQuestionVoteAPIViewTestCase(RestAPITestCase):
     """PublicQuestionVoteAPIView test case."""
 
@@ -63,6 +62,29 @@ class PublicQuestionVoteAPIViewTestCase(RestAPITestCase):
         self.assertEqual(updated_choice.votes, self.choice_1_initial_votes + 1)
 
         self.assertEqual(response_data["title"], expected_title)
+        self.assertEqual(response_data["message"], expected_message)
+
+    
+    def test_POST_request_returns_404_if_choice_does_not_exist_for_given_question(
+        self,
+    ) -> None:
+        """POST request returns 404 if choice does not exist for given question."""
+
+        another_choice = ChoiceFactory()
+        data = {
+            "choice": another_choice.pk,
+        }
+
+        request = self.request_factory.post(
+            self.url, data=data, content_type="application/json"
+        )
+        response = self.view(request, pk=self.question.pk)
+
+        response_data = response.data
+
+        expected_message = "Unable to find choice for given question id."
+
+        self.assertEqual(response.status_code, 404)
         self.assertEqual(response_data["message"], expected_message)
 
 
