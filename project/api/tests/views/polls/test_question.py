@@ -5,15 +5,65 @@ from accounts.tests.factories import EntityFactory, UserFactory
 from accounts.models import User
 from polls.models import Question, Choice
 from polls.serializers import QuestionSerializer
-from polls.tests.factories import QuestionFactory, QuestionTypeFactory
+from polls.tests.factories import QuestionFactory, QuestionTypeFactory, ChoiceFactory
 from api.views.polls import (
     QuestionAPIView,
     QuestionsAPIView,
     PublicQuestionsAPIView,
     PublicQuestionAPIView,
+    PublicQuestionVoteAPIView,
 )
 
 from utils.testing_utils.testcases import RestAPITestCase
+
+
+
+class PublicQuestionVoteAPIViewTestCase(RestAPITestCase):
+    """PublicQuestionVoteAPIView test case."""
+
+    def setUp(self) -> None:
+        """Run this setUp before each test."""
+        super().setUp()
+        self.request_factory = self.get_request_factory()
+        self.view = PublicQuestionVoteAPIView.as_view()
+        self.question = QuestionFactory()
+        self.url = self.get_url(question_id=self.question.pk)
+        self.choice_1_initial_votes = 0
+        self.choice_1 = ChoiceFactory(
+            question=self.question, votes=self.choice_1_initial_votes
+        )
+
+    def get_url(self, question_id: int) -> str:
+        """Get url."""
+
+        url = f"/api/public/question/{question_id}/vote/"
+        return url
+
+    def test_POST_request_increments_votes_for_choice(self) -> None:
+        """POST request increments votes for choice."""
+
+        data = {"choice": self.choice_1.pk}
+
+        request = self.request_factory.post(
+            self.url, data=data, content_type="application/json"
+        )
+        response = self.view(request, pk=self.question.pk)
+
+        response_data = response.data
+
+        self.pprint_response(response_data)
+
+        updated_choice = Choice.objects.get(pk=self.choice_1.pk)
+        updated_choice.refresh_from_db()
+
+        expected_title = "Success"
+        expected_message = "Voted on question."
+
+        self.assertNotEqual(updated_choice.votes, self.choice_1_initial_votes)
+        self.assertEqual(updated_choice.votes, self.choice_1_initial_votes + 1)
+
+        self.assertEqual(response_data["title"], expected_title)
+        self.assertEqual(response_data["message"], expected_message)
 
 
 class QuestionsAPIViewTestCase(RestAPITestCase):
@@ -182,7 +232,6 @@ class PublicQuestionAPIViewTestCase(RestAPITestCase):
 
         self.assertEqual(response_data, expected_data)
 
-    @pytest.mark.solo
     def test_get_request_returns_404_if_question_does_not_exists(self) -> None:
         """GET request on non existing question returns 404."""
 
