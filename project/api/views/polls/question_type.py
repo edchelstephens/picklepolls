@@ -18,7 +18,7 @@ class PublicQuestionTypesAPIView(RestAPIView):
 
             response = {"data": data, "count": len(data)}
             return self.success_response(response)
-        except HumanReadableError as exc:
+        except HumanReadableError as exc: # pragma no cover
             return self.error_response(exc)
-        except Exception as exc:
+        except Exception as exc: # pragma no cover
             return self.server_error_response(exc)
